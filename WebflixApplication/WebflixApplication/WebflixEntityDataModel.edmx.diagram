@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b98d38daf3b64128b225e86b9e2c9ef4" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.ADRESSE" Width="1.5" PointX="0.75" PointY="29.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.ANNONCE" Width="1.5" PointX="5.25" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.CARTECREDIT" Width="1.5" PointX="3" PointY="23" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.CLIENT" Width="1.5" PointX="5.25" PointY="26.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.COPIE" Width="1.5" PointX="5.25" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.EMPLOYE" Width="1.5" PointX="5.25" PointY="29.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.FILM" Width="1.5" PointX="3" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.FILMGENRE" Width="1.5" PointX="5.25" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.FILMPAY" Width="1.5" PointX="8.25" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.FORFAIT" Width="1.5" PointX="3" PointY="26" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.GENRE" Width="1.5" PointX="3" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.LOCATION" Width="1.5" PointX="7.5" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.PAY" Width="1.5" PointX="6" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.PERSONNE" Width="1.5" PointX="3" PointY="28.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.PERSONNESFILM" Width="1.5" PointX="0.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.ROLE" Width="1.5" PointX="8.25" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.SCENARISTE" Width="1.5" PointX="5.25" PointY="19.625" IsExpanded="true" />
+        <AssociationConnector Association="Model.IDADRESSE_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.IDANNONCEFILM_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.IDCARTECREDIT_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.IDCLIENT_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.IDFORFAIT_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.IDPERSONNE_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.IDCOPIELOCATION_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.IDFILMCOPIE_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.IDPERSONNE_EMPLOYE_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.IDFILM_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.IDFILMPAYS_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.IDFILMSCENARISTE_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.IDREALISATEUR_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.IDROLEFILM_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.IDGENRE_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.IDPAYS_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.IDACTEUR_FK" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

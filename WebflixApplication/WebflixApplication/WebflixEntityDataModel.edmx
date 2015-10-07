@@ -1,0 +1,1528 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Model.Store" Alias="Self" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="12.1" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="ADRESSE" EntityType="Model.Store.ADRESSE" store:Type="Tables" Schema="EQUIPE23" />
+          <EntitySet Name="ANNONCE" EntityType="Model.Store.ANNONCE" store:Type="Tables" Schema="EQUIPE23" />
+          <EntitySet Name="CARTECREDIT" EntityType="Model.Store.CARTECREDIT" store:Type="Tables" Schema="EQUIPE23" />
+          <EntitySet Name="CLIENT" EntityType="Model.Store.CLIENT" store:Type="Tables" Schema="EQUIPE23" />
+          <EntitySet Name="COPIE" EntityType="Model.Store.COPIE" store:Type="Tables" Schema="EQUIPE23" />
+          <EntitySet Name="EMPLOYE" EntityType="Model.Store.EMPLOYE" store:Type="Tables" Schema="EQUIPE23" />
+          <EntitySet Name="FILM" EntityType="Model.Store.FILM" store:Type="Tables" Schema="EQUIPE23" />
+          <EntitySet Name="FILMGENRE" EntityType="Model.Store.FILMGENRE" store:Type="Tables" Schema="EQUIPE23" />
+          <EntitySet Name="FILMPAYS" EntityType="Model.Store.FILMPAYS" store:Type="Tables" Schema="EQUIPE23" />
+          <EntitySet Name="FORFAIT" EntityType="Model.Store.FORFAIT" store:Type="Tables" Schema="EQUIPE23" />
+          <EntitySet Name="GENRE" EntityType="Model.Store.GENRE" store:Type="Tables" Schema="EQUIPE23" />
+          <EntitySet Name="LOCATION" EntityType="Model.Store.LOCATION" store:Type="Tables" Schema="EQUIPE23" />
+          <EntitySet Name="PAYS" EntityType="Model.Store.PAYS" store:Type="Tables" Schema="EQUIPE23" />
+          <EntitySet Name="PERSONNE" EntityType="Model.Store.PERSONNE" store:Type="Tables" Schema="EQUIPE23" />
+          <EntitySet Name="PERSONNESFILM" EntityType="Model.Store.PERSONNESFILM" store:Type="Tables" Schema="EQUIPE23" />
+          <EntitySet Name="ROLE" EntityType="Model.Store.ROLE" store:Type="Tables" Schema="EQUIPE23" />
+          <EntitySet Name="SCENARISTE" EntityType="Model.Store.SCENARISTE" store:Type="Tables" Schema="EQUIPE23" />
+          <AssociationSet Name="IDACTEUR_FK" Association="Model.Store.IDACTEUR_FK">
+            <End Role="PERSONNESFILM" EntitySet="PERSONNESFILM" />
+            <End Role="ROLE" EntitySet="ROLE" />
+          </AssociationSet>
+          <AssociationSet Name="IDADRESSE_FK" Association="Model.Store.IDADRESSE_FK">
+            <End Role="ADRESSE" EntitySet="ADRESSE" />
+            <End Role="PERSONNE" EntitySet="PERSONNE" />
+          </AssociationSet>
+          <AssociationSet Name="IDANNONCEFILM_FK" Association="Model.Store.IDANNONCEFILM_FK">
+            <End Role="FILM" EntitySet="FILM" />
+            <End Role="ANNONCE" EntitySet="ANNONCE" />
+          </AssociationSet>
+          <AssociationSet Name="IDCARTECREDIT_FK" Association="Model.Store.IDCARTECREDIT_FK">
+            <End Role="CARTECREDIT" EntitySet="CARTECREDIT" />
+            <End Role="CLIENT" EntitySet="CLIENT" />
+          </AssociationSet>
+          <AssociationSet Name="IDCLIENT_FK" Association="Model.Store.IDCLIENT_FK">
+            <End Role="CLIENT" EntitySet="CLIENT" />
+            <End Role="LOCATION" EntitySet="LOCATION" />
+          </AssociationSet>
+          <AssociationSet Name="IDCOPIELOCATION_FK" Association="Model.Store.IDCOPIELOCATION_FK">
+            <End Role="COPIE" EntitySet="COPIE" />
+            <End Role="LOCATION" EntitySet="LOCATION" />
+          </AssociationSet>
+          <AssociationSet Name="IDFILM_FK" Association="Model.Store.IDFILM_FK">
+            <End Role="FILM" EntitySet="FILM" />
+            <End Role="FILMGENRE" EntitySet="FILMGENRE" />
+          </AssociationSet>
+          <AssociationSet Name="IDFILMCOPIE_FK" Association="Model.Store.IDFILMCOPIE_FK">
+            <End Role="FILM" EntitySet="FILM" />
+            <End Role="COPIE" EntitySet="COPIE" />
+          </AssociationSet>
+          <AssociationSet Name="IDFILMPAYS_FK" Association="Model.Store.IDFILMPAYS_FK">
+            <End Role="FILM" EntitySet="FILM" />
+            <End Role="FILMPAYS" EntitySet="FILMPAYS" />
+          </AssociationSet>
+          <AssociationSet Name="IDFILMSCENARISTE_FK" Association="Model.Store.IDFILMSCENARISTE_FK">
+            <End Role="FILM" EntitySet="FILM" />
+            <End Role="SCENARISTE" EntitySet="SCENARISTE" />
+          </AssociationSet>
+          <AssociationSet Name="IDFORFAIT_FK" Association="Model.Store.IDFORFAIT_FK">
+            <End Role="FORFAIT" EntitySet="FORFAIT" />
+            <End Role="CLIENT" EntitySet="CLIENT" />
+          </AssociationSet>
+          <AssociationSet Name="IDGENRE_FK" Association="Model.Store.IDGENRE_FK">
+            <End Role="GENRE" EntitySet="GENRE" />
+            <End Role="FILMGENRE" EntitySet="FILMGENRE" />
+          </AssociationSet>
+          <AssociationSet Name="IDPAYS_FK" Association="Model.Store.IDPAYS_FK">
+            <End Role="PAYS" EntitySet="PAYS" />
+            <End Role="FILMPAYS" EntitySet="FILMPAYS" />
+          </AssociationSet>
+          <AssociationSet Name="IDPERSONNE_EMPLOYE_FK" Association="Model.Store.IDPERSONNE_EMPLOYE_FK">
+            <End Role="PERSONNE" EntitySet="PERSONNE" />
+            <End Role="EMPLOYE" EntitySet="EMPLOYE" />
+          </AssociationSet>
+          <AssociationSet Name="IDPERSONNE_FK" Association="Model.Store.IDPERSONNE_FK">
+            <End Role="PERSONNE" EntitySet="PERSONNE" />
+            <End Role="CLIENT" EntitySet="CLIENT" />
+          </AssociationSet>
+          <AssociationSet Name="IDREALISATEUR_FK" Association="Model.Store.IDREALISATEUR_FK">
+            <End Role="PERSONNESFILM" EntitySet="PERSONNESFILM" />
+            <End Role="FILM" EntitySet="FILM" />
+          </AssociationSet>
+          <AssociationSet Name="IDROLEFILM_FK" Association="Model.Store.IDROLEFILM_FK">
+            <End Role="FILM" EntitySet="FILM" />
+            <End Role="ROLE" EntitySet="ROLE" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="ADRESSE">
+          <Key>
+            <PropertyRef Name="IDADRESSE" />
+          </Key>
+          <Property Name="IDADRESSE" Type="number" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="NUMCIVIQUE" Type="number" Nullable="false" />
+          <Property Name="RUE" Type="varchar2" Nullable="false" MaxLength="75" />
+          <Property Name="VILLE" Type="varchar2" Nullable="false" MaxLength="30" />
+          <Property Name="PROVINCE" Type="varchar2" Nullable="false" MaxLength="30" />
+          <Property Name="CODEPOSTAL" Type="varchar2" Nullable="false" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="ANNONCE">
+          <Key>
+            <PropertyRef Name="IDANNONCE" />
+          </Key>
+          <Property Name="IDANNONCE" Type="number" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="LIEN" Type="varchar2" Nullable="false" MaxLength="250" />
+          <Property Name="IDFILM" Type="number" />
+        </EntityType>
+        <EntityType Name="CARTECREDIT">
+          <Key>
+            <PropertyRef Name="IDCARTECREDIT" />
+          </Key>
+          <Property Name="IDCARTECREDIT" Type="number" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="TYPE" Type="varchar2" Nullable="false" MaxLength="30" />
+          <Property Name="NUMERO" Type="varchar2" Nullable="false" MaxLength="20" />
+          <Property Name="DATEEXPIRATION" Type="date" Nullable="false" />
+          <Property Name="CVV" Type="number" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CLIENT">
+          <Key>
+            <PropertyRef Name="IDCLIENT" />
+          </Key>
+          <Property Name="IDCLIENT" Type="number" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="IDPERSONNE" Type="number" />
+          <Property Name="IDCARTECREDIT" Type="number" />
+          <Property Name="IDFORFAIT" Type="number" />
+        </EntityType>
+        <EntityType Name="COPIE">
+          <Key>
+            <PropertyRef Name="IDCOPIE" />
+          </Key>
+          <Property Name="IDCOPIE" Type="number" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="DISPONIBLE" Type="number" Nullable="false" Precision="1" />
+          <Property Name="IDFILM" Type="number" />
+        </EntityType>
+        <EntityType Name="EMPLOYE">
+          <Key>
+            <PropertyRef Name="IDEMPLOYE" />
+          </Key>
+          <Property Name="IDEMPLOYE" Type="number" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="MATRICULE" Type="number" Nullable="false" />
+          <Property Name="IDPERSONNE" Type="number" />
+        </EntityType>
+        <EntityType Name="FILM">
+          <Key>
+            <PropertyRef Name="IDFILM" />
+          </Key>
+          <Property Name="IDFILM" Type="number" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="TITRE" Type="varchar2" Nullable="false" MaxLength="150" />
+          <Property Name="DATEPARUTION" Type="date" Nullable="false" />
+          <Property Name="DUREEFILM" Type="number" />
+          <Property Name="SCENARIO" Type="nclob" />
+          <Property Name="POSTER" Type="varchar2" MaxLength="200" />
+          <Property Name="NBCOPIE" Type="number" Nullable="false" />
+          <Property Name="LANGUEORIGINALE" Type="varchar2" MaxLength="25" />
+          <Property Name="IDREALISATEUR" Type="number" />
+          <Property Name="CODE" Type="varchar2" Nullable="false" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="FILMGENRE">
+          <Key>
+            <PropertyRef Name="IDFILMGENRE" />
+          </Key>
+          <Property Name="IDFILMGENRE" Type="number" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="IDFILM" Type="number" />
+          <Property Name="IDGENRE" Type="number" />
+        </EntityType>
+        <EntityType Name="FILMPAYS">
+          <Key>
+            <PropertyRef Name="IDFILMPAYS" />
+          </Key>
+          <Property Name="IDFILMPAYS" Type="number" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="IDPAYS" Type="number" />
+          <Property Name="IDFILM" Type="number" />
+        </EntityType>
+        <EntityType Name="FORFAIT">
+          <Key>
+            <PropertyRef Name="IDFORFAIT" />
+          </Key>
+          <Property Name="IDFORFAIT" Type="number" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="NOM" Type="varchar2" Nullable="false" MaxLength="15" />
+          <Property Name="PRIX" Type="number" Nullable="false" />
+          <Property Name="LOCATIONSMAX" Type="number" Nullable="false" />
+          <Property Name="DUREEMAX" Type="number" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GENRE">
+          <Key>
+            <PropertyRef Name="IDGENRE" />
+          </Key>
+          <Property Name="IDGENRE" Type="number" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="TITRE" Type="varchar2" Nullable="false" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="LOCATION">
+          <Key>
+            <PropertyRef Name="IDLOCATION" />
+          </Key>
+          <Property Name="IDLOCATION" Type="number" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="DATEDELOCATION" Type="date" />
+          <Property Name="DATERETOUR" Type="date" />
+          <Property Name="IDCOPIE" Type="number" />
+          <Property Name="IDCLIENT" Type="number" />
+        </EntityType>
+        <EntityType Name="PAYS">
+          <Key>
+            <PropertyRef Name="IDPAYS" />
+          </Key>
+          <Property Name="IDPAYS" Type="number" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="NOM" Type="varchar2" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="PERSONNE">
+          <Key>
+            <PropertyRef Name="IDPERSONNE" />
+          </Key>
+          <Property Name="IDPERSONNE" Type="number" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="NOM" Type="varchar2" Nullable="false" MaxLength="30" />
+          <Property Name="PRENOM" Type="varchar2" Nullable="false" MaxLength="30" />
+          <Property Name="COURRIEL" Type="varchar2" Nullable="false" MaxLength="50" />
+          <Property Name="TELEPHONE" Type="varchar2" Nullable="false" MaxLength="15" />
+          <Property Name="DATEDENAISSANCE" Type="date" />
+          <Property Name="MOTDEPASSE" Type="varchar2" MaxLength="255" />
+          <Property Name="IDADRESSE" Type="number" />
+        </EntityType>
+        <EntityType Name="PERSONNESFILM">
+          <Key>
+            <PropertyRef Name="IDPERSONNEFILM" />
+          </Key>
+          <Property Name="IDPERSONNEFILM" Type="number" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="NOM" Type="varchar2" Nullable="false" MaxLength="30" />
+          <Property Name="PRENOM" Type="varchar2" Nullable="false" MaxLength="30" />
+          <Property Name="BIO" Type="nclob" />
+          <Property Name="LIEUDENAISSANCE" Type="varchar2" Nullable="false" MaxLength="100" />
+          <Property Name="PHOTO" Type="varchar2" MaxLength="200" />
+          <Property Name="DATEDENAISSANCE" Type="date" />
+          <Property Name="CODE" Type="number" />
+        </EntityType>
+        <EntityType Name="ROLE">
+          <Key>
+            <PropertyRef Name="IDROLE" />
+          </Key>
+          <Property Name="IDROLE" Type="number" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="PERSONNAGE" Type="varchar2" Nullable="false" MaxLength="75" />
+          <Property Name="IDACTEUR" Type="number" />
+          <Property Name="IDFILM" Type="number" />
+        </EntityType>
+        <EntityType Name="SCENARISTE">
+          <Key>
+            <PropertyRef Name="IDSCENARISTE" />
+          </Key>
+          <Property Name="IDSCENARISTE" Type="number" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="NOM" Type="varchar2" MaxLength="75" />
+          <Property Name="IDFILM" Type="number" />
+        </EntityType>
+        <Association Name="IDACTEUR_FK">
+          <End Role="PERSONNESFILM" Type="Model.Store.PERSONNESFILM" Multiplicity="0..1" />
+          <End Role="ROLE" Type="Model.Store.ROLE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERSONNESFILM">
+              <PropertyRef Name="IDPERSONNEFILM" />
+            </Principal>
+            <Dependent Role="ROLE">
+              <PropertyRef Name="IDACTEUR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="IDADRESSE_FK">
+          <End Role="ADRESSE" Type="Model.Store.ADRESSE" Multiplicity="0..1" />
+          <End Role="PERSONNE" Type="Model.Store.PERSONNE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ADRESSE">
+              <PropertyRef Name="IDADRESSE" />
+            </Principal>
+            <Dependent Role="PERSONNE">
+              <PropertyRef Name="IDADRESSE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="IDANNONCEFILM_FK">
+          <End Role="FILM" Type="Model.Store.FILM" Multiplicity="0..1" />
+          <End Role="ANNONCE" Type="Model.Store.ANNONCE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FILM">
+              <PropertyRef Name="IDFILM" />
+            </Principal>
+            <Dependent Role="ANNONCE">
+              <PropertyRef Name="IDFILM" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="IDCARTECREDIT_FK">
+          <End Role="CARTECREDIT" Type="Model.Store.CARTECREDIT" Multiplicity="0..1" />
+          <End Role="CLIENT" Type="Model.Store.CLIENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CARTECREDIT">
+              <PropertyRef Name="IDCARTECREDIT" />
+            </Principal>
+            <Dependent Role="CLIENT">
+              <PropertyRef Name="IDCARTECREDIT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="IDCLIENT_FK">
+          <End Role="CLIENT" Type="Model.Store.CLIENT" Multiplicity="0..1" />
+          <End Role="LOCATION" Type="Model.Store.LOCATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENT">
+              <PropertyRef Name="IDCLIENT" />
+            </Principal>
+            <Dependent Role="LOCATION">
+              <PropertyRef Name="IDCLIENT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="IDCOPIELOCATION_FK">
+          <End Role="COPIE" Type="Model.Store.COPIE" Multiplicity="0..1" />
+          <End Role="LOCATION" Type="Model.Store.LOCATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COPIE">
+              <PropertyRef Name="IDCOPIE" />
+            </Principal>
+            <Dependent Role="LOCATION">
+              <PropertyRef Name="IDCOPIE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="IDFILM_FK">
+          <End Role="FILM" Type="Model.Store.FILM" Multiplicity="0..1" />
+          <End Role="FILMGENRE" Type="Model.Store.FILMGENRE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FILM">
+              <PropertyRef Name="IDFILM" />
+            </Principal>
+            <Dependent Role="FILMGENRE">
+              <PropertyRef Name="IDFILM" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="IDFILMCOPIE_FK">
+          <End Role="FILM" Type="Model.Store.FILM" Multiplicity="0..1" />
+          <End Role="COPIE" Type="Model.Store.COPIE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FILM">
+              <PropertyRef Name="IDFILM" />
+            </Principal>
+            <Dependent Role="COPIE">
+              <PropertyRef Name="IDFILM" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="IDFILMPAYS_FK">
+          <End Role="FILM" Type="Model.Store.FILM" Multiplicity="0..1" />
+          <End Role="FILMPAYS" Type="Model.Store.FILMPAYS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FILM">
+              <PropertyRef Name="IDFILM" />
+            </Principal>
+            <Dependent Role="FILMPAYS">
+              <PropertyRef Name="IDFILM" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="IDFILMSCENARISTE_FK">
+          <End Role="FILM" Type="Model.Store.FILM" Multiplicity="0..1" />
+          <End Role="SCENARISTE" Type="Model.Store.SCENARISTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FILM">
+              <PropertyRef Name="IDFILM" />
+            </Principal>
+            <Dependent Role="SCENARISTE">
+              <PropertyRef Name="IDFILM" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="IDFORFAIT_FK">
+          <End Role="FORFAIT" Type="Model.Store.FORFAIT" Multiplicity="0..1" />
+          <End Role="CLIENT" Type="Model.Store.CLIENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FORFAIT">
+              <PropertyRef Name="IDFORFAIT" />
+            </Principal>
+            <Dependent Role="CLIENT">
+              <PropertyRef Name="IDFORFAIT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="IDGENRE_FK">
+          <End Role="GENRE" Type="Model.Store.GENRE" Multiplicity="0..1" />
+          <End Role="FILMGENRE" Type="Model.Store.FILMGENRE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GENRE">
+              <PropertyRef Name="IDGENRE" />
+            </Principal>
+            <Dependent Role="FILMGENRE">
+              <PropertyRef Name="IDGENRE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="IDPAYS_FK">
+          <End Role="PAYS" Type="Model.Store.PAYS" Multiplicity="0..1" />
+          <End Role="FILMPAYS" Type="Model.Store.FILMPAYS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PAYS">
+              <PropertyRef Name="IDPAYS" />
+            </Principal>
+            <Dependent Role="FILMPAYS">
+              <PropertyRef Name="IDPAYS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="IDPERSONNE_EMPLOYE_FK">
+          <End Role="PERSONNE" Type="Model.Store.PERSONNE" Multiplicity="0..1" />
+          <End Role="EMPLOYE" Type="Model.Store.EMPLOYE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERSONNE">
+              <PropertyRef Name="IDPERSONNE" />
+            </Principal>
+            <Dependent Role="EMPLOYE">
+              <PropertyRef Name="IDPERSONNE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="IDPERSONNE_FK">
+          <End Role="PERSONNE" Type="Model.Store.PERSONNE" Multiplicity="0..1" />
+          <End Role="CLIENT" Type="Model.Store.CLIENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERSONNE">
+              <PropertyRef Name="IDPERSONNE" />
+            </Principal>
+            <Dependent Role="CLIENT">
+              <PropertyRef Name="IDPERSONNE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="IDREALISATEUR_FK">
+          <End Role="PERSONNESFILM" Type="Model.Store.PERSONNESFILM" Multiplicity="0..1" />
+          <End Role="FILM" Type="Model.Store.FILM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERSONNESFILM">
+              <PropertyRef Name="IDPERSONNEFILM" />
+            </Principal>
+            <Dependent Role="FILM">
+              <PropertyRef Name="IDREALISATEUR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="IDROLEFILM_FK">
+          <End Role="FILM" Type="Model.Store.FILM" Multiplicity="0..1" />
+          <End Role="ROLE" Type="Model.Store.ROLE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FILM">
+              <PropertyRef Name="IDFILM" />
+            </Principal>
+            <Dependent Role="ROLE">
+              <PropertyRef Name="IDFILM" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="ADDNEWPERSONNETEST" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="EQUIPE23">
+          <Parameter Name="NOM" Type="varchar2" Mode="In" />
+          <Parameter Name="PRENOM" Type="varchar2" Mode="In" />
+          <Parameter Name="TELEPHONE" Type="varchar2" Mode="In" />
+        </Function>
+        <Function Name="FAGECLIENT" ReturnType="number" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="EQUIPE23">
+          <Parameter Name="LECOURRIEL" Type="varchar2" Mode="In" />
+        </Function>
+        <Function Name="FINDCLIENTTEST" ReturnType="number" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="EQUIPE23">
+          <Parameter Name="COURRIEL" Type="varchar2" Mode="In" />
+        </Function>
+        <Function Name="GET_CLIENT_AGE" ReturnType="number" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="EQUIPE23">
+          <Parameter Name="DOB" Type="date" Mode="In" />
+        </Function>
+        <Function Name="INSCRIPTIONCLIENT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="EQUIPE23">
+          <Parameter Name="IDCLIENT" Type="number" Mode="Out" />
+          <Parameter Name="NUMCIVIQUE" Type="number" Mode="In" />
+          <Parameter Name="RUE" Type="varchar2" Mode="In" />
+          <Parameter Name="VILLE" Type="varchar2" Mode="In" />
+          <Parameter Name="PROVINCE" Type="varchar2" Mode="In" />
+          <Parameter Name="CODEPOSTAL" Type="varchar2" Mode="In" />
+          <Parameter Name="NOM" Type="varchar2" Mode="In" />
+          <Parameter Name="PRENOM" Type="varchar2" Mode="In" />
+          <Parameter Name="COURRIEL" Type="varchar2" Mode="In" />
+          <Parameter Name="TELEPHONE" Type="varchar2" Mode="In" />
+          <Parameter Name="DATEDENAISSANCE" Type="date" Mode="In" />
+          <Parameter Name="MOTDEPASSE" Type="varchar2" Mode="In" />
+          <Parameter Name="TYPE" Type="varchar2" Mode="In" />
+          <Parameter Name="NUMERO" Type="varchar2" Mode="In" />
+          <Parameter Name="DATEEXPIRATION" Type="date" Mode="In" />
+          <Parameter Name="CVV" Type="number" Mode="In" />
+          <Parameter Name="NOMFORFAIT" Type="varchar2" Mode="In" />
+        </Function>
+        <Function Name="INSERTADRESS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="EQUIPE23">
+          <Parameter Name="ID" Type="number" Mode="Out" />
+          <Parameter Name="NUMCIVIQUE" Type="number" Mode="In" />
+          <Parameter Name="RUE" Type="varchar2" Mode="In" />
+          <Parameter Name="VILLE" Type="varchar2" Mode="In" />
+          <Parameter Name="PROVINCE" Type="varchar2" Mode="In" />
+          <Parameter Name="CODEPOSTAL" Type="varchar2" Mode="In" />
+        </Function>
+        <Function Name="INSERTANNONCE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="EQUIPE23">
+          <Parameter Name="LIEN" Type="varchar2" Mode="In" />
+          <Parameter Name="IDFILM" Type="number" Mode="In" />
+        </Function>
+        <Function Name="INSERTCARTECREDIT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="EQUIPE23">
+          <Parameter Name="ID" Type="number" Mode="Out" />
+          <Parameter Name="TYPE" Type="varchar2" Mode="In" />
+          <Parameter Name="NUMERO" Type="varchar2" Mode="In" />
+          <Parameter Name="DATEEXPIRATION" Type="date" Mode="In" />
+          <Parameter Name="CVV" Type="number" Mode="In" />
+        </Function>
+        <Function Name="INSERTCLIENT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="EQUIPE23">
+          <Parameter Name="ID" Type="number" Mode="Out" />
+          <Parameter Name="IDPERSONNE" Type="number" Mode="In" />
+          <Parameter Name="IDCARTECREDIT" Type="number" Mode="In" />
+          <Parameter Name="IDFORFAIT" Type="number" Mode="In" />
+        </Function>
+        <Function Name="INSERTCOPIE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="EQUIPE23">
+          <Parameter Name="ID" Type="number" Mode="Out" />
+          <Parameter Name="DISPONIBLE" Type="number" Mode="In" />
+          <Parameter Name="IDFILM" Type="number" Mode="In" />
+        </Function>
+        <Function Name="INSERTEMPLOYE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="EQUIPE23">
+          <Parameter Name="ID" Type="number" Mode="Out" />
+          <Parameter Name="MATRICULE" Type="number" Mode="In" />
+          <Parameter Name="IDPERSONNE" Type="number" Mode="In" />
+        </Function>
+        <Function Name="INSERTFILM" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="EQUIPE23">
+          <Parameter Name="ID" Type="number" Mode="Out" />
+          <Parameter Name="TITRE" Type="varchar2" Mode="In" />
+          <Parameter Name="DATEPARUTION" Type="date" Mode="In" />
+          <Parameter Name="DUREEFILM" Type="number" Mode="In" />
+          <Parameter Name="SCENARIO" Type="nclob" Mode="In" />
+          <Parameter Name="POSTER" Type="varchar2" Mode="In" />
+          <Parameter Name="NBCOPIE" Type="number" Mode="In" />
+          <Parameter Name="LANGUEORIGINALE" Type="varchar2" Mode="In" />
+          <Parameter Name="IDREALISATEUR" Type="number" Mode="In" />
+          <Parameter Name="CODE" Type="varchar2" Mode="In" />
+        </Function>
+        <Function Name="INSERTFILMGENRE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="EQUIPE23">
+          <Parameter Name="IDFILM" Type="number" Mode="In" />
+          <Parameter Name="IDGENRE" Type="number" Mode="In" />
+        </Function>
+        <Function Name="INSERTFILMPAYS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="EQUIPE23">
+          <Parameter Name="IDPAYS" Type="number" Mode="In" />
+          <Parameter Name="IDFILM" Type="number" Mode="In" />
+        </Function>
+        <Function Name="INSERTFORFAIT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="EQUIPE23">
+          <Parameter Name="ID" Type="number" Mode="Out" />
+          <Parameter Name="NAME" Type="varchar2" Mode="In" />
+          <Parameter Name="PRIX" Type="number" Mode="In" />
+          <Parameter Name="LOCATIONSMAX" Type="number" Mode="In" />
+          <Parameter Name="DUREEMAX" Type="number" Mode="In" />
+        </Function>
+        <Function Name="INSERTGENRE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="EQUIPE23">
+          <Parameter Name="ID" Type="number" Mode="Out" />
+          <Parameter Name="NEWTITRE" Type="varchar2" Mode="In" />
+        </Function>
+        <Function Name="INSERTLOCATION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="EQUIPE23">
+          <Parameter Name="ID" Type="number" Mode="Out" />
+          <Parameter Name="DATEDELOCATION" Type="date" Mode="In" />
+          <Parameter Name="DATERETOUR" Type="date" Mode="In" />
+          <Parameter Name="IDCOPIE" Type="number" Mode="In" />
+          <Parameter Name="IDCLIENT" Type="number" Mode="In" />
+        </Function>
+        <Function Name="INSERTPAYS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="EQUIPE23">
+          <Parameter Name="ID" Type="number" Mode="Out" />
+          <Parameter Name="NAME" Type="varchar2" Mode="In" />
+        </Function>
+        <Function Name="INSERTPERSONNE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="EQUIPE23">
+          <Parameter Name="ID" Type="number" Mode="Out" />
+          <Parameter Name="NOM" Type="varchar2" Mode="In" />
+          <Parameter Name="PRENOM" Type="varchar2" Mode="In" />
+          <Parameter Name="COURRIEL" Type="varchar2" Mode="In" />
+          <Parameter Name="TELEPHONE" Type="varchar2" Mode="In" />
+          <Parameter Name="DATEDENAISSANCE" Type="date" Mode="In" />
+          <Parameter Name="MOTDEPASSE" Type="varchar2" Mode="In" />
+          <Parameter Name="ADRESSE" Type="number" Mode="In" />
+        </Function>
+        <Function Name="INSERTPERSONNESFILM" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="EQUIPE23">
+          <Parameter Name="CODE" Type="number" Mode="In" />
+          <Parameter Name="NOM" Type="varchar2" Mode="In" />
+          <Parameter Name="PRENOM" Type="varchar2" Mode="In" />
+          <Parameter Name="BIO" Type="nclob" Mode="In" />
+          <Parameter Name="LIEUDENAISSANCE" Type="varchar2" Mode="In" />
+          <Parameter Name="PHOTO" Type="varchar2" Mode="In" />
+          <Parameter Name="DATEDENAISSANCE" Type="date" Mode="In" />
+        </Function>
+        <Function Name="INSERTROLE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="EQUIPE23">
+          <Parameter Name="PERSONNAGE" Type="varchar2" Mode="In" />
+          <Parameter Name="IDACTEUR" Type="number" Mode="In" />
+          <Parameter Name="IDFILM" Type="number" Mode="In" />
+        </Function>
+        <Function Name="INSERTSCENARISTE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="EQUIPE23">
+          <Parameter Name="NOM" Type="varchar2" Mode="In" />
+          <Parameter Name="IDFILM" Type="number" Mode="In" />
+        </Function>
+        <Function Name="LOUERFILM" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="EQUIPE23">
+          <Parameter Name="IDLOCATION" Type="number" Mode="Out" />
+          <Parameter Name="IDCLIENT" Type="number" Mode="In" />
+          <Parameter Name="IDFILMS" Type="number" Mode="In" />
+        </Function>
+        <Function Name="NUMBEFOFMOVIE" ReturnType="number" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="EQUIPE23">
+          <Parameter Name="IDPERSONNE" Type="number" Mode="In" />
+        </Function>
+        <Function Name="RECHERCHEDATEPARUTION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="EQUIPE23">
+          <Parameter Name="MIN" Type="date" Mode="In" />
+          <Parameter Name="MAX" Type="date" Mode="In" />
+        </Function>
+        <Function Name="RECHERCHEFILMACTEUR" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="EQUIPE23">
+          <Parameter Name="NOMS" Type="varchar2" Mode="In" />
+        </Function>
+        <Function Name="RECHERCHEFILMGENRE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="EQUIPE23">
+          <Parameter Name="GENRES" Type="varchar2" Mode="In" />
+        </Function>
+        <Function Name="RECHERCHEFILMLANGUE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="EQUIPE23">
+          <Parameter Name="LANGUE" Type="varchar2" Mode="In" />
+        </Function>
+        <Function Name="RECHERCHEFILMPAYS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="EQUIPE23">
+          <Parameter Name="PAYSRECHERCHER" Type="varchar2" Mode="In" />
+        </Function>
+        <Function Name="RECHERCHEFILMREALISATEUR" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="EQUIPE23">
+          <Parameter Name="NOMS" Type="varchar2" Mode="In" />
+        </Function>
+        <Function Name="RECHERCHEFILMTITRE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="EQUIPE23">
+          <Parameter Name="TITRES" Type="varchar2" Mode="In" />
+        </Function>
+        <Function Name="RETOURNERFILM" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="EQUIPE23">
+          <Parameter Name="IDLOCATIONS" Type="number" Mode="In" />
+        </Function>
+        <Function Name="RETOURNERIDCLIENT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="EQUIPE23">
+          <Parameter Name="IDCLIENT" Type="number" Mode="Out" />
+          <Parameter Name="COURRIELS" Type="varchar2" Mode="In" />
+          <Parameter Name="MOTDEPASSES" Type="varchar2" Mode="In" />
+        </Function>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="Entities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="ADRESSEs" EntityType="Model.ADRESSE" />
+          <EntitySet Name="ANNONCEs" EntityType="Model.ANNONCE" />
+          <EntitySet Name="CARTECREDITs" EntityType="Model.CARTECREDIT" />
+          <EntitySet Name="CLIENTs" EntityType="Model.CLIENT" />
+          <EntitySet Name="COPIEs" EntityType="Model.COPIE" />
+          <EntitySet Name="EMPLOYEs" EntityType="Model.EMPLOYE" />
+          <EntitySet Name="FILMs" EntityType="Model.FILM" />
+          <EntitySet Name="FILMGENREs" EntityType="Model.FILMGENRE" />
+          <EntitySet Name="FILMPAYS" EntityType="Model.FILMPAY" />
+          <EntitySet Name="FORFAITs" EntityType="Model.FORFAIT" />
+          <EntitySet Name="GENREs" EntityType="Model.GENRE" />
+          <EntitySet Name="LOCATIONs" EntityType="Model.LOCATION" />
+          <EntitySet Name="PAYS" EntityType="Model.PAY" />
+          <EntitySet Name="PERSONNEs" EntityType="Model.PERSONNE" />
+          <EntitySet Name="PERSONNESFILMs" EntityType="Model.PERSONNESFILM" />
+          <EntitySet Name="ROLEs" EntityType="Model.ROLE" />
+          <EntitySet Name="SCENARISTEs" EntityType="Model.SCENARISTE" />
+          <AssociationSet Name="IDADRESSE_FK" Association="Model.IDADRESSE_FK">
+            <End Role="ADRESSE" EntitySet="ADRESSEs" />
+            <End Role="PERSONNE" EntitySet="PERSONNEs" />
+          </AssociationSet>
+          <AssociationSet Name="IDANNONCEFILM_FK" Association="Model.IDANNONCEFILM_FK">
+            <End Role="FILM" EntitySet="FILMs" />
+            <End Role="ANNONCE" EntitySet="ANNONCEs" />
+          </AssociationSet>
+          <AssociationSet Name="IDCARTECREDIT_FK" Association="Model.IDCARTECREDIT_FK">
+            <End Role="CARTECREDIT" EntitySet="CARTECREDITs" />
+            <End Role="CLIENT" EntitySet="CLIENTs" />
+          </AssociationSet>
+          <AssociationSet Name="IDCLIENT_FK" Association="Model.IDCLIENT_FK">
+            <End Role="CLIENT" EntitySet="CLIENTs" />
+            <End Role="LOCATION" EntitySet="LOCATIONs" />
+          </AssociationSet>
+          <AssociationSet Name="IDFORFAIT_FK" Association="Model.IDFORFAIT_FK">
+            <End Role="FORFAIT" EntitySet="FORFAITs" />
+            <End Role="CLIENT" EntitySet="CLIENTs" />
+          </AssociationSet>
+          <AssociationSet Name="IDPERSONNE_FK" Association="Model.IDPERSONNE_FK">
+            <End Role="PERSONNE" EntitySet="PERSONNEs" />
+            <End Role="CLIENT" EntitySet="CLIENTs" />
+          </AssociationSet>
+          <AssociationSet Name="IDCOPIELOCATION_FK" Association="Model.IDCOPIELOCATION_FK">
+            <End Role="COPIE" EntitySet="COPIEs" />
+            <End Role="LOCATION" EntitySet="LOCATIONs" />
+          </AssociationSet>
+          <AssociationSet Name="IDFILMCOPIE_FK" Association="Model.IDFILMCOPIE_FK">
+            <End Role="FILM" EntitySet="FILMs" />
+            <End Role="COPIE" EntitySet="COPIEs" />
+          </AssociationSet>
+          <AssociationSet Name="IDPERSONNE_EMPLOYE_FK" Association="Model.IDPERSONNE_EMPLOYE_FK">
+            <End Role="PERSONNE" EntitySet="PERSONNEs" />
+            <End Role="EMPLOYE" EntitySet="EMPLOYEs" />
+          </AssociationSet>
+          <AssociationSet Name="IDFILM_FK" Association="Model.IDFILM_FK">
+            <End Role="FILM" EntitySet="FILMs" />
+            <End Role="FILMGENRE" EntitySet="FILMGENREs" />
+          </AssociationSet>
+          <AssociationSet Name="IDFILMPAYS_FK" Association="Model.IDFILMPAYS_FK">
+            <End Role="FILM" EntitySet="FILMs" />
+            <End Role="FILMPAYS" EntitySet="FILMPAYS" />
+          </AssociationSet>
+          <AssociationSet Name="IDFILMSCENARISTE_FK" Association="Model.IDFILMSCENARISTE_FK">
+            <End Role="FILM" EntitySet="FILMs" />
+            <End Role="SCENARISTE" EntitySet="SCENARISTEs" />
+          </AssociationSet>
+          <AssociationSet Name="IDREALISATEUR_FK" Association="Model.IDREALISATEUR_FK">
+            <End Role="PERSONNESFILM" EntitySet="PERSONNESFILMs" />
+            <End Role="FILM" EntitySet="FILMs" />
+          </AssociationSet>
+          <AssociationSet Name="IDROLEFILM_FK" Association="Model.IDROLEFILM_FK">
+            <End Role="FILM" EntitySet="FILMs" />
+            <End Role="ROLE" EntitySet="ROLEs" />
+          </AssociationSet>
+          <AssociationSet Name="IDGENRE_FK" Association="Model.IDGENRE_FK">
+            <End Role="GENRE" EntitySet="GENREs" />
+            <End Role="FILMGENRE" EntitySet="FILMGENREs" />
+          </AssociationSet>
+          <AssociationSet Name="IDPAYS_FK" Association="Model.IDPAYS_FK">
+            <End Role="PAYS" EntitySet="PAYS" />
+            <End Role="FILMPAYS" EntitySet="FILMPAYS" />
+          </AssociationSet>
+          <AssociationSet Name="IDACTEUR_FK" Association="Model.IDACTEUR_FK">
+            <End Role="PERSONNESFILM" EntitySet="PERSONNESFILMs" />
+            <End Role="ROLE" EntitySet="ROLEs" />
+          </AssociationSet>
+          <FunctionImport Name="ADDNEWPERSONNETEST">
+            <Parameter Name="NOM" Mode="In" Type="String" />
+            <Parameter Name="PRENOM" Mode="In" Type="String" />
+            <Parameter Name="TELEPHONE" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="INSCRIPTIONCLIENT">
+            <Parameter Name="IDCLIENT" Mode="Out" Type="Decimal" />
+            <Parameter Name="NUMCIVIQUE" Mode="In" Type="Decimal" />
+            <Parameter Name="RUE" Mode="In" Type="String" />
+            <Parameter Name="VILLE" Mode="In" Type="String" />
+            <Parameter Name="PROVINCE" Mode="In" Type="String" />
+            <Parameter Name="CODEPOSTAL" Mode="In" Type="String" />
+            <Parameter Name="NOM" Mode="In" Type="String" />
+            <Parameter Name="PRENOM" Mode="In" Type="String" />
+            <Parameter Name="COURRIEL" Mode="In" Type="String" />
+            <Parameter Name="TELEPHONE" Mode="In" Type="String" />
+            <Parameter Name="DATEDENAISSANCE" Mode="In" Type="DateTime" />
+            <Parameter Name="MOTDEPASSE" Mode="In" Type="String" />
+            <Parameter Name="TYPE" Mode="In" Type="String" />
+            <Parameter Name="NUMERO" Mode="In" Type="String" />
+            <Parameter Name="DATEEXPIRATION" Mode="In" Type="DateTime" />
+            <Parameter Name="CVV" Mode="In" Type="Decimal" />
+            <Parameter Name="NOMFORFAIT" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="INSERTADRESS">
+            <Parameter Name="ID" Mode="Out" Type="Decimal" />
+            <Parameter Name="NUMCIVIQUE" Mode="In" Type="Decimal" />
+            <Parameter Name="RUE" Mode="In" Type="String" />
+            <Parameter Name="VILLE" Mode="In" Type="String" />
+            <Parameter Name="PROVINCE" Mode="In" Type="String" />
+            <Parameter Name="CODEPOSTAL" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="INSERTANNONCE">
+            <Parameter Name="LIEN" Mode="In" Type="String" />
+            <Parameter Name="IDFILM" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="INSERTCARTECREDIT">
+            <Parameter Name="ID" Mode="Out" Type="Decimal" />
+            <Parameter Name="TYPE" Mode="In" Type="String" />
+            <Parameter Name="NUMERO" Mode="In" Type="String" />
+            <Parameter Name="DATEEXPIRATION" Mode="In" Type="DateTime" />
+            <Parameter Name="CVV" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="INSERTCLIENT">
+            <Parameter Name="ID" Mode="Out" Type="Decimal" />
+            <Parameter Name="IDPERSONNE" Mode="In" Type="Decimal" />
+            <Parameter Name="IDCARTECREDIT" Mode="In" Type="Decimal" />
+            <Parameter Name="IDFORFAIT" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="INSERTCOPIE">
+            <Parameter Name="ID" Mode="Out" Type="Decimal" />
+            <Parameter Name="DISPONIBLE" Mode="In" Type="Decimal" />
+            <Parameter Name="IDFILM" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="INSERTEMPLOYE">
+            <Parameter Name="ID" Mode="Out" Type="Decimal" />
+            <Parameter Name="MATRICULE" Mode="In" Type="Decimal" />
+            <Parameter Name="IDPERSONNE" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="INSERTFILM">
+            <Parameter Name="ID" Mode="Out" Type="Decimal" />
+            <Parameter Name="TITRE" Mode="In" Type="String" />
+            <Parameter Name="DATEPARUTION" Mode="In" Type="DateTime" />
+            <Parameter Name="DUREEFILM" Mode="In" Type="Decimal" />
+            <Parameter Name="SCENARIO" Mode="In" Type="String" />
+            <Parameter Name="POSTER" Mode="In" Type="String" />
+            <Parameter Name="NBCOPIE" Mode="In" Type="Decimal" />
+            <Parameter Name="LANGUEORIGINALE" Mode="In" Type="String" />
+            <Parameter Name="IDREALISATEUR" Mode="In" Type="Decimal" />
+            <Parameter Name="CODE" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="INSERTFILMGENRE">
+            <Parameter Name="IDFILM" Mode="In" Type="Decimal" />
+            <Parameter Name="IDGENRE" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="INSERTFILMPAYS">
+            <Parameter Name="IDPAYS" Mode="In" Type="Decimal" />
+            <Parameter Name="IDFILM" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="INSERTFORFAIT">
+            <Parameter Name="ID" Mode="Out" Type="Decimal" />
+            <Parameter Name="NAME" Mode="In" Type="String" />
+            <Parameter Name="PRIX" Mode="In" Type="Decimal" />
+            <Parameter Name="LOCATIONSMAX" Mode="In" Type="Decimal" />
+            <Parameter Name="DUREEMAX" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="INSERTGENRE">
+            <Parameter Name="ID" Mode="Out" Type="Decimal" />
+            <Parameter Name="NEWTITRE" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="INSERTLOCATION">
+            <Parameter Name="ID" Mode="Out" Type="Decimal" />
+            <Parameter Name="DATEDELOCATION" Mode="In" Type="DateTime" />
+            <Parameter Name="DATERETOUR" Mode="In" Type="DateTime" />
+            <Parameter Name="IDCOPIE" Mode="In" Type="Decimal" />
+            <Parameter Name="IDCLIENT" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="INSERTPAYS">
+            <Parameter Name="ID" Mode="Out" Type="Decimal" />
+            <Parameter Name="NAME" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="INSERTPERSONNE">
+            <Parameter Name="ID" Mode="Out" Type="Decimal" />
+            <Parameter Name="NOM" Mode="In" Type="String" />
+            <Parameter Name="PRENOM" Mode="In" Type="String" />
+            <Parameter Name="COURRIEL" Mode="In" Type="String" />
+            <Parameter Name="TELEPHONE" Mode="In" Type="String" />
+            <Parameter Name="DATEDENAISSANCE" Mode="In" Type="DateTime" />
+            <Parameter Name="MOTDEPASSE" Mode="In" Type="String" />
+            <Parameter Name="ADRESSE" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="INSERTPERSONNESFILM">
+            <Parameter Name="CODE" Mode="In" Type="Decimal" />
+            <Parameter Name="NOM" Mode="In" Type="String" />
+            <Parameter Name="PRENOM" Mode="In" Type="String" />
+            <Parameter Name="BIO" Mode="In" Type="String" />
+            <Parameter Name="LIEUDENAISSANCE" Mode="In" Type="String" />
+            <Parameter Name="PHOTO" Mode="In" Type="String" />
+            <Parameter Name="DATEDENAISSANCE" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="INSERTROLE">
+            <Parameter Name="PERSONNAGE" Mode="In" Type="String" />
+            <Parameter Name="IDACTEUR" Mode="In" Type="Decimal" />
+            <Parameter Name="IDFILM" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="INSERTSCENARISTE">
+            <Parameter Name="NOM" Mode="In" Type="String" />
+            <Parameter Name="IDFILM" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="LOUERFILM">
+            <Parameter Name="IDLOCATION" Mode="Out" Type="Decimal" />
+            <Parameter Name="IDCLIENT" Mode="In" Type="Decimal" />
+            <Parameter Name="IDFILMS" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="RECHERCHEDATEPARUTION">
+            <Parameter Name="MIN" Mode="In" Type="DateTime" />
+            <Parameter Name="MAX" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="RECHERCHEFILMACTEUR">
+            <Parameter Name="NOMS" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="RECHERCHEFILMGENRE">
+            <Parameter Name="GENRES" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="RECHERCHEFILMLANGUE">
+            <Parameter Name="LANGUE" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="RECHERCHEFILMPAYS">
+            <Parameter Name="PAYSRECHERCHER" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="RECHERCHEFILMREALISATEUR">
+            <Parameter Name="NOMS" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="RECHERCHEFILMTITRE">
+            <Parameter Name="TITRES" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="RETOURNERFILM">
+            <Parameter Name="IDLOCATIONS" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="RETOURNERIDCLIENT">
+            <Parameter Name="IDCLIENT" Mode="Out" Type="Decimal" />
+            <Parameter Name="COURRIELS" Mode="In" Type="String" />
+            <Parameter Name="MOTDEPASSES" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <EntityType Name="ADRESSE">
+          <Key>
+            <PropertyRef Name="IDADRESSE" />
+          </Key>
+          <Property Name="IDADRESSE" Type="Decimal" Nullable="false" Precision="38" Scale="0" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="NUMCIVIQUE" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <Property Name="RUE" Type="String" Nullable="false" MaxLength="75" Unicode="false" FixedLength="false" />
+          <Property Name="VILLE" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="PROVINCE" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="CODEPOSTAL" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="PERSONNEs" Relationship="Model.IDADRESSE_FK" FromRole="ADRESSE" ToRole="PERSONNE" />
+        </EntityType>
+        <EntityType Name="ANNONCE">
+          <Key>
+            <PropertyRef Name="IDANNONCE" />
+          </Key>
+          <Property Name="IDANNONCE" Type="Decimal" Nullable="false" Precision="38" Scale="0" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="LIEN" Type="String" Nullable="false" MaxLength="250" Unicode="false" FixedLength="false" />
+          <Property Name="IDFILM" Type="Decimal" Precision="38" Scale="0" />
+          <NavigationProperty Name="FILM" Relationship="Model.IDANNONCEFILM_FK" FromRole="ANNONCE" ToRole="FILM" />
+        </EntityType>
+        <EntityType Name="CARTECREDIT">
+          <Key>
+            <PropertyRef Name="IDCARTECREDIT" />
+          </Key>
+          <Property Name="IDCARTECREDIT" Type="Decimal" Nullable="false" Precision="38" Scale="0" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="TYPE" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="NUMERO" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="DATEEXPIRATION" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CVV" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <NavigationProperty Name="CLIENTs" Relationship="Model.IDCARTECREDIT_FK" FromRole="CARTECREDIT" ToRole="CLIENT" />
+        </EntityType>
+        <EntityType Name="CLIENT">
+          <Key>
+            <PropertyRef Name="IDCLIENT" />
+          </Key>
+          <Property Name="IDCLIENT" Type="Decimal" Nullable="false" Precision="38" Scale="0" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="IDPERSONNE" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="IDCARTECREDIT" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="IDFORFAIT" Type="Decimal" Precision="38" Scale="0" />
+          <NavigationProperty Name="CARTECREDIT" Relationship="Model.IDCARTECREDIT_FK" FromRole="CLIENT" ToRole="CARTECREDIT" />
+          <NavigationProperty Name="LOCATIONs" Relationship="Model.IDCLIENT_FK" FromRole="CLIENT" ToRole="LOCATION" />
+          <NavigationProperty Name="FORFAIT" Relationship="Model.IDFORFAIT_FK" FromRole="CLIENT" ToRole="FORFAIT" />
+          <NavigationProperty Name="PERSONNE" Relationship="Model.IDPERSONNE_FK" FromRole="CLIENT" ToRole="PERSONNE" />
+        </EntityType>
+        <EntityType Name="COPIE">
+          <Key>
+            <PropertyRef Name="IDCOPIE" />
+          </Key>
+          <Property Name="IDCOPIE" Type="Decimal" Nullable="false" Precision="38" Scale="0" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="DISPONIBLE" Type="Int16" Nullable="false" />
+          <Property Name="IDFILM" Type="Decimal" Precision="38" Scale="0" />
+          <NavigationProperty Name="LOCATIONs" Relationship="Model.IDCOPIELOCATION_FK" FromRole="COPIE" ToRole="LOCATION" />
+          <NavigationProperty Name="FILM" Relationship="Model.IDFILMCOPIE_FK" FromRole="COPIE" ToRole="FILM" />
+        </EntityType>
+        <EntityType Name="EMPLOYE">
+          <Key>
+            <PropertyRef Name="IDEMPLOYE" />
+          </Key>
+          <Property Name="IDEMPLOYE" Type="Decimal" Nullable="false" Precision="38" Scale="0" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="MATRICULE" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <Property Name="IDPERSONNE" Type="Decimal" Precision="38" Scale="0" />
+          <NavigationProperty Name="PERSONNE" Relationship="Model.IDPERSONNE_EMPLOYE_FK" FromRole="EMPLOYE" ToRole="PERSONNE" />
+        </EntityType>
+        <EntityType Name="FILM">
+          <Key>
+            <PropertyRef Name="IDFILM" />
+          </Key>
+          <Property Name="IDFILM" Type="Decimal" Nullable="false" Precision="38" Scale="0" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="TITRE" Type="String" Nullable="false" MaxLength="150" Unicode="false" FixedLength="false" />
+          <Property Name="DATEPARUTION" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DUREEFILM" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="SCENARIO" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="POSTER" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="NBCOPIE" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <Property Name="LANGUEORIGINALE" Type="String" MaxLength="25" Unicode="false" FixedLength="false" />
+          <Property Name="IDREALISATEUR" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="CODE" Type="String" Nullable="false" MaxLength="25" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="ANNONCEs" Relationship="Model.IDANNONCEFILM_FK" FromRole="FILM" ToRole="ANNONCE" />
+          <NavigationProperty Name="COPIEs" Relationship="Model.IDFILMCOPIE_FK" FromRole="FILM" ToRole="COPIE" />
+          <NavigationProperty Name="FILMGENREs" Relationship="Model.IDFILM_FK" FromRole="FILM" ToRole="FILMGENRE" />
+          <NavigationProperty Name="FILMPAYS" Relationship="Model.IDFILMPAYS_FK" FromRole="FILM" ToRole="FILMPAYS" />
+          <NavigationProperty Name="SCENARISTEs" Relationship="Model.IDFILMSCENARISTE_FK" FromRole="FILM" ToRole="SCENARISTE" />
+          <NavigationProperty Name="PERSONNESFILM" Relationship="Model.IDREALISATEUR_FK" FromRole="FILM" ToRole="PERSONNESFILM" />
+          <NavigationProperty Name="ROLEs" Relationship="Model.IDROLEFILM_FK" FromRole="FILM" ToRole="ROLE" />
+        </EntityType>
+        <EntityType Name="FILMGENRE">
+          <Key>
+            <PropertyRef Name="IDFILMGENRE" />
+          </Key>
+          <Property Name="IDFILMGENRE" Type="Decimal" Nullable="false" Precision="38" Scale="0" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="IDFILM" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="IDGENRE" Type="Decimal" Precision="38" Scale="0" />
+          <NavigationProperty Name="FILM" Relationship="Model.IDFILM_FK" FromRole="FILMGENRE" ToRole="FILM" />
+          <NavigationProperty Name="GENRE" Relationship="Model.IDGENRE_FK" FromRole="FILMGENRE" ToRole="GENRE" />
+        </EntityType>
+        <EntityType Name="FILMPAY">
+          <Key>
+            <PropertyRef Name="IDFILMPAYS" />
+          </Key>
+          <Property Name="IDFILMPAYS" Type="Decimal" Nullable="false" Precision="38" Scale="0" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="IDPAYS" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="IDFILM" Type="Decimal" Precision="38" Scale="0" />
+          <NavigationProperty Name="FILM" Relationship="Model.IDFILMPAYS_FK" FromRole="FILMPAYS" ToRole="FILM" />
+          <NavigationProperty Name="PAY" Relationship="Model.IDPAYS_FK" FromRole="FILMPAYS" ToRole="PAYS" />
+        </EntityType>
+        <EntityType Name="FORFAIT">
+          <Key>
+            <PropertyRef Name="IDFORFAIT" />
+          </Key>
+          <Property Name="IDFORFAIT" Type="Decimal" Nullable="false" Precision="38" Scale="0" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="NOM" Type="String" Nullable="false" MaxLength="15" Unicode="false" FixedLength="false" />
+          <Property Name="PRIX" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <Property Name="LOCATIONSMAX" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <Property Name="DUREEMAX" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <NavigationProperty Name="CLIENTs" Relationship="Model.IDFORFAIT_FK" FromRole="FORFAIT" ToRole="CLIENT" />
+        </EntityType>
+        <EntityType Name="GENRE">
+          <Key>
+            <PropertyRef Name="IDGENRE" />
+          </Key>
+          <Property Name="IDGENRE" Type="Decimal" Nullable="false" Precision="38" Scale="0" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="TITRE" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="FILMGENREs" Relationship="Model.IDGENRE_FK" FromRole="GENRE" ToRole="FILMGENRE" />
+        </EntityType>
+        <EntityType Name="LOCATION">
+          <Key>
+            <PropertyRef Name="IDLOCATION" />
+          </Key>
+          <Property Name="IDLOCATION" Type="Decimal" Nullable="false" Precision="38" Scale="0" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="DATEDELOCATION" Type="DateTime" Precision="0" />
+          <Property Name="DATERETOUR" Type="DateTime" Precision="0" />
+          <Property Name="IDCOPIE" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="IDCLIENT" Type="Decimal" Precision="38" Scale="0" />
+          <NavigationProperty Name="CLIENT" Relationship="Model.IDCLIENT_FK" FromRole="LOCATION" ToRole="CLIENT" />
+          <NavigationProperty Name="COPIE" Relationship="Model.IDCOPIELOCATION_FK" FromRole="LOCATION" ToRole="COPIE" />
+        </EntityType>
+        <EntityType Name="PAY">
+          <Key>
+            <PropertyRef Name="IDPAYS" />
+          </Key>
+          <Property Name="IDPAYS" Type="Decimal" Nullable="false" Precision="38" Scale="0" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="NOM" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="FILMPAYS" Relationship="Model.IDPAYS_FK" FromRole="PAYS" ToRole="FILMPAYS" />
+        </EntityType>
+        <EntityType Name="PERSONNE">
+          <Key>
+            <PropertyRef Name="IDPERSONNE" />
+          </Key>
+          <Property Name="IDPERSONNE" Type="Decimal" Nullable="false" Precision="38" Scale="0" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="NOM" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="PRENOM" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="COURRIEL" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="TELEPHONE" Type="String" Nullable="false" MaxLength="15" Unicode="false" FixedLength="false" />
+          <Property Name="DATEDENAISSANCE" Type="DateTime" Precision="0" />
+          <Property Name="MOTDEPASSE" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="IDADRESSE" Type="Decimal" Precision="38" Scale="0" />
+          <NavigationProperty Name="ADRESSE" Relationship="Model.IDADRESSE_FK" FromRole="PERSONNE" ToRole="ADRESSE" />
+          <NavigationProperty Name="CLIENTs" Relationship="Model.IDPERSONNE_FK" FromRole="PERSONNE" ToRole="CLIENT" />
+          <NavigationProperty Name="EMPLOYEs" Relationship="Model.IDPERSONNE_EMPLOYE_FK" FromRole="PERSONNE" ToRole="EMPLOYE" />
+        </EntityType>
+        <EntityType Name="PERSONNESFILM">
+          <Key>
+            <PropertyRef Name="IDPERSONNEFILM" />
+          </Key>
+          <Property Name="IDPERSONNEFILM" Type="Decimal" Nullable="false" Precision="38" Scale="0" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="NOM" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="PRENOM" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="BIO" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="LIEUDENAISSANCE" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="PHOTO" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="DATEDENAISSANCE" Type="DateTime" Precision="0" />
+          <Property Name="CODE" Type="Decimal" Precision="38" Scale="0" />
+          <NavigationProperty Name="FILMs" Relationship="Model.IDREALISATEUR_FK" FromRole="PERSONNESFILM" ToRole="FILM" />
+          <NavigationProperty Name="ROLEs" Relationship="Model.IDACTEUR_FK" FromRole="PERSONNESFILM" ToRole="ROLE" />
+        </EntityType>
+        <EntityType Name="ROLE">
+          <Key>
+            <PropertyRef Name="IDROLE" />
+          </Key>
+          <Property Name="IDROLE" Type="Decimal" Nullable="false" Precision="38" Scale="0" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="PERSONNAGE" Type="String" Nullable="false" MaxLength="75" Unicode="false" FixedLength="false" />
+          <Property Name="IDACTEUR" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="IDFILM" Type="Decimal" Precision="38" Scale="0" />
+          <NavigationProperty Name="FILM" Relationship="Model.IDROLEFILM_FK" FromRole="ROLE" ToRole="FILM" />
+          <NavigationProperty Name="PERSONNESFILM" Relationship="Model.IDACTEUR_FK" FromRole="ROLE" ToRole="PERSONNESFILM" />
+        </EntityType>
+        <EntityType Name="SCENARISTE">
+          <Key>
+            <PropertyRef Name="IDSCENARISTE" />
+          </Key>
+          <Property Name="IDSCENARISTE" Type="Decimal" Nullable="false" Precision="38" Scale="0" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="NOM" Type="String" MaxLength="75" Unicode="false" FixedLength="false" />
+          <Property Name="IDFILM" Type="Decimal" Precision="38" Scale="0" />
+          <NavigationProperty Name="FILM" Relationship="Model.IDFILMSCENARISTE_FK" FromRole="SCENARISTE" ToRole="FILM" />
+        </EntityType>
+        <Association Name="IDADRESSE_FK">
+          <End Role="ADRESSE" Type="Model.ADRESSE" Multiplicity="0..1" />
+          <End Role="PERSONNE" Type="Model.PERSONNE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ADRESSE">
+              <PropertyRef Name="IDADRESSE" />
+            </Principal>
+            <Dependent Role="PERSONNE">
+              <PropertyRef Name="IDADRESSE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="IDANNONCEFILM_FK">
+          <End Role="FILM" Type="Model.FILM" Multiplicity="0..1" />
+          <End Role="ANNONCE" Type="Model.ANNONCE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FILM">
+              <PropertyRef Name="IDFILM" />
+            </Principal>
+            <Dependent Role="ANNONCE">
+              <PropertyRef Name="IDFILM" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="IDCARTECREDIT_FK">
+          <End Role="CARTECREDIT" Type="Model.CARTECREDIT" Multiplicity="0..1" />
+          <End Role="CLIENT" Type="Model.CLIENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CARTECREDIT">
+              <PropertyRef Name="IDCARTECREDIT" />
+            </Principal>
+            <Dependent Role="CLIENT">
+              <PropertyRef Name="IDCARTECREDIT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="IDCLIENT_FK">
+          <End Role="CLIENT" Type="Model.CLIENT" Multiplicity="0..1" />
+          <End Role="LOCATION" Type="Model.LOCATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENT">
+              <PropertyRef Name="IDCLIENT" />
+            </Principal>
+            <Dependent Role="LOCATION">
+              <PropertyRef Name="IDCLIENT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="IDFORFAIT_FK">
+          <End Role="FORFAIT" Type="Model.FORFAIT" Multiplicity="0..1" />
+          <End Role="CLIENT" Type="Model.CLIENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FORFAIT">
+              <PropertyRef Name="IDFORFAIT" />
+            </Principal>
+            <Dependent Role="CLIENT">
+              <PropertyRef Name="IDFORFAIT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="IDPERSONNE_FK">
+          <End Role="PERSONNE" Type="Model.PERSONNE" Multiplicity="0..1" />
+          <End Role="CLIENT" Type="Model.CLIENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERSONNE">
+              <PropertyRef Name="IDPERSONNE" />
+            </Principal>
+            <Dependent Role="CLIENT">
+              <PropertyRef Name="IDPERSONNE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="IDCOPIELOCATION_FK">
+          <End Role="COPIE" Type="Model.COPIE" Multiplicity="0..1" />
+          <End Role="LOCATION" Type="Model.LOCATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COPIE">
+              <PropertyRef Name="IDCOPIE" />
+            </Principal>
+            <Dependent Role="LOCATION">
+              <PropertyRef Name="IDCOPIE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="IDFILMCOPIE_FK">
+          <End Role="FILM" Type="Model.FILM" Multiplicity="0..1" />
+          <End Role="COPIE" Type="Model.COPIE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FILM">
+              <PropertyRef Name="IDFILM" />
+            </Principal>
+            <Dependent Role="COPIE">
+              <PropertyRef Name="IDFILM" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="IDPERSONNE_EMPLOYE_FK">
+          <End Role="PERSONNE" Type="Model.PERSONNE" Multiplicity="0..1" />
+          <End Role="EMPLOYE" Type="Model.EMPLOYE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERSONNE">
+              <PropertyRef Name="IDPERSONNE" />
+            </Principal>
+            <Dependent Role="EMPLOYE">
+              <PropertyRef Name="IDPERSONNE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="IDFILM_FK">
+          <End Role="FILM" Type="Model.FILM" Multiplicity="0..1" />
+          <End Role="FILMGENRE" Type="Model.FILMGENRE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FILM">
+              <PropertyRef Name="IDFILM" />
+            </Principal>
+            <Dependent Role="FILMGENRE">
+              <PropertyRef Name="IDFILM" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="IDFILMPAYS_FK">
+          <End Role="FILM" Type="Model.FILM" Multiplicity="0..1" />
+          <End Role="FILMPAYS" Type="Model.FILMPAY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FILM">
+              <PropertyRef Name="IDFILM" />
+            </Principal>
+            <Dependent Role="FILMPAYS">
+              <PropertyRef Name="IDFILM" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="IDFILMSCENARISTE_FK">
+          <End Role="FILM" Type="Model.FILM" Multiplicity="0..1" />
+          <End Role="SCENARISTE" Type="Model.SCENARISTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FILM">
+              <PropertyRef Name="IDFILM" />
+            </Principal>
+            <Dependent Role="SCENARISTE">
+              <PropertyRef Name="IDFILM" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="IDREALISATEUR_FK">
+          <End Role="PERSONNESFILM" Type="Model.PERSONNESFILM" Multiplicity="0..1" />
+          <End Role="FILM" Type="Model.FILM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERSONNESFILM">
+              <PropertyRef Name="IDPERSONNEFILM" />
+            </Principal>
+            <Dependent Role="FILM">
+              <PropertyRef Name="IDREALISATEUR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="IDROLEFILM_FK">
+          <End Role="FILM" Type="Model.FILM" Multiplicity="0..1" />
+          <End Role="ROLE" Type="Model.ROLE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FILM">
+              <PropertyRef Name="IDFILM" />
+            </Principal>
+            <Dependent Role="ROLE">
+              <PropertyRef Name="IDFILM" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="IDGENRE_FK">
+          <End Role="GENRE" Type="Model.GENRE" Multiplicity="0..1" />
+          <End Role="FILMGENRE" Type="Model.FILMGENRE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GENRE">
+              <PropertyRef Name="IDGENRE" />
+            </Principal>
+            <Dependent Role="FILMGENRE">
+              <PropertyRef Name="IDGENRE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="IDPAYS_FK">
+          <End Role="PAYS" Type="Model.PAY" Multiplicity="0..1" />
+          <End Role="FILMPAYS" Type="Model.FILMPAY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PAYS">
+              <PropertyRef Name="IDPAYS" />
+            </Principal>
+            <Dependent Role="FILMPAYS">
+              <PropertyRef Name="IDPAYS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="IDACTEUR_FK">
+          <End Role="PERSONNESFILM" Type="Model.PERSONNESFILM" Multiplicity="0..1" />
+          <End Role="ROLE" Type="Model.ROLE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERSONNESFILM">
+              <PropertyRef Name="IDPERSONNEFILM" />
+            </Principal>
+            <Dependent Role="ROLE">
+              <PropertyRef Name="IDACTEUR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="ADRESSEs">
+            <EntityTypeMapping TypeName="Model.ADRESSE">
+              <MappingFragment StoreEntitySet="ADRESSE">
+                <ScalarProperty Name="IDADRESSE" ColumnName="IDADRESSE" />
+                <ScalarProperty Name="NUMCIVIQUE" ColumnName="NUMCIVIQUE" />
+                <ScalarProperty Name="RUE" ColumnName="RUE" />
+                <ScalarProperty Name="VILLE" ColumnName="VILLE" />
+                <ScalarProperty Name="PROVINCE" ColumnName="PROVINCE" />
+                <ScalarProperty Name="CODEPOSTAL" ColumnName="CODEPOSTAL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ANNONCEs">
+            <EntityTypeMapping TypeName="Model.ANNONCE">
+              <MappingFragment StoreEntitySet="ANNONCE">
+                <ScalarProperty Name="IDANNONCE" ColumnName="IDANNONCE" />
+                <ScalarProperty Name="LIEN" ColumnName="LIEN" />
+                <ScalarProperty Name="IDFILM" ColumnName="IDFILM" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CARTECREDITs">
+            <EntityTypeMapping TypeName="Model.CARTECREDIT">
+              <MappingFragment StoreEntitySet="CARTECREDIT">
+                <ScalarProperty Name="IDCARTECREDIT" ColumnName="IDCARTECREDIT" />
+                <ScalarProperty Name="TYPE" ColumnName="TYPE" />
+                <ScalarProperty Name="NUMERO" ColumnName="NUMERO" />
+                <ScalarProperty Name="DATEEXPIRATION" ColumnName="DATEEXPIRATION" />
+                <ScalarProperty Name="CVV" ColumnName="CVV" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CLIENTs">
+            <EntityTypeMapping TypeName="Model.CLIENT">
+              <MappingFragment StoreEntitySet="CLIENT">
+                <ScalarProperty Name="IDCLIENT" ColumnName="IDCLIENT" />
+                <ScalarProperty Name="IDPERSONNE" ColumnName="IDPERSONNE" />
+                <ScalarProperty Name="IDCARTECREDIT" ColumnName="IDCARTECREDIT" />
+                <ScalarProperty Name="IDFORFAIT" ColumnName="IDFORFAIT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COPIEs">
+            <EntityTypeMapping TypeName="Model.COPIE">
+              <MappingFragment StoreEntitySet="COPIE">
+                <ScalarProperty Name="IDCOPIE" ColumnName="IDCOPIE" />
+                <ScalarProperty Name="DISPONIBLE" ColumnName="DISPONIBLE" />
+                <ScalarProperty Name="IDFILM" ColumnName="IDFILM" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EMPLOYEs">
+            <EntityTypeMapping TypeName="Model.EMPLOYE">
+              <MappingFragment StoreEntitySet="EMPLOYE">
+                <ScalarProperty Name="IDEMPLOYE" ColumnName="IDEMPLOYE" />
+                <ScalarProperty Name="MATRICULE" ColumnName="MATRICULE" />
+                <ScalarProperty Name="IDPERSONNE" ColumnName="IDPERSONNE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FILMs">
+            <EntityTypeMapping TypeName="Model.FILM">
+              <MappingFragment StoreEntitySet="FILM">
+                <ScalarProperty Name="IDFILM" ColumnName="IDFILM" />
+                <ScalarProperty Name="TITRE" ColumnName="TITRE" />
+                <ScalarProperty Name="DATEPARUTION" ColumnName="DATEPARUTION" />
+                <ScalarProperty Name="DUREEFILM" ColumnName="DUREEFILM" />
+                <ScalarProperty Name="SCENARIO" ColumnName="SCENARIO" />
+                <ScalarProperty Name="POSTER" ColumnName="POSTER" />
+                <ScalarProperty Name="NBCOPIE" ColumnName="NBCOPIE" />
+                <ScalarProperty Name="LANGUEORIGINALE" ColumnName="LANGUEORIGINALE" />
+                <ScalarProperty Name="IDREALISATEUR" ColumnName="IDREALISATEUR" />
+                <ScalarProperty Name="CODE" ColumnName="CODE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FILMGENREs">
+            <EntityTypeMapping TypeName="Model.FILMGENRE">
+              <MappingFragment StoreEntitySet="FILMGENRE">
+                <ScalarProperty Name="IDFILMGENRE" ColumnName="IDFILMGENRE" />
+                <ScalarProperty Name="IDFILM" ColumnName="IDFILM" />
+                <ScalarProperty Name="IDGENRE" ColumnName="IDGENRE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FILMPAYS">
+            <EntityTypeMapping TypeName="Model.FILMPAY">
+              <MappingFragment StoreEntitySet="FILMPAYS">
+                <ScalarProperty Name="IDFILMPAYS" ColumnName="IDFILMPAYS" />
+                <ScalarProperty Name="IDPAYS" ColumnName="IDPAYS" />
+                <ScalarProperty Name="IDFILM" ColumnName="IDFILM" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FORFAITs">
+            <EntityTypeMapping TypeName="Model.FORFAIT">
+              <MappingFragment StoreEntitySet="FORFAIT">
+                <ScalarProperty Name="IDFORFAIT" ColumnName="IDFORFAIT" />
+                <ScalarProperty Name="NOM" ColumnName="NOM" />
+                <ScalarProperty Name="PRIX" ColumnName="PRIX" />
+                <ScalarProperty Name="LOCATIONSMAX" ColumnName="LOCATIONSMAX" />
+                <ScalarProperty Name="DUREEMAX" ColumnName="DUREEMAX" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GENREs">
+            <EntityTypeMapping TypeName="Model.GENRE">
+              <MappingFragment StoreEntitySet="GENRE">
+                <ScalarProperty Name="IDGENRE" ColumnName="IDGENRE" />
+                <ScalarProperty Name="TITRE" ColumnName="TITRE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LOCATIONs">
+            <EntityTypeMapping TypeName="Model.LOCATION">
+              <MappingFragment StoreEntitySet="LOCATION">
+                <ScalarProperty Name="IDLOCATION" ColumnName="IDLOCATION" />
+                <ScalarProperty Name="DATEDELOCATION" ColumnName="DATEDELOCATION" />
+                <ScalarProperty Name="DATERETOUR" ColumnName="DATERETOUR" />
+                <ScalarProperty Name="IDCOPIE" ColumnName="IDCOPIE" />
+                <ScalarProperty Name="IDCLIENT" ColumnName="IDCLIENT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PAYS">
+            <EntityTypeMapping TypeName="Model.PAY">
+              <MappingFragment StoreEntitySet="PAYS">
+                <ScalarProperty Name="IDPAYS" ColumnName="IDPAYS" />
+                <ScalarProperty Name="NOM" ColumnName="NOM" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PERSONNEs">
+            <EntityTypeMapping TypeName="Model.PERSONNE">
+              <MappingFragment StoreEntitySet="PERSONNE">
+                <ScalarProperty Name="IDPERSONNE" ColumnName="IDPERSONNE" />
+                <ScalarProperty Name="NOM" ColumnName="NOM" />
+                <ScalarProperty Name="PRENOM" ColumnName="PRENOM" />
+                <ScalarProperty Name="COURRIEL" ColumnName="COURRIEL" />
+                <ScalarProperty Name="TELEPHONE" ColumnName="TELEPHONE" />
+                <ScalarProperty Name="DATEDENAISSANCE" ColumnName="DATEDENAISSANCE" />
+                <ScalarProperty Name="MOTDEPASSE" ColumnName="MOTDEPASSE" />
+                <ScalarProperty Name="IDADRESSE" ColumnName="IDADRESSE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PERSONNESFILMs">
+            <EntityTypeMapping TypeName="Model.PERSONNESFILM">
+              <MappingFragment StoreEntitySet="PERSONNESFILM">
+                <ScalarProperty Name="IDPERSONNEFILM" ColumnName="IDPERSONNEFILM" />
+                <ScalarProperty Name="NOM" ColumnName="NOM" />
+                <ScalarProperty Name="PRENOM" ColumnName="PRENOM" />
+                <ScalarProperty Name="BIO" ColumnName="BIO" />
+                <ScalarProperty Name="LIEUDENAISSANCE" ColumnName="LIEUDENAISSANCE" />
+                <ScalarProperty Name="PHOTO" ColumnName="PHOTO" />
+                <ScalarProperty Name="DATEDENAISSANCE" ColumnName="DATEDENAISSANCE" />
+                <ScalarProperty Name="CODE" ColumnName="CODE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ROLEs">
+            <EntityTypeMapping TypeName="Model.ROLE">
+              <MappingFragment StoreEntitySet="ROLE">
+                <ScalarProperty Name="IDROLE" ColumnName="IDROLE" />
+                <ScalarProperty Name="PERSONNAGE" ColumnName="PERSONNAGE" />
+                <ScalarProperty Name="IDACTEUR" ColumnName="IDACTEUR" />
+                <ScalarProperty Name="IDFILM" ColumnName="IDFILM" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SCENARISTEs">
+            <EntityTypeMapping TypeName="Model.SCENARISTE">
+              <MappingFragment StoreEntitySet="SCENARISTE">
+                <ScalarProperty Name="IDSCENARISTE" ColumnName="IDSCENARISTE" />
+                <ScalarProperty Name="NOM" ColumnName="NOM" />
+                <ScalarProperty Name="IDFILM" ColumnName="IDFILM" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ADDNEWPERSONNETEST" FunctionName="Model.Store.ADDNEWPERSONNETEST" />
+          <FunctionImportMapping FunctionImportName="INSCRIPTIONCLIENT" FunctionName="Model.Store.INSCRIPTIONCLIENT" />
+          <FunctionImportMapping FunctionImportName="INSERTADRESS" FunctionName="Model.Store.INSERTADRESS" />
+          <FunctionImportMapping FunctionImportName="INSERTANNONCE" FunctionName="Model.Store.INSERTANNONCE" />
+          <FunctionImportMapping FunctionImportName="INSERTCARTECREDIT" FunctionName="Model.Store.INSERTCARTECREDIT" />
+          <FunctionImportMapping FunctionImportName="INSERTCLIENT" FunctionName="Model.Store.INSERTCLIENT" />
+          <FunctionImportMapping FunctionImportName="INSERTCOPIE" FunctionName="Model.Store.INSERTCOPIE" />
+          <FunctionImportMapping FunctionImportName="INSERTEMPLOYE" FunctionName="Model.Store.INSERTEMPLOYE" />
+          <FunctionImportMapping FunctionImportName="INSERTFILM" FunctionName="Model.Store.INSERTFILM" />
+          <FunctionImportMapping FunctionImportName="INSERTFILMGENRE" FunctionName="Model.Store.INSERTFILMGENRE" />
+          <FunctionImportMapping FunctionImportName="INSERTFILMPAYS" FunctionName="Model.Store.INSERTFILMPAYS" />
+          <FunctionImportMapping FunctionImportName="INSERTFORFAIT" FunctionName="Model.Store.INSERTFORFAIT" />
+          <FunctionImportMapping FunctionImportName="INSERTGENRE" FunctionName="Model.Store.INSERTGENRE" />
+          <FunctionImportMapping FunctionImportName="INSERTLOCATION" FunctionName="Model.Store.INSERTLOCATION" />
+          <FunctionImportMapping FunctionImportName="INSERTPAYS" FunctionName="Model.Store.INSERTPAYS" />
+          <FunctionImportMapping FunctionImportName="INSERTPERSONNE" FunctionName="Model.Store.INSERTPERSONNE" />
+          <FunctionImportMapping FunctionImportName="INSERTPERSONNESFILM" FunctionName="Model.Store.INSERTPERSONNESFILM" />
+          <FunctionImportMapping FunctionImportName="INSERTROLE" FunctionName="Model.Store.INSERTROLE" />
+          <FunctionImportMapping FunctionImportName="INSERTSCENARISTE" FunctionName="Model.Store.INSERTSCENARISTE" />
+          <FunctionImportMapping FunctionImportName="LOUERFILM" FunctionName="Model.Store.LOUERFILM" />
+          <FunctionImportMapping FunctionImportName="RECHERCHEDATEPARUTION" FunctionName="Model.Store.RECHERCHEDATEPARUTION" />
+          <FunctionImportMapping FunctionImportName="RECHERCHEFILMACTEUR" FunctionName="Model.Store.RECHERCHEFILMACTEUR" />
+          <FunctionImportMapping FunctionImportName="RECHERCHEFILMGENRE" FunctionName="Model.Store.RECHERCHEFILMGENRE" />
+          <FunctionImportMapping FunctionImportName="RECHERCHEFILMLANGUE" FunctionName="Model.Store.RECHERCHEFILMLANGUE" />
+          <FunctionImportMapping FunctionImportName="RECHERCHEFILMPAYS" FunctionName="Model.Store.RECHERCHEFILMPAYS" />
+          <FunctionImportMapping FunctionImportName="RECHERCHEFILMREALISATEUR" FunctionName="Model.Store.RECHERCHEFILMREALISATEUR" />
+          <FunctionImportMapping FunctionImportName="RECHERCHEFILMTITRE" FunctionName="Model.Store.RECHERCHEFILMTITRE" />
+          <FunctionImportMapping FunctionImportName="RETOURNERFILM" FunctionName="Model.Store.RETOURNERFILM" />
+          <FunctionImportMapping FunctionImportName="RETOURNERIDCLIENT" FunctionName="Model.Store.RETOURNERIDCLIENT" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
