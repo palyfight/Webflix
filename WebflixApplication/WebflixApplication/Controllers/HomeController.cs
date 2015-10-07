@@ -13,7 +13,13 @@ namespace WebflixApplication.Controllers
         {
             ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
 
-            return View();
+            using(var webflixContext = new WebflixContext()){
+                var clients = webflixContext.PERSONNESFILMs.ToList();
+                return View(clients);
+            }
+
+
+            
         }
 
         public ActionResult About()
