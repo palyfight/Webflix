@@ -5,7 +5,7 @@ using System.Web;
 
 namespace WebflixApplication.Models
 {
-    public class Class1
+    public class Film
     {
     }
 }
