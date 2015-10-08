@@ -6,7 +6,6 @@
 
 body {
     background-color: #fff;
-    border-top: solid 10px #000;
     color: #333;
     font-size: .85em;
     font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
@@ -101,7 +100,6 @@ h5, h6 {
 #body {
     background-color: #efeeef;
     clear: both;
-    padding-bottom: 35px;
 }
 
     .main-content {
@@ -754,3 +752,15 @@ tr.pager td {
             margin: 0;
         }
 }
+
+.movie-jcarousel > ul > li{
+    height: 250px;
+}
+
+.movie-jcarousel > ul > li h2.film_title{
+    text-align: center;
+    margin-bottom: 5px;
+    color: #fff;
+}
+
+    

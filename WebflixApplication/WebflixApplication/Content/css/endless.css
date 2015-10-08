@@ -715,7 +715,6 @@ aside .main-menu .alert {
 #wrapper {
   position: relative;
   overflow: hidden;
-  min-height: 800px;
   background-color: #f9f9f9;
 }
 @media (min-width: 768px) {
@@ -1279,7 +1278,6 @@ a.list-group-item {
   position: relative;
   min-height: 800px;
   padding-top: 45px;
-  margin-left: 194px;
   transition: all 0.5s ease;
   -webkit-transition: all 0.5s ease;
   -moz-transition: all 0.5s ease;
@@ -1973,7 +1971,6 @@ footer {
   padding: 10px 15px;
   background: #fefefe;
   color: #777777;
-  margin-left: 194px;
   transition: all 0.5s ease;
   -webkit-transition: all 0.5s ease;
   -moz-transition: all 0.5s ease;

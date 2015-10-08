@@ -22,7 +22,7 @@
     <body>
         <header>
             <div id="wrapper" class="preload sidebar-mini">
-                <div id="top-nav" class="skin-6 fixed">
+                <div id="top-nav" class="skin-6">
 			        <div class="brand">
 				        <span>Webflix</span>
 			        </div><!-- /brand -->
@@ -61,18 +61,8 @@
             </div>
         </header>
         <div id="body">
-            @RenderSection("featured", required: false)
-            <section class="content-wrapper main-content clear-fix">
-                @RenderBody()
-            </section>
+            @RenderBody()
         </div>
-        <footer>
-            <div class="content-wrapper">
-                <div class="float-left">
-                    <p>&copy; @DateTime.Now.Year - My ASP.NET MVC Application</p>
-                </div>
-            </div>
-        </footer>
 
 	    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
         <script src="~/Scripts/bootstrap.js"></script>

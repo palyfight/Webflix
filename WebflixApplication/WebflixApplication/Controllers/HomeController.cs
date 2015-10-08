@@ -14,8 +14,8 @@ namespace WebflixApplication.Controllers
             ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
 
             using(var webflixContext = new WebflixContext()){
-                //var films = webflixContext.FILMs.ToList();
-                return View(/*films*/);
+                var films = webflixContext.FILMs.Take(100).ToList();
+                return View(films);
             }
 
 
