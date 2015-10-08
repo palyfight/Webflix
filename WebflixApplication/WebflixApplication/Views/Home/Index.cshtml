@@ -38,24 +38,32 @@ ViewBag.Title = "Home Page";
 						</ul>
 					</li>
 				</ul>
+                <div>
+                    <form class="pull-right form-inline" action="film/SearchMovie">
+                      <div class="form-group">
+                        <input type="email" class="form-control" id="exampleInputEmail2" placeholder="ex: Titanic">
+                      </div>
+                      <button type="submit" class="btn btn-default">Rechercher</button>
+                    </form>
+                </div>
 			</div><!-- /.navbar-collapse -->
 		</nav>
 		<div class="row">
 			<div class="col-md-12">
-				<h4 class="headline dark text-white">
-					Popular Movies
+				<h2 class="headline dark text-white">
+					Latest Movies
 					<span class="line"></span>
-				</h4>
+				</h2>
 				<div class="jcarousel-wrapper">
 					<div class="movie-jcarousel row" id="popularMovie">
 						<ul>
                             @foreach(var film in Model){
-							    <li class="col-md-2">
-								    <a href="/film/@film.IDFILM">
+							    <li class="col-sm-3">
+								    <a href="/film/showfilm/@film.IDFILM">
                                         <h2 class="film_title">@film.TITRE</h2>
-									    <img src="@film.POSTER" alt="Image 1">
+									    <img class="posters" src="@film.POSTER" alt="Image 1">
 									    <div class="quick-detail text-white">
-										    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eros nibh, viverra a dui a, gravida varius velit.</p>
+										    <p>@film.SCENARIO</p>
 									    </div>
 								    </a>
 							    </li>

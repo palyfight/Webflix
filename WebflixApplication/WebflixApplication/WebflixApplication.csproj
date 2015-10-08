@@ -175,6 +175,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\FilmController.cs" />
     <Compile Include="Models\ADRESSE.cs" />
     <Compile Include="Models\ANNONCE.cs" />
     <Compile Include="App_Start\AuthConfig.cs" />
@@ -336,6 +337,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
+    <Content Include="Views\Film\ShowFilm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
