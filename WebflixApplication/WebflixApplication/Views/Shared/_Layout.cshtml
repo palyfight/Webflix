@@ -1,31 +1,63 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="utf-8" />
-        <title>@ViewBag.Title - My ASP.NET MVC Application</title>
+        <meta charset="utf-8">
+        <title>Movies</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
         <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
         <meta name="viewport" content="width=device-width" />
-        @Styles.Render("~/Content/css")
+
+        <link rel="stylesheet" type="text/css" href="~/Content/css/bootstrap.css" />
+        <link rel="stylesheet" type="text/css" href="~/Content/css/font-awesome.css" />
+        <link rel="stylesheet" type="text/css" href="~/Content/css/endless.css" />
+        <link rel="stylesheet" type="text/css" href="~/Content/css/endless-skin.css" />
+        <link rel="stylesheet" type="text/css" href="~/Content/css/jcarousel.responsive.css" />
+        <link rel="stylesheet" type="text/css" href="~/Content/css/pace.css" />
+        <link rel="stylesheet" type="text/css" href="~/Content/Site.css" />
+
         @Scripts.Render("~/bundles/modernizr")
     </head>
     <body>
         <header>
-            <div class="content-wrapper">
-                <div class="float-left">
-                    <p class="site-title">@Html.ActionLink("your logo here", "Index", "Home")</p>
-                </div>
-                <div class="float-right">
-                    <section id="login">
-                        @Html.Partial("_LoginPartial")
-                    </section>
-                    <nav>
-                        <ul id="menu">
-                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                            <li>@Html.ActionLink("About", "About", "Home")</li>
-                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                        </ul>
-                    </nav>
-                </div>
+            <div id="wrapper" class="preload sidebar-mini">
+                <div id="top-nav" class="skin-6 fixed">
+			        <div class="brand">
+				        <span>Webflix</span>
+			        </div><!-- /brand -->
+			        <button type="button" class="navbar-toggle pull-left" id="sidebarToggle">
+				        <span class="icon-bar"></span>
+				        <span class="icon-bar"></span>
+				        <span class="icon-bar"></span>
+			        </button>
+			        <ul class="nav-notification clearfix">
+
+				        <li class="profile dropdown">
+					        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+						        <strong>John Doe</strong>
+						        <span><i class="fa fa-chevron-down"></i></span>
+					        </a>
+					        <ul class="dropdown-menu">
+						        <li>
+							        <a class="clearfix" href="#">
+								        <img src="img/user.jpg" alt="User Avatar">
+								        <div class="detail">
+									        <strong>John Doe</strong>
+									        <p class="grey">John_Doe@email.com</p> 
+								        </div>
+							        </a>
+						        </li>
+						        <li><a tabindex="-1" href="profile.html" class="main-link"><i class="fa fa-edit fa-lg"></i> Edit profile</a></li>
+						        <li><a tabindex="-1" href="gallery.html" class="main-link"><i class="fa fa-picture-o fa-lg"></i> Photo Gallery</a></li>
+						        <li><a tabindex="-1" href="#" class="theme-setting"><i class="fa fa-cog fa-lg"></i> Setting</a></li>
+						        <li class="divider"></li>
+						        <li><a tabindex="-1" class="main-link logoutConfirm_open" href="#logoutConfirm"><i class="fa fa-lock fa-lg"></i> Log out</a></li>
+					        </ul>
+				        </li>
+			        </ul>
+		        </div><!-- /top-nav-->
+		
             </div>
         </header>
         <div id="body">
@@ -42,7 +74,18 @@
             </div>
         </footer>
 
-        @Scripts.Render("~/bundles/jquery")
+	    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+        <script src="~/Scripts/bootstrap.js"></script>
+	    <script src='~/Scripts/jquery.jcarousel.min.js'></script>
+	    <script src='~/Scripts/modernizr-2.5.3.js'></script>
+	    <script src='~/Scripts/pace.min.js'></script>
+	    <script src='~/Scripts/jquery.popupoverlay.min.js'></script>
+	    <script src='~/Scripts/jquery.slimscroll.min.js'></script>
+	    <script src='~/Scripts/jquery.resize.min.js'></script>
+	    <script src='~/Scripts/holder.js'></script>
+	    <script src='~/Scripts/jquery.cookie.min.js'></script>
+	    <script src="~/Scripts/endless.js"></script>
+
         @RenderSection("scripts", required: false)
     </body>
 </html>

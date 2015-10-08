@@ -44,8 +44,6 @@ namespace WebflixApplication.Models
 
         public decimal? IDREALISATEUR { get; set; }
 
-        public List<FILM> FILMS { get; set; }
-
         [Required]
         [StringLength(25)]
         public string CODE { get; set; }
