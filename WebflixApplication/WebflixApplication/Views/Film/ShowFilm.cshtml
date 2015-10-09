@@ -20,16 +20,20 @@
                             <h2 class="text-white">@Model.SCENARIO</h2>
                         </p>
                         <p>
-                            <h3 class="text-white">Nombre de copie disponible: @Model.COPIEs.Count(c => c.DISPONIBLE = true)</h3>
-                            <h3 class="text-white">Pays de production: @foreach (var pays in @Model.FILMPAYS) { @pays.PAY.NOM }</h3>
-                            <h3 class="text-white">Langue originale: @Model.LANGUEORIGINALE </h3>
-                            <h3 class="text-white">Date de parution: @Model.DATEPARUTION</h3>
-                            <h3 class="text-white">Genre: @foreach (var genre in @Model.FILMGENREs) { @genre.GENRE.TITRE }</h3>
-                            <h3 class="text-white">Acteur:  <ul>@foreach (var acteur in @Model.ROLEs) {<li>@acteur.PERSONNESFILM.PRENOM @acteur.PERSONNESFILM.NOM</li> }</ul></h3>
+                            <ul>
+                                <li class="text-white film-details">Nombre de copie disponible: @Model.COPIEs.Count(c => c.DISPONIBLE = true)</li>
+                                <li class="text-white film-details">Pays de production: @foreach (var pays in @Model.FILMPAYS) {<span> @pays.PAY.NOM, </span> }</li>
+                                <li class="text-white film-details">Langue originale: @Model.LANGUEORIGINALE </li>
+                                <li class="text-white film-details">Date de parution: @Model.DATEPARUTION</li>
+                                <li class="text-white film-details">Genre: @foreach (var genre in @Model.FILMGENREs) {<span> @genre.GENRE.TITRE, </span>}</li>
+                                <li class="text-white film-details">Acteur:  <ul>@foreach (var acteur in @Model.ROLEs) {<li>@acteur.PERSONNESFILM.PRENOM @acteur.PERSONNESFILM.NOM</li> }</ul></li>
+                            </ul>
                         </p>
                     </div>
+                    <div class="col-md-2">
+                        <a class="btn btn-default btn-rent-movie" href="@Url.Action("RentMovie", "Film", new { idFilm = Model.IDFILM, idClient = Model.IDFILM })" role="button">Louer le film</a>
+                    </div>
                 </div>
-                <a class="btn btn-default" href="#" role="button">Louer le film</a>
 			</div><!-- /.col -->
 		</div><!-- ./row -->
 	</div><!-- /.padding-sm -->

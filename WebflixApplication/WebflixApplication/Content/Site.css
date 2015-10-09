@@ -760,4 +760,34 @@ img.posters {
 
 div.quick-detail {
     font-size: 12px;
-}  
+}
+
+li.film-details {
+    font-size: 16px;
+    line-height: 23px;
+}
+
+ul {
+    list-style: none;
+}
+
+li.film-details li {
+    margin-left: 45px;
+}
+
+a.btn-rent-movie{
+    margin-top: 20px;
+    margin-left: 25px;
+    width: 190px;
+    background-color: #3c8dbc;
+    color: #fff;
+}
+
+.social-connect {
+    margin: 0 7px;
+}
+
+footer .block {
+    display: block !important;
+    font-size: 16px;
+}
