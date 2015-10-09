@@ -737,7 +737,8 @@ tr.pager td {
 }
 
 .movie-jcarousel > ul > li{
-    height: 250px;
+    height: 340px;
+    border-bottom: 3px solid #3c8dbc;
 }
 
 .movie-jcarousel > ul > li h2.film_title{
@@ -752,4 +753,11 @@ img.posters {
     text-align: center;
     display: block;
 }
-    
+
+.movies-wrapper {
+    padding: 10px;
+}
+
+div.quick-detail {
+    font-size: 12px;
+}  
