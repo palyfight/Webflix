@@ -5,6 +5,9 @@ namespace WebflixApplication
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
     using WebflixApplication.Models;
+    using System.Data;
+    using Oracle.ManagedDataAccess.Client;
+    using System.Collections.Generic;
 
     public partial class WebflixContext : DbContext
     {
@@ -30,6 +33,14 @@ namespace WebflixApplication
         public virtual DbSet<PERSONNESFILM> PERSONNESFILMs { get; set; }
         public virtual DbSet<ROLE> ROLEs { get; set; }
         public virtual DbSet<SCENARISTE> SCENARISTEs { get; set; }
+
+        public virtual List<FILM> getFilmByTitle(String title)
+        {
+            var titleParameter = new OracleParameter("titres", OracleDbType.Varchar2, title, ParameterDirection.Input);
+            var result = new OracleParameter("resultset", OracleDbType.RefCursor, ParameterDirection.Output);
+
+            return this.Database.SqlQuery<FILM>("BEGIN rechercheFilmTitre(:result, :titres); END;", result, titleParameter).ToList();
+        }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

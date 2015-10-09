@@ -26,7 +26,16 @@ namespace WebflixApplication.Controllers
 
         public ActionResult SearchMovie(String query)
         {
-            return Json(new { response = "success" });
+            using (var webflixContext = new WebflixContext())
+            {
+
+                foreach (var film in webflixContext.getFilmByTitle(query))
+                {
+                    System.Diagnostics.Debug.WriteLine(film.TITRE);
+                }
+                return Json(new { response = "Success" });
+            }
+          
         }
 
         public ActionResult RentMovie(int idFilm, int idClient)
