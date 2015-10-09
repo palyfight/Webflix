@@ -25,7 +25,7 @@ namespace WebflixApplication.Controllers
 
         public ActionResult SearchMovie(String query)
         {
-            return View();
+            return Json(new { response = "success" });
         }
     }
 }
