@@ -42,6 +42,51 @@ namespace WebflixApplication
             return this.Database.SqlQuery<FILM>("BEGIN rechercheFilmTitre(:result, :titres); END;", result, titleParameter).ToList();
         }
 
+        public virtual List<FILM> getFilmByDate(String min, String max)
+        {
+            return null;
+        }
+
+        public virtual List<FILM> getFilmByActor(String actor)
+        {
+            var actorParameter = new OracleParameter("noms", OracleDbType.Varchar2, actor, ParameterDirection.Input);
+            var result = new OracleParameter("resultset", OracleDbType.RefCursor, ParameterDirection.Output);
+
+            return this.Database.SqlQuery<FILM>("BEGIN rechercheFilmActeur(:result, :noms); END;", result, actorParameter).ToList();
+        }
+
+        public virtual List<FILM> getFilmByRealisator(String realisator)
+        {
+            var realisatorParameter = new OracleParameter("noms", OracleDbType.Varchar2, realisator, ParameterDirection.Input);
+            var result = new OracleParameter("resultset", OracleDbType.RefCursor, ParameterDirection.Output);
+
+            return this.Database.SqlQuery<FILM>("BEGIN rechercheFilmRealisateur(:result, :noms); END;", result, realisatorParameter).ToList();
+        }
+
+        public virtual List<FILM> getFilmByGenre(String genre)
+        {
+            var genreParameter = new OracleParameter("genres", OracleDbType.Varchar2, genre, ParameterDirection.Input);
+            var result = new OracleParameter("resultset", OracleDbType.RefCursor, ParameterDirection.Output);
+
+            return this.Database.SqlQuery<FILM>("BEGIN rechercheFilmGenre(:result, :genres); END;", result, genreParameter).ToList();
+        }
+
+        public virtual List<FILM> getFilmByCountry(String country)
+        {
+            var countryParameter = new OracleParameter("paysRechercher", OracleDbType.Varchar2, country, ParameterDirection.Input);
+            var result = new OracleParameter("resultset", OracleDbType.RefCursor, ParameterDirection.Output);
+
+            return this.Database.SqlQuery<FILM>("BEGIN rechercheFilmPays(:result, :paysRechercher); END;", result, countryParameter).ToList();
+        }
+
+        public virtual List<FILM> getFilmByLanguage(String language)
+        {
+            var languageParameter = new OracleParameter("langue", OracleDbType.Varchar2, language, ParameterDirection.Input);
+            var result = new OracleParameter("resultset", OracleDbType.RefCursor, ParameterDirection.Output);
+
+            return this.Database.SqlQuery<FILM>("BEGIN rechercheFilmLangue(:result, :langue); END;", result, languageParameter).ToList();
+        }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ADRESSE>()

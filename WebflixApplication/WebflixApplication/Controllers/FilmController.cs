@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using WebflixApplication.Models;
@@ -24,16 +25,52 @@ namespace WebflixApplication.Controllers
             return View(film);
         }
 
+        //ajax needs to be change to start searching from 3 characters min.
         public ActionResult SearchMovie(String query)
         {
+
+            Match isNumber = Regex.Match(query, @"^[0-9-]*$");
+
             using (var webflixContext = new WebflixContext())
             {
+                //Always search by titles
+                var titlesFilm  = webflixContext.getFilmByTitle(query).GroupBy(item => item.IDFILM).ToDictionary(item => item.Key, item => item.First()) ;
 
-                foreach (var film in webflixContext.getFilmByTitle(query))
+                if (isNumber.Success)
                 {
-                    System.Diagnostics.Debug.WriteLine(film.TITRE);
+                    //if plusieur date need to loop
+                    //Search by years
+                    string[] stringSeparators = new string[] { "-" };
+                    String[] years = query.Split(stringSeparators, StringSplitOptions.RemoveEmptyEntries);
+
+                    String min = years[0];
+                    String max = years.Length > 1 ? years[1] : years[0];
+
+                    //webflixContext.getFilmByDate(min, max).ToDictionary(item => item.IDFILM, item => item) ;
                 }
-                return Json(new { response = "Success" });
+                else 
+                {
+                    //search by actor
+                    var actorFilm = webflixContext.getFilmByActor(query).GroupBy(item => item.IDFILM).ToDictionary(item => item.Key, item => item.First());
+
+                    //search by realisator
+                    var realisatorFilm = webflixContext.getFilmByRealisator(query).GroupBy(item => item.IDFILM).ToDictionary(item => item.Key, item => item.First());
+
+                    //search by genre
+                    var genreFilm = webflixContext.getFilmByGenre(query).GroupBy(item => item.IDFILM).ToDictionary(item => item.Key, item => item.First());
+
+                    //search by country
+                    var contryFilm = webflixContext.getFilmByCountry(query).GroupBy(item => item.IDFILM).ToDictionary(item => item.Key, item => item.First());
+
+                    //search by language
+                    var languageFilm = webflixContext.getFilmByLanguage(query).GroupBy(item => item.IDFILM).ToDictionary(item => item.Key, item => item.First());
+
+                    var result = titlesFilm.Concat(actorFilm).Concat(realisatorFilm).Concat(genreFilm).Concat(contryFilm).Concat(languageFilm).GroupBy(d => d.Key).ToDictionary(d => d.Key, d => d.First().Value);
+                }
+                
+                
+
+                return Json(new { response = "success" });
             }
           
         }
