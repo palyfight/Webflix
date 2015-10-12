@@ -42,9 +42,13 @@ namespace WebflixApplication
             return this.Database.SqlQuery<FILM>("BEGIN rechercheFilmTitre(:result, :titres); END;", result, titleParameter).ToList();
         }
 
-        public virtual List<FILM> getFilmByDate(String min, String max)
+        public virtual List<FILM> getFilmByDate(DateTime min, DateTime max)
         {
-            return null;
+            var dateMin = new OracleParameter("min", OracleDbType.Date, min.Date, ParameterDirection.Input);
+            var dateMax = new OracleParameter("max", OracleDbType.Date, max.Date, ParameterDirection.Input);
+            var result = new OracleParameter("resultset", OracleDbType.RefCursor, ParameterDirection.Output);
+
+            return this.Database.SqlQuery<FILM>("BEGIN rechercheDateParution(:result, :min, :max); END;", result, dateMin, dateMax).ToList();
         }
 
         public virtual List<FILM> getFilmByActor(String actor)

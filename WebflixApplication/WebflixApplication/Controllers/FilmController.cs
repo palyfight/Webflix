@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
@@ -30,6 +32,7 @@ namespace WebflixApplication.Controllers
         {
 
             Match isNumber = Regex.Match(query, @"^[0-9-]*$");
+            string json = "";
 
             using (var webflixContext = new WebflixContext())
             {
@@ -44,9 +47,19 @@ namespace WebflixApplication.Controllers
                     String[] years = query.Split(stringSeparators, StringSplitOptions.RemoveEmptyEntries);
 
                     String min = years[0];
-                    String max = years.Length > 1 ? years[1] : years[0];
+                    String max = years[0];
+                    if (years.Length > 1 && years[1].Length == 4)
+                    {
+                        max = years[1];
+                    }
 
-                    //webflixContext.getFilmByDate(min, max).ToDictionary(item => item.IDFILM, item => item) ;
+                    DateTime starts = DateTime.ParseExact(min + "-01-01", "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None);
+                    DateTime ends = DateTime.ParseExact(max + "-12-31", "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None);
+
+                    var dateFilm = webflixContext.getFilmByDate(starts, ends).GroupBy(item => item.IDFILM).ToDictionary(item => item.Key, item => item.First());
+                    var result = titlesFilm.Concat(dateFilm).GroupBy(d => d.Key).ToDictionary(d => d.Key, d => d.First().Value);
+                    json = JsonConvert.SerializeObject(result);
+
                 }
                 else 
                 {
@@ -66,11 +79,11 @@ namespace WebflixApplication.Controllers
                     var languageFilm = webflixContext.getFilmByLanguage(query).GroupBy(item => item.IDFILM).ToDictionary(item => item.Key, item => item.First());
 
                     var result = titlesFilm.Concat(actorFilm).Concat(realisatorFilm).Concat(genreFilm).Concat(contryFilm).Concat(languageFilm).GroupBy(d => d.Key).ToDictionary(d => d.Key, d => d.First().Value);
+                    json = JsonConvert.SerializeObject(result);
+
                 }
                 
-                
-
-                return Json(new { response = "success" });
+                return Json(new { response = json });
             }
           
         }
