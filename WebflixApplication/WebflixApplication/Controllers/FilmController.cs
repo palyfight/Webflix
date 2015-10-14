@@ -30,38 +30,17 @@ namespace WebflixApplication.Controllers
         //ajax needs to be change to start searching from 3 characters min.
         public ActionResult SearchMovie(String query)
         {
-
-            Match isNumber = Regex.Match(query, @"^[0-9-]*$");
+            query = query.Replace(",", "|");
+            Match isNumber = Regex.Match(query, @"^[0-9-|]*$");
             string json = "";
 
             using (var webflixContext = new WebflixContext())
             {
+                Dictionary<Decimal, FILM> result;
                 //Always search by titles
                 var titlesFilm  = webflixContext.getFilmByTitle(query).GroupBy(item => item.IDFILM).ToDictionary(item => item.Key, item => item.First()) ;
 
-                if (isNumber.Success)
-                {
-                    //if plusieur date need to loop
-                    //Search by years
-                    string[] stringSeparators = new string[] { "-" };
-                    String[] years = query.Split(stringSeparators, StringSplitOptions.RemoveEmptyEntries);
-
-                    String min = years[0];
-                    String max = years[0];
-                    if (years.Length > 1 && years[1].Length == 4)
-                    {
-                        max = years[1];
-                    }
-
-                    DateTime starts = DateTime.ParseExact(min + "-01-01", "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None);
-                    DateTime ends = DateTime.ParseExact(max + "-12-31", "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None);
-
-                    var dateFilm = webflixContext.getFilmByDate(starts, ends).GroupBy(item => item.IDFILM).ToDictionary(item => item.Key, item => item.First());
-                    var result = titlesFilm.Concat(dateFilm).GroupBy(d => d.Key).ToDictionary(d => d.Key, d => d.First().Value);
-                    json = JsonConvert.SerializeObject(result);
-
-                }
-                else 
+                if (!isNumber.Success)
                 {
                     //search by actor
                     var actorFilm = webflixContext.getFilmByActor(query).GroupBy(item => item.IDFILM).ToDictionary(item => item.Key, item => item.First());
@@ -78,11 +57,41 @@ namespace WebflixApplication.Controllers
                     //search by language
                     var languageFilm = webflixContext.getFilmByLanguage(query).GroupBy(item => item.IDFILM).ToDictionary(item => item.Key, item => item.First());
 
-                    var result = titlesFilm.Concat(actorFilm).Concat(realisatorFilm).Concat(genreFilm).Concat(contryFilm).Concat(languageFilm).GroupBy(d => d.Key).ToDictionary(d => d.Key, d => d.First().Value);
-                    json = JsonConvert.SerializeObject(result);
+                    result = titlesFilm.Concat(actorFilm).Concat(realisatorFilm).Concat(genreFilm).Concat(contryFilm).Concat(languageFilm).GroupBy(d => d.Key).ToDictionary(d => d.Key, d => d.First().Value);
 
                 }
-                
+                else
+                {
+                    //if plusieur date need to loop
+                    //Search by years
+                    result = titlesFilm;
+                    foreach (String dates in query.Split(new String[] { "|" }, StringSplitOptions.RemoveEmptyEntries))
+                    {
+                        
+                        string[] stringSeparators = new string[] { "-" };
+                        String[] years = dates.Split(stringSeparators, StringSplitOptions.RemoveEmptyEntries);
+
+                        if (years[0].Length == 4)
+                        {
+                            String min = years[0];
+                            String max = years[0];
+                            if (years.Length > 1 && years[1].Length == 4)
+                            {
+                                max = years[1];
+                            }
+
+                            DateTime starts = DateTime.ParseExact(min + "-01-01", "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None);
+                            DateTime ends = DateTime.ParseExact(max + "-12-31", "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None);
+
+                            var dateFilm = webflixContext.getFilmByDate(starts, ends).GroupBy(item => item.IDFILM).ToDictionary(item => item.Key, item => item.First());
+                            result = result.Concat(dateFilm).GroupBy(d => d.Key).ToDictionary(d => d.Key, d => d.First().Value);
+                        }
+    
+                    }
+
+                }
+
+                json = JsonConvert.SerializeObject(result);
                 return Json(new { response = json });
             }
           
