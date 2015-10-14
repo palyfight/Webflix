@@ -32,7 +32,7 @@ namespace WebflixApplication.Controllers
         {
             query = query.Replace(",", "|");
             Match isNumber = Regex.Match(query, @"^[0-9-|]*$");
-            string json = "";
+            string json = null;
 
             using (var webflixContext = new WebflixContext())
             {
@@ -95,6 +95,24 @@ namespace WebflixApplication.Controllers
                 return Json(new { response = json });
             }
           
+        }
+
+        public ActionResult AdvanceSearchMovie(String title, String actor, String realisator, String genre, String country, String language, String dates)
+        {
+            Dictionary<Decimal, FILM> result =  new Dictionary<decimal,FILM>();
+            string json = "";
+
+            using (var webflixContext = new WebflixContext())
+            {
+                if (title.Length > 0)
+                {
+                    var titlesFilm = webflixContext.getFilmByTitle(title).GroupBy(item => item.IDFILM).ToDictionary(item => item.Key, item => item.First());
+                    
+                } 
+            }
+
+       
+            return null;
         }
 
         public ActionResult RentMovie(int idFilm, int idClient)
