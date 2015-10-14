@@ -8,6 +8,12 @@ namespace WebflixApplication
     using System.Data;
     using Oracle.ManagedDataAccess.Client;
     using System.Collections.Generic;
+    using System.Globalization;
+    using System.Text.RegularExpressions;
+    using Newtonsoft.Json;
+    using System.Web.Helpers;
+    using System.Collections;
+
 
     public partial class WebflixContext : DbContext
     {
@@ -374,6 +380,154 @@ namespace WebflixApplication
             modelBuilder.Entity<SCENARISTE>()
                 .Property(e => e.IDFILM)
                 .HasPrecision(38, 0);
+        }
+
+        //RECHERCHE
+        public virtual String searchMovie(String query)
+        {
+            query = query.Replace(",", "|");
+            Match isNumber = Regex.Match(query, @"^[0-9-|]*$");
+            string json = null;
+
+
+            Dictionary<Decimal, FILM> result;
+            //Always search by titles
+            var titlesFilm = this.getFilmByTitle(query).GroupBy(item => item.IDFILM).ToDictionary(item => item.Key, item => item.First());
+
+            if (!isNumber.Success)
+            {
+                //search by actor
+                var actorFilm = this.getFilmByActor(query).GroupBy(item => item.IDFILM).ToDictionary(item => item.Key, item => item.First());
+
+                //search by realisator
+                var realisatorFilm = this.getFilmByRealisator(query).GroupBy(item => item.IDFILM).ToDictionary(item => item.Key, item => item.First());
+
+                //search by genre
+                var genreFilm = this.getFilmByGenre(query).GroupBy(item => item.IDFILM).ToDictionary(item => item.Key, item => item.First());
+
+                //search by country
+                var contryFilm = this.getFilmByCountry(query).GroupBy(item => item.IDFILM).ToDictionary(item => item.Key, item => item.First());
+
+                //search by language
+                var languageFilm = this.getFilmByLanguage(query).GroupBy(item => item.IDFILM).ToDictionary(item => item.Key, item => item.First());
+
+                result = titlesFilm.Concat(actorFilm).Concat(realisatorFilm).Concat(genreFilm).Concat(contryFilm).Concat(languageFilm).GroupBy(d => d.Key).ToDictionary(d => d.Key, d => d.First().Value);
+
+            }
+            else
+            {
+                //if plusieur date need to loop
+                //Search by years
+                result = titlesFilm;
+                foreach (String dates in query.Split(new String[] { "|" }, StringSplitOptions.RemoveEmptyEntries))
+                {
+
+                    string[] stringSeparators = new string[] { "-" };
+                    String[] years = dates.Split(stringSeparators, StringSplitOptions.RemoveEmptyEntries);
+
+                    if (years[0].Length == 4)
+                    {
+                        String min = years[0];
+                        String max = years[0];
+                        if (years.Length > 1 && years[1].Length == 4)
+                        {
+                            max = years[1];
+                        }
+
+                        DateTime starts = DateTime.ParseExact(min + "-01-01", "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None);
+                        DateTime ends = DateTime.ParseExact(max + "-12-31", "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None);
+
+                        var dateFilm = this.getFilmByDate(starts, ends).GroupBy(item => item.IDFILM).ToDictionary(item => item.Key, item => item.First());
+                        result = result.Concat(dateFilm).GroupBy(d => d.Key).ToDictionary(d => d.Key, d => d.First().Value);
+                    }
+
+                }
+
+            }
+
+            json = JsonConvert.SerializeObject(result);
+            return json;
+
+        }
+
+        public virtual String AdvanceSearchMovie(String title, String actor, String realisator, String genre, String country, String language, String dates)
+        {
+            Stack resultStack = new Stack();
+            string json = "";
+
+            if (title.Length > 0)
+            {
+                var titlesFilm = this.getFilmByTitle(title).GroupBy(item => item.IDFILM).ToDictionary(item => item.Key, item => item.First());
+                resultStack.Push(titlesFilm);
+
+            }
+
+            if (actor.Length > 0)
+            {
+                var actorFilm = this.getFilmByActor(actor).GroupBy(item => item.IDFILM).ToDictionary(item => item.Key, item => item.First());
+                resultStack.Push(actorFilm);
+
+            }
+
+            if (realisator.Length > 0)
+            {
+                var realisatorFilm = this.getFilmByRealisator(realisator).GroupBy(item => item.IDFILM).ToDictionary(item => item.Key, item => item.First());
+                resultStack.Push(realisatorFilm);
+
+            }
+
+
+            if (genre.Length > 0)
+            {
+                var genreFilm = this.getFilmByGenre(genre).GroupBy(item => item.IDFILM).ToDictionary(item => item.Key, item => item.First());
+                resultStack.Push(genreFilm);
+
+            }
+
+
+            if (country.Length > 0)
+            {
+                var contryFilm = this.getFilmByCountry(country).GroupBy(item => item.IDFILM).ToDictionary(item => item.Key, item => item.First());
+                resultStack.Push(contryFilm);
+
+            }
+
+
+            if (language.Length > 0)
+            {
+                var languageFilm = this.getFilmByLanguage(language).GroupBy(item => item.IDFILM).ToDictionary(item => item.Key, item => item.First());
+                resultStack.Push(languageFilm);
+
+            }
+
+
+            if (dates.Length > 0)
+            {
+                Match isNumber = Regex.Match(dates, @"^[0-9-|]*$");
+
+                if (isNumber.Success)
+                {
+
+                    DateTime starts = DateTime.ParseExact(dates + "-01-01", "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None);
+                    DateTime ends = DateTime.ParseExact(dates + "-12-31", "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None);
+
+                    var dateFilm = this.getFilmByDate(starts, ends).GroupBy(item => item.IDFILM).ToDictionary(item => item.Key, item => item.First());
+                    resultStack.Push(dateFilm);
+                }
+
+            }
+
+            if (resultStack.Count > 0)
+            {
+                var result = ((Dictionary<Decimal, FILM>)resultStack.Pop());
+                while (resultStack.Count > 0)
+                {
+                    result = result.Intersect((Dictionary<Decimal, FILM>)resultStack.Pop()).GroupBy(d => d.Key).ToDictionary(d => d.Key, d => d.First().Value); ;
+                }
+                json = JsonConvert.SerializeObject(result);
+            }
+
+            return json;
         }
     }
 }
