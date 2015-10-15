@@ -1206,5 +1206,205 @@ namespace WebflixApplication.App_Start
 
         #endregion
 
+        #region "Utility Functions"
+        /// <summary>
+        /// Create a MembershipUser object from a data reader.
+        /// </summary>
+        /// <param name="sqlDataReader">Data reader.</param>
+        /// <returns>MembershipUser object.</returns>
+        private MembershipUser GetUserFromReader(
+      SqlDataReader sqlDataReader
+        )
+        {
+
+            object userID = sqlDataReader.GetValue(0);
+            string username = sqlDataReader.GetString(1);
+            string email = sqlDataReader.GetString(2);
+
+            string passwordQuestion = String.Empty;
+            if (sqlDataReader.GetValue(3) != DBNull.Value)
+            {
+                passwordQuestion = sqlDataReader.GetString(3);
+            }
+
+            string comment = String.Empty;
+            if (sqlDataReader.GetValue(4) != DBNull.Value)
+            {
+                comment = sqlDataReader.GetString(4);
+            }
+
+            bool isApproved = sqlDataReader.GetBoolean(5);
+            bool isLockedOut = sqlDataReader.GetBoolean(6);
+            DateTime creationDate = sqlDataReader.GetDateTime(7);
+
+            DateTime lastLoginDate = new DateTime();
+            if (sqlDataReader.GetValue(8) != DBNull.Value)
+            {
+                lastLoginDate = sqlDataReader.GetDateTime(8);
+            }
+
+            DateTime lastActivityDate = sqlDataReader.GetDateTime(9);
+            DateTime lastPasswordChangedDate = sqlDataReader.GetDateTime(10);
+
+            DateTime lastLockedOutDate = new DateTime();
+            if (sqlDataReader.GetValue(11) != DBNull.Value)
+            {
+                lastLockedOutDate = sqlDataReader.GetDateTime(11);
+            }
+
+            MembershipUser membershipUser = new MembershipUser(
+              this.Name,
+             username,
+             userID,
+             email,
+             passwordQuestion,
+             comment,
+             isApproved,
+             isLockedOut,
+             creationDate,
+             lastLoginDate,
+             lastActivityDate,
+             lastPasswordChangedDate,
+             lastLockedOutDate
+              );
+
+            return membershipUser;
+
+        }
+
+        /// <summary>
+        /// Converts a hexadecimal string to a byte array. Used to convert encryption key values from the configuration
+        /// </summary>
+        /// <param name="hexString"></param>
+        /// <returns></returns>
+        /// <remarks></remarks>
+        private byte[] HexToByte(string hexString)
+        {
+            byte[] returnBytes = new byte[hexString.Length / 2];
+            for (int i = 0; i < returnBytes.Length; i++)
+                returnBytes[i] = Convert.ToByte(hexString.Substring(i * 2, 2), 16);
+            return returnBytes;
+        }
+
+        /// <summary>
+        /// Update password and answer failure information.
+        /// </summary>
+        /// <param name="username">User name.</param>
+        /// <param name="failureType">Type of failure</param>
+        /// <remarks></remarks>
+        private void UpdateFailureCount(string username, FailureType failureType)
+        {
+
+            SqlConnection sqlConnection = new SqlConnection(connectionString);
+            SqlCommand sqlCommand = new SqlCommand("Users_Sel_ByUserName", sqlConnection);
+
+            sqlCommand.CommandType = CommandType.StoredProcedure;
+            sqlCommand.Parameters.Add("@failureType", SqlDbType.Int, 0).Value = failureType;
+            sqlCommand.Parameters.Add("@passwordAttempWindow", SqlDbType.DateTime, 0).Value = passwordAttemptWindow;
+            sqlCommand.Parameters.Add("@maxInvalidPasswordAttempts", SqlDbType.Int, 0).Value = maxInvalidPasswordAttempts;
+            sqlCommand.Parameters.Add("@userName", SqlDbType.NVarChar, 255).Value = username;
+            sqlCommand.Parameters.Add("@applicationName", SqlDbType.NVarChar, 255).Value = applicationName;
+
+            try
+            {
+                sqlConnection.Open();
+                sqlCommand.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                //Add exception handling here.
+            }
+
+        }
+        /// <summary>
+        /// Check the password format based upon the MembershipPasswordFormat.
+        /// </summary>
+        /// <param name="password">Password</param>
+        /// <param name="dbpassword"></param>
+        /// <returns></returns>
+        /// <remarks></remarks>
+        private bool CheckPassword(string password, string dbpassword)
+        {
+            string pass1 = password;
+            string pass2 = dbpassword;
+
+            switch (PasswordFormat)
+            {
+                case MembershipPasswordFormat.Encrypted:
+                    pass2 = UnEncodePassword(dbpassword);
+                    break;
+                case MembershipPasswordFormat.Hashed:
+                    pass1 = EncodePassword(password);
+                    break;
+                default:
+                    break;
+            }
+
+            if (pass1 == pass2)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Encode password.
+        /// </summary>
+        /// <param name="password">Password.</param>
+        /// <returns>Encoded password.</returns>
+        private string EncodePassword(string password)
+        {
+            string encodedPassword = password;
+
+            switch (PasswordFormat)
+            {
+                case MembershipPasswordFormat.Clear:
+                    break;
+                case MembershipPasswordFormat.Encrypted:
+                    encodedPassword =
+                      Convert.ToBase64String(EncryptPassword(Encoding.Unicode.GetBytes(password)));
+                    break;
+                case MembershipPasswordFormat.Hashed:
+                    HMACSHA1 hash = new HMACSHA1();
+                    hash.Key = HexToByte(machineKey.ValidationKey);
+                    encodedPassword =
+                      Convert.ToBase64String(hash.ComputeHash(Encoding.Unicode.GetBytes(password)));
+                    break;
+                default:
+                    throw new ProviderException("Unsupported password format.");
+            }
+
+            return encodedPassword;
+        }
+
+        /// <summary>
+        /// UnEncode password.
+        /// </summary>
+        /// <param name="encodedPassword">Password.</param>
+        /// <returns>Unencoded password.</returns>
+        private string UnEncodePassword(string encodedPassword)
+        {
+            string password = encodedPassword;
+
+            switch (PasswordFormat)
+            {
+                case MembershipPasswordFormat.Clear:
+                    break;
+                case MembershipPasswordFormat.Encrypted:
+                    password =
+                      Encoding.Unicode.GetString(DecryptPassword(Convert.FromBase64String(password)));
+                    break;
+                case MembershipPasswordFormat.Hashed:
+                    throw new ProviderException("Cannot unencode a hashed password.");
+                default:
+                    throw new ProviderException("Unsupported password format.");
+            }
+
+            return password;
+        }
+
+        #endregion
+
     }
 }
