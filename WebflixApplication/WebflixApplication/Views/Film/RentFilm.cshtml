@@ -1,0 +1,80 @@
+﻿@model WebflixApplication.ViewModels.RentFilmViewModel
+
+@{
+    ViewBag.Title = "RentFilm";
+}
+
+@if(Model.type == 'S'){
+    <div class="bg-success rent-message">
+        @Model.message
+    </div>
+    
+    <div id="main-container" class="bg-dark">
+	    <div class="padding-sm">
+		    <div class="row">
+			    <div class="col-md-12">
+				    <h1 class="headline dark text-white">
+					    @Model.location.COPIE.FILM.TITRE
+					    <span class="line"></span>
+				    </h1>
+                
+                    <div class="row">
+                        <div ><img class="col-md-2" src="@Model.location.COPIE.FILM.POSTER" alt="Image 1"></div>
+                        <div class="col-md-6">
+                            <p>
+                                <h2 class="text-white">@Model.location.COPIE.FILM.SCENARIO</h2>
+                            </p>
+                            <p>
+                                <ul>
+                                    <li class="text-white film-details">Nombre de copie disponible: @Model.location.COPIE.FILM.COPIEs.Count(c => c.DISPONIBLE = true)</li>
+                                    <li class="text-white film-details">Pays de production: @foreach (var pays in @Model.location.COPIE.FILM.FILMPAYS) {<span> @pays.PAY.NOM, </span> }</li>
+                                    <li class="text-white film-details">Langue originale: @Model.location.COPIE.FILM.LANGUEORIGINALE </li>
+                                    <li class="text-white film-details">Date de parution: @Model.location.COPIE.FILM.DATEPARUTION</li>
+                                    <li class="text-white film-details">Genre: @foreach (var genre in @Model.location.COPIE.FILM.FILMGENREs) {<span> @genre.GENRE.TITRE, </span>}</li>
+                                    <li class="text-white film-details">Acteur:  <ul>@foreach (var acteur in @Model.location.COPIE.FILM.ROLEs){<li>@acteur.PERSONNESFILM.PRENOM @acteur.PERSONNESFILM.NOM</li> }</ul></li>
+                                </ul>
+                            </p>
+                        </div>
+                    </div>
+			    </div><!-- /.col -->
+		    </div><!-- ./row -->
+	    </div><!-- /.padding-sm -->
+    </div><!-- /main-container -->
+} else {
+    <div class="bg-danger rent-message">
+        @Model.message
+    </div>
+    
+    <div id="main-container" class="bg-dark">
+	    <div class="padding-sm">
+		    <div class="row">
+			    <div class="col-md-12">
+				    <h1 class="headline dark text-white">
+					    @Model.film.TITRE
+					    <span class="line"></span>
+				    </h1>
+                
+                    <div class="row">
+                        <div ><img class="col-md-2" src="@Model.film.POSTER" alt="Image 1"></div>
+                        <div class="col-md-6">
+                            <p>
+                                <h2 class="text-white">@Model.film.SCENARIO</h2>
+                            </p>
+                            <p>
+                                <ul>
+                                    <li class="text-white film-details">Nombre de copie disponible: @Model.film.COPIEs.Count(c => c.DISPONIBLE = true)</li>
+                                    <li class="text-white film-details">Pays de production: @foreach (var pays in @Model.film.FILMPAYS) {<span> @pays.PAY.NOM, </span> }</li>
+                                    <li class="text-white film-details">Langue originale: @Model.film.LANGUEORIGINALE </li>
+                                    <li class="text-white film-details">Date de parution: @Model.film.DATEPARUTION</li>
+                                    <li class="text-white film-details">Genre: @foreach (var genre in @Model.film.FILMGENREs) {<span> @genre.GENRE.TITRE, </span>}</li>
+                                    <li class="text-white film-details">Acteur:  <ul>@foreach (var acteur in @Model.film.ROLEs) {<li>@acteur.PERSONNESFILM.PRENOM @acteur.PERSONNESFILM.NOM</li> }</ul></li>
+                                </ul>
+                            </p>
+                        </div>
+                    </div>
+			    </div><!-- /.col -->
+		    </div><!-- ./row -->
+	    </div><!-- /.padding-sm -->
+    </div><!-- /main-container -->
+}
+
