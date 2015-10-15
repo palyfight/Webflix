@@ -46,7 +46,7 @@
         container = $('#movie-list');
         container.html('');
         $.each(films, function (i, value) {
-            var film;
+            var film = '';
             film += "<li class='col-sm-2'>";
             film += "<a href='/film/showfilm/" + value.IDFILM + "'>";
             film += "<h2 class='film_title'>" + value.TITRE + "</h2>";
