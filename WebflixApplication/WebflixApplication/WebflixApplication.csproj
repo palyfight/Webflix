@@ -176,7 +176,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\MembershipProviderOracle.cs" />
+    <Compile Include="MembershipProviderOracle.cs" />
     <Compile Include="Controllers\FilmController.cs" />
     <Compile Include="Models\ADRESSE.cs" />
     <Compile Include="Models\ANNONCE.cs" />
