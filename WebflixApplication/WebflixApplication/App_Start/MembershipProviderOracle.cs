@@ -4,7 +4,8 @@ using System.Configuration;
 using System.Collections.Specialized;
 using System.Configuration.Provider;
 using System.Data;
-using System.Data.SqlClient;
+//using System.Data.SqlClient;
+using System.Data.OracleClient;
 using System.Security.Cryptography;
 using System.Text;
 using System.Web.Configuration;
@@ -247,7 +248,7 @@ namespace WebflixApplication.App_Start
         /// <param name="oldPwd">Old password.</param>
         /// <param name="newPwd">New password.</param>
         /// <returns>T/F if password was changed.</returns>
-        public override bool ChangePassword(string username, string oldPwd, string newPwd)
+        /*public override bool ChangePassword(string username, string oldPwd, string newPwd)
         {
 
             if (!ValidateUser(username, oldPwd))
@@ -350,13 +351,13 @@ namespace WebflixApplication.App_Start
 
             return true;
 
-        }
+        }*/
         /// <summary>
         /// Create a new user.
         /// </summary>
-        /// <param name="username">User name.</param>
         /// <param name="password">Password.</param>
         /// <param name="email">Email address.</param>
+        /// <param name="username">User name.</param>
         /// <param name="passwordQuestion">Security quesiton for password.</param>
         /// <param name="passwordAnswer">Security quesiton answer for password.</param>
         /// <param name="isApproved"></param>
@@ -364,10 +365,10 @@ namespace WebflixApplication.App_Start
         /// <param name="status"></param>
         /// <returns>MembershipUser</returns>
 
-        public override MembershipUser CreateUser(string username, string password, string email, string passwordQuestion, string passwordAnswer, bool isApproved, object providerUserKey, out MembershipCreateStatus status)
+        public override MembershipUser CreateUser(string password, string email, out MembershipCreateStatus status, string username = "", string passwordQuestion = "", string passwordAnswer = "", bool isApproved = true, object providerUserKey = null)
         {
 
-            ValidatePasswordEventArgs args = new ValidatePasswordEventArgs(username, password, true);
+            ValidatePasswordEventArgs args = new ValidatePasswordEventArgs(email, password, true);
 
             OnValidatingPassword(args);
 
@@ -389,26 +390,26 @@ namespace WebflixApplication.App_Start
             {
                 System.DateTime createDate = DateTime.Now;
 
-                SqlConnection sqlConnection = new SqlConnection(connectionString);
-                SqlCommand sqlCommand = new SqlCommand("User_Ins", sqlConnection);
+                OracleConnection oracleConnection = new OracleConnection(connectionString);
+                OracleCommand oracleCommand = new OracleCommand("User_Ins", oracleConnection);
 
-                sqlCommand.CommandType = CommandType.StoredProcedure;
-                sqlCommand.Parameters.Add("@returnValue", SqlDbType.Int, 0).Direction = ParameterDirection.ReturnValue;
-                sqlCommand.Parameters.Add("@username", SqlDbType.NVarChar, 255).Value = username; ;
-                sqlCommand.Parameters.Add("@applicationName", SqlDbType.NVarChar, 255).Value = applicationName;
-                sqlCommand.Parameters.Add("@password", SqlDbType.NVarChar, 255).Value = EncodePassword(password);
-                sqlCommand.Parameters.Add("@email", SqlDbType.NVarChar, 128).Value = email;
-                sqlCommand.Parameters.Add("@passwordQuestion", SqlDbType.NVarChar, 255).Value = passwordQuestion;
-                sqlCommand.Parameters.Add("@passwordAnswer", SqlDbType.NVarChar, 255).Value = EncodePassword(passwordAnswer);
-                sqlCommand.Parameters.Add("@isApproved", SqlDbType.Bit).Value = isApproved;
-                sqlCommand.Parameters.Add("@comment", SqlDbType.NVarChar, 255).Value = String.Empty;
+                oracleCommand.CommandType = CommandType.StoredProcedure;
+                oracleCommand.Parameters.Add("@returnValue", OracleType.Int32, 0).Direction = ParameterDirection.ReturnValue;
+                //oracleCommand.Parameters.Add("@username", SqlDbType.NVarChar, 255).Value = username; ;
+                //oracleCommand.Parameters.Add("@applicationName", SqlDbType.NVarChar, 255).Value = applicationName;
+                oracleCommand.Parameters.Add("@password", OracleType.VarChar, 255).Value = EncodePassword(password);
+                oracleCommand.Parameters.Add("@email", OracleType.VarChar, 50).Value = email;
+                //oracleCommand.Parameters.Add("@passwordQuestion", SqlDbType.NVarChar, 255).Value = passwordQuestion;
+                //oracleCommand.Parameters.Add("@passwordAnswer", SqlDbType.NVarChar, 255).Value = EncodePassword(passwordAnswer);
+                //oracleCommand.Parameters.Add("@isApproved", SqlDbType.Bit).Value = isApproved;
+                //oracleCommand.Parameters.Add("@comment", SqlDbType.NVarChar, 255).Value = String.Empty;
 
                 try
                 {
-                    sqlConnection.Open();
+                    oracleConnection.Open();
 
-                    sqlCommand.ExecuteNonQuery();
-                    if ((int)sqlCommand.Parameters["@returnValue"].Value == 0)
+                    oracleCommand.ExecuteNonQuery();
+                    if ((int)oracleCommand.Parameters["@returnValue"].Value == 0)
                     {
 
                         status = MembershipCreateStatus.Success;
@@ -418,7 +419,7 @@ namespace WebflixApplication.App_Start
                         status = MembershipCreateStatus.UserRejected;
                     }
                 }
-                catch (SqlException e)
+                catch (OracleException e)
                 {
                     //Add exception handling here.
 
@@ -426,7 +427,7 @@ namespace WebflixApplication.App_Start
                 }
                 finally
                 {
-                    sqlConnection.Close();
+                    oracleConnection.Close();
                 }
 
                 return GetUser(username, false);
@@ -444,7 +445,7 @@ namespace WebflixApplication.App_Start
         /// <param name="username">User name.</param>
         /// <param name="deleteAllRelatedData">Whether to delete all related data.</param>
         /// <returns>T/F if the user was deleted.</returns>
-        public override bool DeleteUser(
+        /*public override bool DeleteUser(
          string username,
          bool deleteAllRelatedData
         )
@@ -579,15 +580,15 @@ namespace WebflixApplication.App_Start
 
             return numOnline;
 
-        }
+        }*/
         /// <summary>
         /// Get the password for a user.
         /// </summary>
-        /// <param name="username">User name.</param>
+        /// <param name="email">Email.</param>
         /// <param name="answer">Answer to security question.</param>
         /// <returns>Password for the user.</returns>
         public override string GetPassword(
-         string username,
+         string email,
          string answer
         )
         {
@@ -602,52 +603,52 @@ namespace WebflixApplication.App_Start
                 throw new ProviderException("Cannot retrieve Hashed passwords.");
             }
 
-            SqlConnection sqlConnection = new SqlConnection(connectionString);
-            SqlCommand sqlCommand = new SqlCommand("User_GetPassword", sqlConnection);
+            OracleConnection oracleConnection = new OracleConnection(connectionString);
+            OracleCommand oracleCommand = new OracleCommand("User_GetPassword", oracleConnection);
 
-            sqlCommand.CommandType = CommandType.StoredProcedure;
-            sqlCommand.Parameters.Add("@username", SqlDbType.NVarChar, 255).Value = username;
-            sqlCommand.Parameters.Add("@applicationName", SqlDbType.NVarChar, 255).Value = applicationName;
+            oracleCommand.CommandType = CommandType.StoredProcedure;
+            oracleCommand.Parameters.Add("@email", OracleType.VarChar, 50).Value = email;
+            //oracleCommand.Parameters.Add("@applicationName", SqlDbType.NVarChar, 255).Value = applicationName;
 
             string password = String.Empty;
             string passwordAnswer = String.Empty;
-            SqlDataReader sqlDataReader = null;
+            OracleDataReader oracleDataReader = null;
 
             try
             {
-                sqlConnection.Open();
+                oracleConnection.Open();
 
-                sqlDataReader = sqlCommand.ExecuteReader(CommandBehavior.SingleRow & CommandBehavior.CloseConnection);
+                oracleDataReader = oracleCommand.ExecuteReader(CommandBehavior.SingleRow & CommandBehavior.CloseConnection);
 
-                if (sqlDataReader.HasRows)
+                if (oracleDataReader.HasRows)
                 {
-                    sqlDataReader.Read();
+                    oracleDataReader.Read();
 
-                    if (sqlDataReader.GetBoolean(2))
+                    /*if (oracleDateReader.GetBoolean(2))
                     {
                         throw new MembershipPasswordException("The supplied user is locked out.");
-                    }
+                    }*/
 
-                    password = sqlDataReader.GetString(0);
-                    passwordAnswer = sqlDataReader.GetString(1);
+                    password = oracleDataReader.GetString(0);
+                    //passwordAnswer = oracleDateReader.GetString(1);
                 }
                 else
                 {
                     throw new MembershipPasswordException("The supplied user name is not found.");
                 }
             }
-            catch (SqlException e)
+            catch (OracleException e)
             {
                 //Add exception handling here.
             }
             finally
             {
-                if (sqlDataReader != null) { sqlDataReader.Close(); }
+                if (oracleDataReader != null) { oracleDataReader.Close(); }
             }
 
             if (RequiresQuestionAndAnswer && !CheckPassword(answer, passwordAnswer))
             {
-                UpdateFailureCount(username, FailureType.PasswordAnswer);
+                //UpdateFailureCount(username, FailureType.PasswordAnswer);
 
                 throw new MembershipPasswordException("Incorrect password answer.");
             }
@@ -661,7 +662,7 @@ namespace WebflixApplication.App_Start
         }
 
         public override MembershipUser GetUser(
-        string username,
+        string email,
          bool userIsOnline
         )
         {
@@ -715,7 +716,7 @@ namespace WebflixApplication.App_Start
         /// <param name="userID">Provider key.</param>
         /// <param name="userIsOnline">T/F whether the user is on-line.</param>
         /// <returns></returns>
-        public override MembershipUser GetUser(
+        /*public override MembershipUser GetUser(
          object userID,
          bool userIsOnline
         )
@@ -807,7 +808,7 @@ namespace WebflixApplication.App_Start
 
             return true;
 
-        }
+        }*/
 
 
         public override string GetUserNameByEmail(string email)
@@ -854,7 +855,7 @@ namespace WebflixApplication.App_Start
         /// <param name="answer">Answer to security question.</param>
         /// <returns></returns>
         /// <remarks></remarks>
-        public override string ResetPassword(
+        /*public override string ResetPassword(
          string username,
          string answer
         )
@@ -991,7 +992,7 @@ namespace WebflixApplication.App_Start
             {
                 sqlConnection.Close();
             }
-        }
+        }*/
 
         /// <summary>
         /// Validate the user based upon username and password.
@@ -1077,7 +1078,7 @@ namespace WebflixApplication.App_Start
         /// <param name="totalRecords">Total records found.</param>
         /// <returns>Collection of MembershipUser objects.</returns>
 
-        public override MembershipUserCollection FindUsersByName(string usernameToMatch, int pageIndex, int pageSize, out int totalRecords)
+        /*public override MembershipUserCollection FindUsersByName(string usernameToMatch, int pageIndex, int pageSize, out int totalRecords)
         {
             SqlConnection sqlConnection = new SqlConnection(connectionString);
             SqlCommand sqlCommand = new SqlCommand("Users_Sel_ByUserName", sqlConnection);
@@ -1180,7 +1181,7 @@ namespace WebflixApplication.App_Start
             totalRecords = counter;
 
             return membershipUsers;
-        }
+        }*/
 
         #endregion
 
@@ -1191,44 +1192,64 @@ namespace WebflixApplication.App_Start
         /// <param name="sqlDataReader">Data reader.</param>
         /// <returns>MembershipUser object.</returns>
         private MembershipUser GetUserFromReader(
-      SqlDataReader sqlDataReader
+      OracleDataReader oracleDataReader
         )
         {
 
-            object idPersonne = sqlDataReader.GetValue(0);
-            string courriel = sqlDataReader.GetString(1);
-            string motDePasse = sqlDataReader.GetString(2);
+            object idPersonne = oracleDataReader.GetValue(0);
+            string courriel = oracleDataReader.GetString(1);
+            string motDePasse = oracleDataReader.GetString(2);
             string username = String.Empty;
 
             string passwordQuestion = String.Empty;
-            if (sqlDataReader.GetValue(3) != DBNull.Value)
+            if (oracleDataReader.GetValue(3) != DBNull.Value)
             {
-                passwordQuestion = sqlDataReader.GetString(3);
+                passwordQuestion = oracleDataReader.GetString(3);
             }
 
             string comment = String.Empty;
-            if (sqlDataReader.GetValue(4) != DBNull.Value)
+            if (oracleDataReader.GetValue(4) != DBNull.Value)
             {
-                comment = sqlDataReader.GetString(4);
+                comment = oracleDataReader.GetString(4);
             }
 
-            bool isApproved = sqlDataReader.GetBoolean(5);
-            bool isLockedOut = sqlDataReader.GetBoolean(6);
-            DateTime creationDate = sqlDataReader.GetDateTime(7);
+            bool isApproved = true;
+            if (oracleDataReader.GetBoolean(5) != null) 
+            {
+                isApproved = oracleDataReader.GetBoolean(5);
+            }
+            bool isLockedOut = oracleDataReader.GetBoolean(6);
+            if (oracleDataReader.GetBoolean(6) != null)
+            {
+                isLockedOut = oracleDataReader.GetBoolean(6);
+            }
+            DateTime creationDate = new DateTime();
+            if (oracleDataReader.GetValue(7) != DBNull.Value)
+            {
+                creationDate = oracleDataReader.GetDateTime(7);
+            }
 
             DateTime lastLoginDate = new DateTime();
-            if (sqlDataReader.GetValue(8) != DBNull.Value)
+            if (oracleDataReader.GetValue(8) != DBNull.Value)
             {
-                lastLoginDate = sqlDataReader.GetDateTime(8);
+                lastLoginDate = oracleDataReader.GetDateTime(8);
             }
 
-            DateTime lastActivityDate = sqlDataReader.GetDateTime(9);
-            DateTime lastPasswordChangedDate = sqlDataReader.GetDateTime(10);
+            DateTime lastActivityDate = new DateTime();
+            if (oracleDataReader.GetValue(9) != DBNull.Value)
+            {
+                lastActivityDate = oracleDataReader.GetDateTime(9);
+            }
+            DateTime lastPasswordChangedDate = new DateTime();
+            if (oracleDataReader.GetValue(10) != DBNull.Value)
+            {
+                lastPasswordChangedDate = oracleDataReader.GetDateTime(10);
+            }
 
             DateTime lastLockedOutDate = new DateTime();
-            if (sqlDataReader.GetValue(11) != DBNull.Value)
+            if (oracleDataReader.GetValue(11) != DBNull.Value)
             {
-                lastLockedOutDate = sqlDataReader.GetDateTime(11);
+                lastLockedOutDate = oracleDataReader.GetDateTime(11);
             }
 
             MembershipUser membershipUser = new MembershipUser(
@@ -1271,7 +1292,7 @@ namespace WebflixApplication.App_Start
         /// <param name="username">User name.</param>
         /// <param name="failureType">Type of failure</param>
         /// <remarks></remarks>
-        private void UpdateFailureCount(string username, FailureType failureType)
+        /*private void UpdateFailureCount(string username, FailureType failureType)
         {
 
             SqlConnection sqlConnection = new SqlConnection(connectionString);
@@ -1294,7 +1315,7 @@ namespace WebflixApplication.App_Start
                 //Add exception handling here.
             }
 
-        }
+        }*/
         /// <summary>
         /// Check the password format based upon the MembershipPasswordFormat.
         /// </summary>
