@@ -13,31 +13,9 @@ using System.Web.Security;
 // This provider works with the following schema for the table of user data.
 // 
 //CREATE TABLE [dbo].[Users](
-//	[UserID] [uniqueidentifier] NOT NULL,
-//	[Username] [nvarchar](255) NOT NULL,
-//	[ApplicationName] [nvarchar](255) NOT NULL,
-//	[Email] [nvarchar](128) NOT NULL,
-//	[Comment] [nvarchar](255) NULL,
-//	[Password] [nvarchar](128) NOT NULL,
-//	[PasswordQuestion] [nvarchar](255) NULL,
-//	[PasswordAnswer] [nvarchar](255) NULL,
-//	[IsApproved] [bit] NULL,
-//	[LastActivityDate] [datetime] NULL,
-//	[LastLoginDate] [datetime] NULL,
-//	[LastPasswordChangedDate] [datetime] NULL,
-//	[CreationDate] [datetime] NULL,
-//	[IsOnLine] [bit] NULL,
-//	[IsLockedOut] [bit] NULL,
-//	[LastLockedOutDate] [datetime] NULL,
-//	[FailedPasswordAttemptCount] [int] NULL,
-//	[FailedPasswordAttemptWindowStart] [datetime] NULL,
-//	[FailedPasswordAnswerAttemptCount] [int] NULL,
-//	[FailedPasswordAnswerAttemptWindowStart] [datetime] NULL,
-//PRIMARY KEY CLUSTERED 
-//(
-//	[UserID] ASC
-//)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
-//) ON [PRIMARY]
+//	[IDPERSONNE] [uniqueidentifier] NOT NULL,
+//	[COURRIEL] [varchar2](50) NOT NULL,
+//	[MOTDEPASSE] [varchar2](255) NOT NULL
 // 
 
 namespace WebflixApplication.App_Start
@@ -188,7 +166,7 @@ namespace WebflixApplication.App_Start
             if (String.IsNullOrEmpty(config["description"]))
             {
                 config.Remove("description");
-                config.Add("description", "How Do I: Sample Membership provider");
+                config.Add("description", "Oracle Membership Provider");
             }
 
             //Initialize the abstract base class.
@@ -1217,9 +1195,10 @@ namespace WebflixApplication.App_Start
         )
         {
 
-            object userID = sqlDataReader.GetValue(0);
-            string username = sqlDataReader.GetString(1);
-            string email = sqlDataReader.GetString(2);
+            object idPersonne = sqlDataReader.GetValue(0);
+            string courriel = sqlDataReader.GetString(1);
+            string motDePasse = sqlDataReader.GetString(2);
+            string username = String.Empty;
 
             string passwordQuestion = String.Empty;
             if (sqlDataReader.GetValue(3) != DBNull.Value)
@@ -1255,8 +1234,8 @@ namespace WebflixApplication.App_Start
             MembershipUser membershipUser = new MembershipUser(
               this.Name,
              username,
-             userID,
-             email,
+             idPersonne,
+             courriel,
              passwordQuestion,
              comment,
              isApproved,
