@@ -176,7 +176,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MembershipProviderOracle.cs" />
     <Compile Include="Controllers\FilmController.cs" />
     <Compile Include="Models\ADRESSE.cs" />
     <Compile Include="Models\ANNONCE.cs" />
@@ -349,6 +348,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OracleMembershipProvider\OracleMembershipProvider.csproj">
+      <Project>{02643f36-c2d6-41b6-bbbe-3f2f9aa73dd8}</Project>
+      <Name>OracleMembershipProvider</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

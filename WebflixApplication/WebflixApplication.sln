@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebflixApplication", "WebflixApplication\WebflixApplication.csproj", "{E36B2C71-50B4-46CE-B9AC-AC29EDB76EB0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OracleMembershipProvider", "OracleMembershipProvider\OracleMembershipProvider.csproj", "{02643F36-C2D6-41B6-BBBE-3F2F9AA73DD8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{E36B2C71-50B4-46CE-B9AC-AC29EDB76EB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E36B2C71-50B4-46CE-B9AC-AC29EDB76EB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E36B2C71-50B4-46CE-B9AC-AC29EDB76EB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02643F36-C2D6-41B6-BBBE-3F2F9AA73DD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02643F36-C2D6-41B6-BBBE-3F2F9AA73DD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02643F36-C2D6-41B6-BBBE-3F2F9AA73DD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02643F36-C2D6-41B6-BBBE-3F2F9AA73DD8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
