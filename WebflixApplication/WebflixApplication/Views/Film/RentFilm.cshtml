@@ -32,7 +32,7 @@
                                     <li class="text-white film-details">Date de parution: @Model.location.COPIE.FILM.DATEPARUTION</li>
                                     <li class="text-white film-details">Genre: @foreach (var genre in @Model.location.COPIE.FILM.FILMGENREs) {<span> @genre.GENRE.TITRE, </span>}</li>
                                     <li class="text-white film-details">Acteur:  <ul>@foreach (var acteur in @Model.location.COPIE.FILM.ROLEs){
-                                        <li><span data-toggle="tooltip" data-placement="right" title="
+                                        <li class="personne-film-list"><span data-toggle="tooltip" data-placement="right" title="
                                             @acteur.PERSONNESFILM.DATEDENAISSANCE&#013;
                                             @acteur.PERSONNESFILM.LIEUDENAISSANCE&#013;
                                             @acteur.PERSONNESFILM.BIO&#013;">@acteur.PERSONNESFILM.PRENOM @acteur.PERSONNESFILM.NOM

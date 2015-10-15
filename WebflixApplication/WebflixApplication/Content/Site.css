@@ -802,3 +802,11 @@ footer .block {
     /* If max-width does not work, try using width instead */
     width: 500px; 
 }
+
+.personne-film-list {
+    cursor: pointer;
+}
+
+.advance-search-inputs div {
+    margin-right: 5px !important;
+}
