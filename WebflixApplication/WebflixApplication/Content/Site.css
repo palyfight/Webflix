@@ -791,3 +791,8 @@ footer .block {
     display: block !important;
     font-size: 16px;
 }
+
+.rent-message {
+    padding: 20px 20px 20px 30px;
+    font-size: 20px;
+}
