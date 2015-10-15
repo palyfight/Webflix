@@ -796,3 +796,9 @@ footer .block {
     padding: 20px 20px 20px 30px;
     font-size: 20px;
 }
+
+.tooltip-inner {
+    max-width: 500px;
+    /* If max-width does not work, try using width instead */
+    width: 500px; 
+}

@@ -26,7 +26,13 @@
                                 <li class="text-white film-details">Langue originale: @Model.LANGUEORIGINALE </li>
                                 <li class="text-white film-details">Date de parution: @Model.DATEPARUTION</li>
                                 <li class="text-white film-details">Genre: @foreach (var genre in @Model.FILMGENREs) {<span> @genre.GENRE.TITRE, </span>}</li>
-                                <li class="text-white film-details">Acteur:  <ul>@foreach (var acteur in @Model.ROLEs) {<li>@acteur.PERSONNESFILM.PRENOM @acteur.PERSONNESFILM.NOM</li> }</ul></li>
+                                <li class="text-white film-details">Acteur:  <ul>@foreach (var acteur in @Model.ROLEs){
+                                    <li><span data-toggle="tooltip" data-placement="right" title="
+                                        @acteur.PERSONNESFILM.DATEDENAISSANCE&#013;
+                                        @acteur.PERSONNESFILM.LIEUDENAISSANCE&#013;
+                                        @acteur.PERSONNESFILM.BIO&#013;">@acteur.PERSONNESFILM.PRENOM @acteur.PERSONNESFILM.NOM
+                                    </li> }</ul>
+                                </li>
                             </ul>
                         </p>
                     </div>

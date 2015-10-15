@@ -31,7 +31,13 @@
                                     <li class="text-white film-details">Langue originale: @Model.location.COPIE.FILM.LANGUEORIGINALE </li>
                                     <li class="text-white film-details">Date de parution: @Model.location.COPIE.FILM.DATEPARUTION</li>
                                     <li class="text-white film-details">Genre: @foreach (var genre in @Model.location.COPIE.FILM.FILMGENREs) {<span> @genre.GENRE.TITRE, </span>}</li>
-                                    <li class="text-white film-details">Acteur:  <ul>@foreach (var acteur in @Model.location.COPIE.FILM.ROLEs){<li>@acteur.PERSONNESFILM.PRENOM @acteur.PERSONNESFILM.NOM</li> }</ul></li>
+                                    <li class="text-white film-details">Acteur:  <ul>@foreach (var acteur in @Model.location.COPIE.FILM.ROLEs){
+                                        <li><span data-toggle="tooltip" data-placement="right" title="
+                                            @acteur.PERSONNESFILM.DATEDENAISSANCE&#013;
+                                            @acteur.PERSONNESFILM.LIEUDENAISSANCE&#013;
+                                            @acteur.PERSONNESFILM.BIO&#013;">@acteur.PERSONNESFILM.PRENOM @acteur.PERSONNESFILM.NOM
+                                        </li> }</ul>
+                                    </li>
                                 </ul>
                             </p>
                         </div>
@@ -67,7 +73,14 @@
                                     <li class="text-white film-details">Langue originale: @Model.film.LANGUEORIGINALE </li>
                                     <li class="text-white film-details">Date de parution: @Model.film.DATEPARUTION</li>
                                     <li class="text-white film-details">Genre: @foreach (var genre in @Model.film.FILMGENREs) {<span> @genre.GENRE.TITRE, </span>}</li>
-                                    <li class="text-white film-details">Acteur:  <ul>@foreach (var acteur in @Model.film.ROLEs) {<li>@acteur.PERSONNESFILM.PRENOM @acteur.PERSONNESFILM.NOM</li> }</ul></li>
+                                    <li class="text-white film-details">Acteur:  <ul>@foreach (var acteur in @Model.film.ROLEs) {
+                                        <li><span data-toggle="tooltip" data-placement="right" title="
+                                            @acteur.PERSONNESFILM.DATEDENAISSANCE&#013;
+                                            @acteur.PERSONNESFILM.LIEUDENAISSANCE&#013;
+                                            @acteur.PERSONNESFILM.BIO&#013;">@acteur.PERSONNESFILM.PRENOM @acteur.PERSONNESFILM.NOM</span>
+                                        </li> }</ul>
+                                    </li>
+                                    <li class="text-white film-details">Réalisateur: </li>
                                 </ul>
                             </p>
                         </div>
@@ -77,4 +90,3 @@
 	    </div><!-- /.padding-sm -->
     </div><!-- /main-container -->
 }
-
