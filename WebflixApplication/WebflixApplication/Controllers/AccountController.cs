@@ -14,7 +14,7 @@ using WebflixApplication.Models;
 namespace WebflixApplication.Controllers
 {
     [Authorize]
-    [InitializeSimpleMembership]
+    //[InitializeSimpleMembership]
     public class AccountController : Controller
     {
         //

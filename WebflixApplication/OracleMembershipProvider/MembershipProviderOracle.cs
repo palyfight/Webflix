@@ -204,7 +204,7 @@ namespace OracleMembershipProvider
                     throw new ProviderException("Password format not supported.");
             }
 
-            ConnectionStringSettings ConnectionStringSettings = ConfigurationManager.ConnectionStrings[config["connectionStringName"]];
+            ConnectionStringSettings ConnectionStringSettings = ConfigurationManager.ConnectionStrings[config["connectionString"]];
 
             if ((ConnectionStringSettings == null) || (ConnectionStringSettings.ConnectionString.Trim() == String.Empty))
             {
