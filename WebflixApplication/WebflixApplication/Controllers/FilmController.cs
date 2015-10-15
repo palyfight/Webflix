@@ -33,16 +33,16 @@ namespace WebflixApplication.Controllers
         {
             using (var webflixContext = new WebflixContext())
             {
-                return Json(new { response = webflixContext.searchMovie(query) });
+                return Json( webflixContext.searchMovie(query) );
             }
           
         }
 
-        public ActionResult AdvanceSearchMovie(String title, String actor, String realisator, String genre, String country, String language, String dates)
+        public ActionResult AdvanceSearchMovie(String title, String actor, String realisator, String genre, String country, String language, String year)
         {
             using (var webflixContext = new WebflixContext())
             {
-                return Json(new { response = webflixContext.AdvanceSearchMovie(title,  actor,  realisator,  genre,  country,  language,  dates) });
+                return Json(webflixContext.AdvanceSearchMovie(title,  actor,  realisator,  genre,  country,  language,  year));
             }           
         }
 

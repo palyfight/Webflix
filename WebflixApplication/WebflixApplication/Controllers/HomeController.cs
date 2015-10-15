@@ -32,5 +32,10 @@ namespace WebflixApplication.Controllers
 
             return View();
         }
+
+        public ActionResult ShowAdvanceSearchMovie()
+        {
+            return View();
+        }
     }
 }

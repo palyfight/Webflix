@@ -21,26 +21,10 @@ ViewBag.Title = "Home Page";
 			<div class="collapse navbar-collapse" id="galleryNavigation">
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="#">Home</a></li>
-					<li><a href="#">Movie Trailer</a></li>
-					<li><a href="#">Animation</a></li>
-					<li><a href="#">New Movies</a></li>
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">More Categories <b class="caret"></b></a>
-						<ul class="dropdown-menu flipInV" role="menu">
-							<li role="presentation" class="dropdown-header">Movie Categories</li>
-							<li><a href="#">Action</a></li>
-							<li><a href="#">Comedies</a></li>
-							<li><a href="#">Horror</a></li>
-							<li role="presentation" class="dropdown-header">Game Categories</li>
-							<li><a href="#">Role-playing game</a></li>
-							<li><a href="#">Card game</a></li>
-							<li><a href="#">Mobile game</a></li>
-						</ul>
-					</li>
+					<li><a href="@Url.Action("ShowAdvanceSearchMovie", "Home")">Advanced Search</a></li>
 				</ul>
                 <div>
                     <div class="form-group col-md-3 pull-right" style="margin-top: 12px;">
-                        <label class="sr-only" for="search_movie">Amount (in dollars)</label>
                         <div class="input-group">
                             <div class="input-group-addon"><i class="fa fa-search"></i></div>
                             <input type="text" class="form-control" id="search_movie" placeholder="Ex: Titanic">
@@ -57,7 +41,7 @@ ViewBag.Title = "Home Page";
 				</h2>
 				<div class="movies-wrapper">
 					<div class="movie-jcarousel row" id="popularMovie">
-						<ul>
+						<ul id="movie-list">
                             @foreach(var film in Model){
 							    <li class="col-sm-2">
 								    <a href="/film/showfilm/@film.IDFILM">

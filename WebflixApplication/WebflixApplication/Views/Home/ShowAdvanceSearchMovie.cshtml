@@ -1,0 +1,102 @@
+﻿@{
+    ViewBag.Title = "ShowAdvanceSearchMovie";
+}
+
+<div id="main-container" class="bg-dark">
+	<div class="padding-sm">
+		<nav class="navbar navbar-inverse">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#galleryNavigation">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Gallery</a>
+			</div>
+
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse" id="galleryNavigation">
+				<ul class="nav navbar-nav">
+					<li ><a href="@Url.Action("Index", "Home")">Home</a></li>
+					<li class="active"><a href="#">Advanced Search</a></li>
+				</ul>
+                <div>
+                    <!--<div class="form-group col-md-3 pull-right" style="margin-top: 12px;">
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                            <input type="text" class="form-control" id="search_movie" placeholder="Ex: Titanic">
+                        </div>
+                    </div>-->
+                </div>
+			</div><!-- /.navbar-collapse -->
+		</nav>
+		<div class="row">
+			<div class="col-md-12">
+				<h2 class="headline dark text-white">
+					Advanced Search
+					<span class="line"></span>
+				</h2>
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <div class="col-md-10">
+                                  <input type="text" class="form-control" id="title" placeholder="Title">
+                                </div>
+                            </div>
+                             <div class="form-group">
+                                <div class="col-md-10">
+                                  <input type="text" class="form-control" id="actor" placeholder="Actor">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-10">
+                                  <input type="text" class="form-control" id="realisator" placeholder="Realisator">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-10">
+                                  <input type="text" class="form-control" id="genre" placeholder="Genre">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-10">
+                                  <input type="text" class="form-control" id="country" placeholder="Country">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-10">
+                                  <input type="text" class="form-control" id="language" placeholder="Language">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-10">
+                                  <input type="text" class="form-control" id="year" placeholder="Year">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-10">
+                                    <button type="button" id="search-btn" class="btn btn-default pull-right">Search</button> 
+                                </div>
+                            </div>
+                         </form>
+                     </div>
+                </div>
+			</div><!-- /.col -->
+		</div><!-- ./row -->
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="movies-wrapper">
+                    <div class="movie-jcarousel row" id="popularMovie">
+                        <ul id="movie-list">
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+	</div><!-- /.padding-sm -->
+</div><!-- /main-container -->
