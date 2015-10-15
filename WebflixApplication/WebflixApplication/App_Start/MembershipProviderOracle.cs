@@ -248,55 +248,9 @@ namespace WebflixApplication.App_Start
         /// <param name="oldPwd">Old password.</param>
         /// <param name="newPwd">New password.</param>
         /// <returns>T/F if password was changed.</returns>
-        /*public override bool ChangePassword(string username, string oldPwd, string newPwd)
+        public override bool ChangePassword(string username, string oldPwd, string newPwd)
         {
-
-            if (!ValidateUser(username, oldPwd))
-            {
-                return false;
-            }
-
-            ValidatePasswordEventArgs args = new ValidatePasswordEventArgs(username, newPwd, true);
-
-            OnValidatingPassword(args);
-
-            if (args.Cancel)
-            {
-                if (args.FailureInformation != null)
-                {
-                    throw args.FailureInformation;
-                }
-                else
-                {
-                    throw new Exception("Change password canceled due to new password validation failure.");
-                }
-            }
-
-            SqlConnection sqlConnection = new SqlConnection(connectionString);
-            SqlCommand sqlCommand = new SqlCommand("User_ChangePassword", sqlConnection);
-
-            sqlCommand.CommandType = CommandType.StoredProcedure;
-            sqlCommand.Parameters.Add("@password", SqlDbType.NVarChar, 255).Value = EncodePassword(newPwd);
-            sqlCommand.Parameters.Add("@username", SqlDbType.NVarChar, 255).Value = username;
-            sqlCommand.Parameters.Add("@applicationName", SqlDbType.NVarChar, 255).Value = applicationName;
-
-            try
-            {
-                sqlConnection.Open();
-                sqlCommand.ExecuteNonQuery();
-            }
-            catch (SqlException e)
-            {
-                //Add exception handling here.
-                return false;
-            }
-            finally
-            {
-                sqlConnection.Close();
-            }
-
-            return true;
-
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -308,56 +262,16 @@ namespace WebflixApplication.App_Start
         /// <param name="newPwdAnswer">New answer text.</param>
         /// <returns></returns>
         /// <remarks></remarks>
-        public override bool ChangePasswordQuestionAndAnswer(
-        string username,
-          string password,
-         string newPwdQuestion,
-          string newPwdAnswer)
+        public override bool ChangePasswordQuestionAndAnswer(string username, string password, string newPwdQuestion, string newPwdAnswer)
         {
-
-            if (!ValidateUser(username, password))
-            {
-                return false;
-            }
-
-            SqlConnection sqlConnection = new SqlConnection(connectionString);
-            SqlCommand sqlCommand = new SqlCommand("User_ChangePasswordQuestionAnswer", sqlConnection);
-
-            sqlCommand.CommandType = CommandType.StoredProcedure;
-            sqlCommand.Parameters.Add("@returnValue", SqlDbType.Int, 0).Direction = ParameterDirection.ReturnValue;
-            sqlCommand.Parameters.Add("@question", SqlDbType.NVarChar, 255).Value = newPwdQuestion;
-            sqlCommand.Parameters.Add("@answer", SqlDbType.NVarChar, 255).Value = EncodePassword(newPwdAnswer);
-            sqlCommand.Parameters.Add("@username", SqlDbType.NVarChar, 255).Value = username; ;
-            sqlCommand.Parameters.Add("@applicationName", SqlDbType.NVarChar, 255).Value = applicationName;
-
-            try
-            {
-                sqlConnection.Open();
-                sqlCommand.ExecuteNonQuery();
-                if ((int)sqlCommand.Parameters["@returnValue"].Value != 0)
-                {
-                    return false;
-                }
-            }
-            catch (SqlException e)
-            {
-                //Add exception handling here.
-                return false;
-            }
-            finally
-            {
-                sqlConnection.Close();
-            }
-
-            return true;
-
-        }*/
+            throw new NotImplementedException();
+        }
         /// <summary>
         /// Create a new user.
         /// </summary>
+        /// <param name="username">User name.</param>
         /// <param name="password">Password.</param>
         /// <param name="email">Email address.</param>
-        /// <param name="username">User name.</param>
         /// <param name="passwordQuestion">Security quesiton for password.</param>
         /// <param name="passwordAnswer">Security quesiton answer for password.</param>
         /// <param name="isApproved"></param>
@@ -365,7 +279,7 @@ namespace WebflixApplication.App_Start
         /// <param name="status"></param>
         /// <returns>MembershipUser</returns>
 
-        public override MembershipUser CreateUser(string password, string email, out MembershipCreateStatus status, string username = "", string passwordQuestion = "", string passwordAnswer = "", bool isApproved = true, object providerUserKey = null)
+        public override MembershipUser CreateUser(string username, string password, string email, string passwordQuestion, string passwordAnswer, bool isApproved, object providerUserKey, out MembershipCreateStatus status)
         {
 
             ValidatePasswordEventArgs args = new ValidatePasswordEventArgs(email, password, true);
@@ -445,47 +359,9 @@ namespace WebflixApplication.App_Start
         /// <param name="username">User name.</param>
         /// <param name="deleteAllRelatedData">Whether to delete all related data.</param>
         /// <returns>T/F if the user was deleted.</returns>
-        /*public override bool DeleteUser(
-         string username,
-         bool deleteAllRelatedData
-        )
+        public override bool DeleteUser(string username, bool deleteAllRelatedData)
         {
-
-            SqlConnection sqlConnection = new SqlConnection(connectionString);
-            SqlCommand sqlCommand = new SqlCommand("User_Del", sqlConnection);
-
-            sqlCommand.CommandType = CommandType.StoredProcedure;
-            sqlCommand.Parameters.Add("@returnValue", SqlDbType.Int, 0).Direction = ParameterDirection.ReturnValue;
-            sqlCommand.Parameters.Add("@username", SqlDbType.NVarChar, 255).Value = username; ;
-            sqlCommand.Parameters.Add("@applicationName", SqlDbType.NVarChar, 255).Value = applicationName;
-
-            try
-            {
-                sqlConnection.Open();
-                sqlCommand.ExecuteNonQuery();
-                if ((int)sqlCommand.Parameters["@returnValue"].Value == 0)
-                {
-                    if (deleteAllRelatedData)
-                    {
-                        //Process commands to delete all data for the user in the database.
-                    }
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            catch (SqlException e)
-            {
-                //Add exception handling here.
-            }
-            finally
-            {
-                sqlConnection.Close();
-            }
-
-            return true;
-
+            throw new NotImplementedException();
         }
         /// <summary>
         /// Get a collection of users.
@@ -497,52 +373,7 @@ namespace WebflixApplication.App_Start
 
         public override MembershipUserCollection GetAllUsers(int pageIndex, int pageSize, out int totalRecords)
         {
-
-            SqlConnection sqlConnection = new SqlConnection(connectionString);
-            SqlCommand sqlCommand = new SqlCommand("Users_Sel", sqlConnection);
-
-            sqlCommand.CommandType = CommandType.StoredProcedure;
-            sqlCommand.Parameters.Add("@applicationName", SqlDbType.NVarChar, 255).Value = applicationName;
-
-            MembershipUserCollection users = new MembershipUserCollection();
-
-            SqlDataReader sqlDataReader = null;
-            totalRecords = 0;
-
-            try
-            {
-                sqlConnection.Open();
-                sqlDataReader = sqlCommand.ExecuteReader(CommandBehavior.CloseConnection);
-
-                int counter = 0;
-                int startIndex = pageSize * pageIndex;
-                int endIndex = startIndex + pageSize - 1;
-
-                while (sqlDataReader.Read())
-                {
-                    if (counter >= startIndex)
-                    {
-                        users.Add(GetUserFromReader(sqlDataReader));
-                    }
-
-                    if (counter >= endIndex) { sqlCommand.Cancel(); }
-                    counter += 1;
-                }
-            }
-            catch (SqlException e)
-            {
-                //Add exception handling here.
-            }
-            finally
-            {
-                if (sqlDataReader != null)
-                {
-                    sqlDataReader.Close();
-                }
-            }
-
-            return users;
-
+            throw new NotImplementedException();
         }
         /// <summary>
         /// Gets the number of users currently on-line.
@@ -550,47 +381,16 @@ namespace WebflixApplication.App_Start
         /// <returns>  /// # of users on-line.</returns>
         public override int GetNumberOfUsersOnline()
         {
+            throw new NotImplementedException();
 
-            TimeSpan onlineSpan = new TimeSpan(0, System.Web.Security.Membership.UserIsOnlineTimeWindow, 0);
-            DateTime compareTime = DateTime.Now.Subtract(onlineSpan);
-
-            SqlConnection sqlConnection = new SqlConnection(connectionString);
-            SqlCommand sqlCommand = new SqlCommand("Users_NumberOnline", sqlConnection);
-
-            sqlCommand.CommandType = CommandType.StoredProcedure;
-            sqlCommand.Parameters.Add("@applicationName", SqlDbType.NVarChar, 255).Value = applicationName;
-            sqlCommand.Parameters.Add("@compareDate", SqlDbType.DateTime).Value = compareTime;
-
-            int numOnline = 0;
-
-            try
-            {
-                sqlConnection.Open();
-
-                numOnline = Convert.ToInt32(sqlCommand.ExecuteScalar());
-            }
-            catch (SqlException e)
-            {
-                //Add exception handling here.
-            }
-            finally
-            {
-                sqlConnection.Close();
-            }
-
-            return numOnline;
-
-        }*/
+        }
         /// <summary>
         /// Get the password for a user.
         /// </summary>
         /// <param name="email">Email.</param>
         /// <param name="answer">Answer to security question.</param>
         /// <returns>Password for the user.</returns>
-        public override string GetPassword(
-         string email,
-         string answer
-        )
+        public override string GetPassword(string email, string answer)
         {
 
             if (!EnablePasswordRetrieval)
@@ -661,10 +461,7 @@ namespace WebflixApplication.App_Start
             return password;
         }
 
-        public override MembershipUser GetUser(
-        string email,
-         bool userIsOnline
-        )
+        public override MembershipUser GetUser(string email, bool userIsOnline)
         {
 
             OracleConnection oracleConnection = new OracleConnection(connectionString);
@@ -716,44 +513,41 @@ namespace WebflixApplication.App_Start
         /// <param name="userID">Provider key.</param>
         /// <param name="userIsOnline">T/F whether the user is on-line.</param>
         /// <returns></returns>
-        /*public override MembershipUser GetUser(
-         object userID,
-         bool userIsOnline
-        )
+        public override MembershipUser GetUser(object userID, bool userIsOnline)
         {
 
-            SqlConnection sqlConnection = new SqlConnection(connectionString);
-            SqlCommand sqlCommand = new SqlCommand("User_SelByUserID", sqlConnection);
+            OracleConnection oracleConnection = new OracleConnection(connectionString);
+            OracleCommand oracleCommand = new OracleCommand("User_SelByUserID", oracleConnection);
 
-            sqlCommand.CommandType = CommandType.StoredProcedure;
-            sqlCommand.Parameters.Add("@userID", SqlDbType.UniqueIdentifier).Value = userID;
+            oracleCommand.CommandType = CommandType.StoredProcedure;
+            oracleCommand.Parameters.Add("@userID", SqlDbType.UniqueIdentifier).Value = userID;
 
             MembershipUser membershipUser = null;
-            SqlDataReader sqlDataReader = null;
+            OracleDataReader sqlDataReader = null;
 
             try
             {
-                sqlConnection.Open();
+                oracleConnection.Open();
 
-                sqlDataReader = sqlCommand.ExecuteReader(CommandBehavior.CloseConnection);
+                sqlDataReader = oracleCommand.ExecuteReader(CommandBehavior.CloseConnection);
 
                 if (sqlDataReader.HasRows)
                 {
                     sqlDataReader.Read();
                     membershipUser = GetUserFromReader(sqlDataReader);
 
-                    if (userIsOnline)
+                    /*if (userIsOnline)
                     {
-                        SqlCommand sqlUpdateCommand = new SqlCommand("User_UpdateActivityDate_ByUserID", sqlConnection);
+                        OracleCommand sqlUpdateCommand = new OracleCommand("User_UpdateActivityDate_ByUserID", oracleConnection);
 
                         sqlUpdateCommand.CommandType = CommandType.StoredProcedure;
                         sqlUpdateCommand.Parameters.Add("@userID", SqlDbType.NVarChar, 255).Value = userID;
                         sqlUpdateCommand.Parameters.Add("@applicationName", SqlDbType.NVarChar, 255).Value = applicationName;
                         sqlUpdateCommand.ExecuteNonQuery();
-                    }
+                    }*/
                 }
             }
-            catch (SqlException e)
+            catch (OracleException e)
             {
                 //Add exception handling here.
             }
@@ -771,69 +565,35 @@ namespace WebflixApplication.App_Start
         /// </summary>
         /// <param name="username">User name.</param>
         /// <returns>T/F if unlocked.</returns>
-        public override bool UnlockUser(
-         string username
-        )
+        public override bool UnlockUser(string username)
         {
-
-            SqlConnection sqlConnection = new SqlConnection(connectionString);
-            SqlCommand sqlCommand = new SqlCommand("User_Unlock", sqlConnection);
-
-            sqlCommand.CommandType = CommandType.StoredProcedure;
-            sqlCommand.Parameters.Add("@returnValue", SqlDbType.Int, 0).Direction = ParameterDirection.ReturnValue;
-            sqlCommand.Parameters.Add("@username", SqlDbType.NVarChar, 255).Value = username;
-            sqlCommand.Parameters.Add("@applicationName", SqlDbType.NVarChar, 255).Value = applicationName;
-
-            int rowsAffected = 0;
-
-            try
-            {
-                sqlConnection.Open();
-
-                sqlCommand.ExecuteNonQuery();
-                if ((int)sqlCommand.Parameters["@returnValue"].Value == 0)
-                {
-                    return false;
-                }
-            }
-            catch (SqlException e)
-            {
-                //Add exception handling here.
-                return false;
-            }
-            finally
-            {
-                sqlConnection.Close();
-            }
-
-            return true;
-
-        }*/
+            throw new NotImplementedException();
+        }
 
 
-        /*public override string GetUserNameByEmail(string email)
+        public override string GetUserNameByEmail(string email)
         {
             OracleConnection oracleConnection = new OracleConnection(connectionString);
             OracleCommand oracleCommand = new OracleCommand("UserName_Sel_ByEmail", oracleConnection);
 
             oracleCommand.CommandType = CommandType.StoredProcedure;
-            sqlCommand.Parameters.Add("@email", SqlDbType.NVarChar, 128).Value = email;
+            oracleCommand.Parameters.Add("@email", OracleType.VarChar, 50).Value = email;
             //sqlCommand.Parameters.Add("@applicationName", SqlDbType.NVarChar, 255).Value = applicationName;
 
             string username = String.Empty;
 
             try
             {
-                sqlConnection.Open();
-                username = Convert.ToString(sqlCommand.ExecuteScalar());
+                oracleConnection.Open();
+                username = Convert.ToString(oracleCommand.ExecuteScalar());
             }
-            catch (SqlException e)
+            catch (OracleException e)
             {
                 //Add exception handling here.
             }
             finally
             {
-                sqlConnection.Close();
+                oracleConnection.Close();
             }
 
             if (username == null)
@@ -847,7 +607,7 @@ namespace WebflixApplication.App_Start
 
             return username;
 
-        }*/
+        }
         /// <summary>
         /// Reset the user password.
         /// </summary>
@@ -855,111 +615,9 @@ namespace WebflixApplication.App_Start
         /// <param name="answer">Answer to security question.</param>
         /// <returns></returns>
         /// <remarks></remarks>
-        /*public override string ResetPassword(
-         string username,
-         string answer
-        )
+        public override string ResetPassword(string username, string answer)
         {
-
-            if (!EnablePasswordReset)
-            {
-                throw new NotSupportedException("Password Reset is not enabled.");
-            }
-
-            if ((answer == null) && (RequiresQuestionAndAnswer))
-            {
-                UpdateFailureCount(username, FailureType.PasswordAnswer);
-
-                throw new ProviderException("Password answer required for password Reset.");
-            }
-
-            string newPassword =
-              System.Web.Security.Membership.GeneratePassword(
-              newPasswordLength,
-              MinRequiredNonAlphanumericCharacters
-              );
-
-            ValidatePasswordEventArgs args = new ValidatePasswordEventArgs(username, newPassword, true);
-
-            OnValidatingPassword(args);
-
-            if (args.Cancel)
-            {
-                if (args.FailureInformation != null)
-                {
-                    throw args.FailureInformation;
-                }
-                else
-                {
-                    throw new MembershipPasswordException("Reset password canceled due to password validation failure.");
-                }
-            }
-
-            SqlConnection sqlConnection = new SqlConnection(connectionString);
-            SqlCommand sqlCommand = new SqlCommand("User_GetPasswordAnswer", sqlConnection);
-
-            sqlCommand.CommandType = CommandType.StoredProcedure;
-            sqlCommand.Parameters.Add("@username", SqlDbType.NVarChar, 255).Value = username;
-            sqlCommand.Parameters.Add("@applicationName", SqlDbType.NVarChar, 255).Value = applicationName;
-
-            int rowsAffected = 0;
-            string passwordAnswer = String.Empty;
-            SqlDataReader sqlDataReader = null;
-
-            try
-            {
-                sqlConnection.Open();
-
-                sqlDataReader = sqlCommand.ExecuteReader(CommandBehavior.SingleRow & CommandBehavior.CloseConnection);
-
-                if (sqlDataReader.HasRows)
-                {
-                    sqlDataReader.Read();
-
-                    if (sqlDataReader.GetBoolean(1))
-                    {
-                        throw new MembershipPasswordException("The supplied user is locked out.");
-                    }
-
-                    passwordAnswer = sqlDataReader.GetString(0);
-                }
-                else
-                {
-                    throw new MembershipPasswordException("The supplied user name is not found.");
-                }
-
-                if (RequiresQuestionAndAnswer && (!CheckPassword(answer, passwordAnswer)))
-                {
-                    UpdateFailureCount(username, FailureType.PasswordAnswer);
-
-                    throw new MembershipPasswordException("Incorrect password answer.");
-                }
-
-                SqlCommand sqlUpdateCommand = new SqlCommand("User_UpdatePassword", sqlConnection);
-
-                sqlUpdateCommand.CommandType = CommandType.StoredProcedure;
-                sqlUpdateCommand.Parameters.Add("@password", SqlDbType.NVarChar, 255).Value = EncodePassword(newPassword);
-                sqlUpdateCommand.Parameters.Add("@username", SqlDbType.NVarChar, 255).Value = username;
-                sqlUpdateCommand.Parameters.Add("@applicationName", SqlDbType.NVarChar, 255).Value = applicationName;
-                rowsAffected = sqlUpdateCommand.ExecuteNonQuery();
-            }
-            catch (SqlException e)
-            {
-                //Add exception handling here.
-            }
-            finally
-            {
-                if (sqlDataReader != null) { sqlDataReader.Close(); }
-            }
-
-            if (rowsAffected > 0)
-            {
-                return newPassword;
-            }
-            else
-            {
-                throw new MembershipPasswordException("User not found, or user is locked out. Password not Reset.");
-            }
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -968,31 +626,8 @@ namespace WebflixApplication.App_Start
         /// <param name="_membershipUser">MembershipUser object containing data.</param>
         public override void UpdateUser(MembershipUser membershipUser)
         {
-
-            SqlConnection sqlConnection = new SqlConnection(connectionString);
-            SqlCommand sqlCommand = new SqlCommand("User_Upd", sqlConnection);
-
-            sqlCommand.CommandType = CommandType.StoredProcedure;
-            sqlCommand.Parameters.Add("@email", SqlDbType.NVarChar, 128).Value = membershipUser.Email;
-            sqlCommand.Parameters.Add("@comment", SqlDbType.NVarChar, 255).Value = membershipUser.Comment;
-            sqlCommand.Parameters.Add("@isApproved", SqlDbType.Bit).Value = membershipUser.IsApproved;
-            sqlCommand.Parameters.Add("@username", SqlDbType.NVarChar, 255).Value = membershipUser.UserName;
-            sqlCommand.Parameters.Add("@applicationName", SqlDbType.NVarChar, 255).Value = applicationName;
-
-            try
-            {
-                sqlConnection.Open();
-                sqlCommand.ExecuteNonQuery();
-            }
-            catch (SqlException e)
-            {
-                //Add exception handling here.
-            }
-            finally
-            {
-                sqlConnection.Close();
-            }
-        }*/
+            throw new NotImplementedException();
+        }
 
         /// <summary>
         /// Validate the user based upon username and password.
@@ -1000,10 +635,7 @@ namespace WebflixApplication.App_Start
         /// <param name="email">Email.</param>
         /// <param name="password">Password.</param>
         /// <returns>T/F if the user is valid.</returns>
-        public override bool ValidateUser(
-         string email,
-         string password
-        )
+        public override bool ValidateUser(string email, string password)
         {
 
             bool isValid = false;
@@ -1078,52 +710,9 @@ namespace WebflixApplication.App_Start
         /// <param name="totalRecords">Total records found.</param>
         /// <returns>Collection of MembershipUser objects.</returns>
 
-        /*public override MembershipUserCollection FindUsersByName(string usernameToMatch, int pageIndex, int pageSize, out int totalRecords)
+        public override MembershipUserCollection FindUsersByName(string usernameToMatch, int pageIndex, int pageSize, out int totalRecords)
         {
-            SqlConnection sqlConnection = new SqlConnection(connectionString);
-            SqlCommand sqlCommand = new SqlCommand("Users_Sel_ByUserName", sqlConnection);
-
-            sqlCommand.CommandType = CommandType.StoredProcedure;
-            sqlCommand.Parameters.Add("@username", SqlDbType.NVarChar, 255).Value = usernameToMatch;
-            sqlCommand.Parameters.Add("@applicationName", SqlDbType.NVarChar, 255).Value = applicationName;
-
-            MembershipUserCollection membershipUsers = new MembershipUserCollection();
-            SqlDataReader sqlDataReader = null;
-            int counter = 0;
-
-            try
-            {
-                sqlConnection.Open();
-                sqlDataReader = sqlCommand.ExecuteReader(CommandBehavior.CloseConnection);
-
-                int startIndex = pageSize * pageIndex;
-                int endIndex = startIndex + pageSize - 1;
-
-                while (sqlDataReader.Read())
-                {
-                    if (counter >= startIndex)
-                    {
-                        MembershipUser membershipUser = GetUserFromReader(sqlDataReader);
-                        membershipUsers.Add(membershipUser);
-                    }
-
-                    if (counter >= endIndex) { sqlCommand.Cancel(); }
-
-                    counter += 1;
-                }
-            }
-            catch (SqlException e)
-            {
-                //Add exception handling here.
-            }
-            finally
-            {
-                if (sqlDataReader != null) { sqlDataReader.Close(); }
-            }
-
-            totalRecords = counter;
-
-            return membershipUsers;
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -1137,51 +726,8 @@ namespace WebflixApplication.App_Start
 
         public override MembershipUserCollection FindUsersByEmail(string emailToMatch, int pageIndex, int pageSize, out int totalRecords)
         {
-            SqlConnection sqlConnection = new SqlConnection(connectionString);
-            SqlCommand sqlCommand = new SqlCommand("Users_Sel_ByUserName", sqlConnection);
-
-            sqlCommand.CommandType = CommandType.StoredProcedure;
-            sqlCommand.Parameters.Add("@email", SqlDbType.NVarChar, 255).Value = emailToMatch;
-            sqlCommand.Parameters.Add("@applicationName", SqlDbType.NVarChar, 255).Value = applicationName;
-
-            MembershipUserCollection membershipUsers = new MembershipUserCollection();
-            SqlDataReader sqlDataReader = null;
-            int counter = 0;
-
-            try
-            {
-                sqlConnection.Open();
-                sqlDataReader = sqlCommand.ExecuteReader(CommandBehavior.CloseConnection);
-
-                int startIndex = pageSize * pageIndex;
-                int endIndex = startIndex + pageSize - 1;
-
-                while (sqlDataReader.Read())
-                {
-                    if (counter >= startIndex)
-                    {
-                        MembershipUser membershipUser = GetUserFromReader(sqlDataReader);
-                        membershipUsers.Add(membershipUser);
-                    }
-
-                    if (counter >= endIndex) { sqlCommand.Cancel(); }
-
-                    counter += 1;
-                }
-            }
-            catch (SqlException e)
-            {
-                //Add exception handling here.
-            }
-            finally
-            {
-                if (sqlDataReader != null) { sqlDataReader.Close(); }
-            }
-
-            totalRecords = counter;
-
-            return membershipUsers;
-        }*/
+            throw new NotImplementedException();
+        }
 
         #endregion
 
@@ -1405,6 +951,5 @@ namespace WebflixApplication.App_Start
         }
 
         #endregion
-
     }
 }
