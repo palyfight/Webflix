@@ -176,6 +176,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\MembershipProviderOracle.cs" />
     <Compile Include="Controllers\FilmController.cs" />
     <Compile Include="Models\ADRESSE.cs" />
     <Compile Include="Models\ANNONCE.cs" />
@@ -341,7 +342,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Film\ShowFilm.cshtml" />
-    <Content Include="Views\Home\ShowAdvanceSearchMovie.cshtml" />
     <Content Include="Views\Film\RentFilm.cshtml" />
   </ItemGroup>
   <ItemGroup>
