@@ -667,45 +667,45 @@ namespace WebflixApplication.App_Start
         )
         {
 
-            SqlConnection sqlConnection = new SqlConnection(connectionString);
-            SqlCommand sqlCommand = new SqlCommand("User_Sel", sqlConnection);
+            OracleConnection oracleConnection = new OracleConnection(connectionString);
+            OracleCommand oracleCommand = new OracleCommand("User_Sel", oracleConnection);
 
-            sqlCommand.CommandType = CommandType.StoredProcedure;
-            sqlCommand.Parameters.Add("@username", SqlDbType.NVarChar, 255).Value = username;
-            sqlCommand.Parameters.Add("@applicationName", SqlDbType.NVarChar, 255).Value = applicationName;
+            oracleCommand.CommandType = CommandType.StoredProcedure;
+            oracleCommand.Parameters.Add("@email", OracleType.VarChar, 50).Value = email;
+            //sqlCommand.Parameters.Add("@applicationName", SqlDbType.NVarChar, 255).Value = applicationName;
 
             MembershipUser membershipUser = null;
-            SqlDataReader sqlDataReader = null;
+            OracleDataReader oracleDataReader = null;
 
             try
             {
-                sqlConnection.Open();
+                oracleConnection.Open();
 
-                sqlDataReader = sqlCommand.ExecuteReader(CommandBehavior.CloseConnection);
+                oracleDataReader = oracleCommand.ExecuteReader(CommandBehavior.CloseConnection);
 
-                if (sqlDataReader.HasRows)
+                if (oracleDataReader.HasRows)
                 {
-                    sqlDataReader.Read();
-                    membershipUser = GetUserFromReader(sqlDataReader);
+                    oracleDataReader.Read();
+                    membershipUser = GetUserFromReader(oracleDataReader);
 
-                    if (userIsOnline)
+                    /*if (userIsOnline)
                     {
-                        SqlCommand sqlUpdateCommand = new SqlCommand("User_UpdateActivityDate_ByUserName", sqlConnection);
+                        OracleCommand sqlUpdateCommand = new OracleCommand("User_UpdateActivityDate_ByUserName", sqlConnection);
 
                         sqlUpdateCommand.CommandType = CommandType.StoredProcedure;
                         sqlUpdateCommand.Parameters.Add("@username", SqlDbType.NVarChar, 255).Value = username;
                         sqlUpdateCommand.Parameters.Add("@applicationName", SqlDbType.NVarChar, 255).Value = applicationName;
                         sqlUpdateCommand.ExecuteNonQuery();
-                    }
+                    }*/
                 }
             }
-            catch (SqlException e)
+            catch (OracleException e)
             {
                 //Add exception handling here.
             }
             finally
             {
-                if (sqlDataReader != null) { sqlDataReader.Close(); }
+                if (oracleDataReader != null) { oracleDataReader.Close(); }
             }
 
             return membershipUser;
@@ -811,14 +811,14 @@ namespace WebflixApplication.App_Start
         }*/
 
 
-        public override string GetUserNameByEmail(string email)
+        /*public override string GetUserNameByEmail(string email)
         {
-            SqlConnection sqlConnection = new SqlConnection(connectionString);
-            SqlCommand sqlCommand = new SqlCommand("UserName_Sel_ByEmail", sqlConnection);
+            OracleConnection oracleConnection = new OracleConnection(connectionString);
+            OracleCommand oracleCommand = new OracleCommand("UserName_Sel_ByEmail", oracleConnection);
 
-            sqlCommand.CommandType = CommandType.StoredProcedure;
+            oracleCommand.CommandType = CommandType.StoredProcedure;
             sqlCommand.Parameters.Add("@email", SqlDbType.NVarChar, 128).Value = email;
-            sqlCommand.Parameters.Add("@applicationName", SqlDbType.NVarChar, 255).Value = applicationName;
+            //sqlCommand.Parameters.Add("@applicationName", SqlDbType.NVarChar, 255).Value = applicationName;
 
             string username = String.Empty;
 
@@ -847,7 +847,7 @@ namespace WebflixApplication.App_Start
 
             return username;
 
-        }
+        }*/
         /// <summary>
         /// Reset the user password.
         /// </summary>
@@ -997,53 +997,53 @@ namespace WebflixApplication.App_Start
         /// <summary>
         /// Validate the user based upon username and password.
         /// </summary>
-        /// <param name="username">User name.</param>
+        /// <param name="email">Email.</param>
         /// <param name="password">Password.</param>
         /// <returns>T/F if the user is valid.</returns>
         public override bool ValidateUser(
-         string username,
+         string email,
          string password
         )
         {
 
             bool isValid = false;
 
-            SqlConnection sqlConnection = new SqlConnection(connectionString);
-            SqlCommand sqlCommand = new SqlCommand("User_Validate", sqlConnection);
+            OracleConnection oracleConnection = new OracleConnection(connectionString);
+            OracleCommand oracleCommand = new OracleCommand("User_Validate", oracleConnection);
 
-            sqlCommand.CommandType = CommandType.StoredProcedure;
-            sqlCommand.Parameters.Add("@username", SqlDbType.NVarChar, 255).Value = username;
-            sqlCommand.Parameters.Add("@applicationName", SqlDbType.NVarChar, 255).Value = applicationName;
+            oracleCommand.CommandType = CommandType.StoredProcedure;
+            oracleCommand.Parameters.Add("@email", OracleType.VarChar, 50).Value = email;
+            //sqlCommand.Parameters.Add("@applicationName", SqlDbType.NVarChar, 255).Value = applicationName;
 
-            SqlDataReader sqlDataReader = null;
+            OracleDataReader oracleDataReader = null;
             bool isApproved = false;
             string storedPassword = String.Empty;
 
             try
             {
-                sqlConnection.Open();
-                sqlDataReader = sqlCommand.ExecuteReader(CommandBehavior.SingleRow);
+                oracleConnection.Open();
+                oracleDataReader = oracleCommand.ExecuteReader(CommandBehavior.SingleRow);
 
-                if (sqlDataReader.HasRows)
+                if (oracleDataReader.HasRows)
                 {
-                    sqlDataReader.Read();
-                    storedPassword = sqlDataReader.GetString(0);
-                    isApproved = sqlDataReader.GetBoolean(1);
+                    oracleDataReader.Read();
+                    storedPassword = oracleDataReader.GetString(0);
+                    isApproved = oracleDataReader.GetBoolean(1);
                 }
                 else
                 {
                     return false;
                 }
 
-                sqlDataReader.Close();
+                oracleDataReader.Close();
 
-                if (CheckPassword(password, storedPassword))
+                /*if (CheckPassword(password, storedPassword))
                 {
                     if (isApproved)
                     {
                         isValid = true;
 
-                        SqlCommand sqlUpdateCommand = new SqlCommand("User_UpdateLoginDate", sqlConnection);
+                        OracleCommand sqlUpdateCommand = new SqlCommand("User_UpdateLoginDate", sqlConnection);
 
                         sqlUpdateCommand.CommandType = CommandType.StoredProcedure;
                         sqlUpdateCommand.Parameters.Add("@username", SqlDbType.NVarChar, 255).Value = username;
@@ -1055,16 +1055,16 @@ namespace WebflixApplication.App_Start
                 {
                     sqlConnection.Close();
                     UpdateFailureCount(username, FailureType.Password);
-                }
+                }*/
             }
-            catch (SqlException e)
+            catch (OracleException e)
             {
                 //Add exception handling here.
             }
             finally
             {
-                if (sqlDataReader != null) { sqlDataReader.Close(); }
-                if ((sqlConnection != null) && (sqlConnection.State == ConnectionState.Open)) { sqlConnection.Close(); }
+                if (oracleDataReader != null) { oracleDataReader.Close(); }
+                if ((oracleConnection != null) && (oracleConnection.State == ConnectionState.Open)) { oracleConnection.Close(); }
             }
 
             return isValid;
