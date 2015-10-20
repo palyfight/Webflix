@@ -572,40 +572,7 @@ namespace OracleMembershipProvider
 
         public override string GetUserNameByEmail(string email)
         {
-            OracleConnection oracleConnection = new OracleConnection(connectionString);
-            OracleCommand oracleCommand = new OracleCommand("UserName_Sel_ByEmail", oracleConnection);
-
-            oracleCommand.CommandType = CommandType.StoredProcedure;
-            oracleCommand.Parameters.Add("@email", OracleType.VarChar, 50).Value = email;
-            //sqlCommand.Parameters.Add("@applicationName", SqlDbType.NVarChar, 255).Value = applicationName;
-
-            string username = String.Empty;
-
-            try
-            {
-                oracleConnection.Open();
-                username = Convert.ToString(oracleCommand.ExecuteScalar());
-            }
-            catch (OracleException e)
-            {
-                //Add exception handling here.
-            }
-            finally
-            {
-                oracleConnection.Close();
-            }
-
-            if (username == null)
-            {
-                return String.Empty;
-            }
-            else
-            {
-                username.Trim();
-            }
-
-            return username;
-
+            throw new NotImplementedException();
         }
         /// <summary>
         /// Reset the user password.
@@ -668,9 +635,10 @@ namespace OracleMembershipProvider
 
                 oracleDataReader.Close();
 
-                /*if (CheckPassword(password, storedPassword))
+                if (CheckPassword(password, storedPassword))
                 {
-                    if (isApproved)
+                    isValid = true;
+                    /*if (isApproved)
                     {
                         isValid = true;
 
@@ -680,13 +648,13 @@ namespace OracleMembershipProvider
                         sqlUpdateCommand.Parameters.Add("@username", SqlDbType.NVarChar, 255).Value = username;
                         sqlUpdateCommand.Parameters.Add("@applicationName", SqlDbType.NVarChar, 255).Value = applicationName;
                         sqlUpdateCommand.ExecuteNonQuery();
-                    }
+                    }*/
                 }
                 else
                 {
-                    sqlConnection.Close();
-                    UpdateFailureCount(username, FailureType.Password);
-                }*/
+                    oracleConnection.Close();
+                    //UpdateFailureCount(username, FailureType.Password);
+                }
             }
             catch (OracleException e)
             {
