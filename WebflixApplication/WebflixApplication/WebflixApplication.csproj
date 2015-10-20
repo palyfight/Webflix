@@ -208,6 +208,7 @@
     <Compile Include="Models\ROLE.cs" />
     <Compile Include="Models\SCENARISTE.cs" />
     <Compile Include="ViewModel\RentFilmViewModel.cs" />
+    <Compile Include="ViewModel\ShowFilmViewModel.cs" />
     <Compile Include="WebflixContext.cs" />
   </ItemGroup>
   <ItemGroup>

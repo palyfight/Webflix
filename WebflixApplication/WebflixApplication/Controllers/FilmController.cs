@@ -26,7 +26,11 @@ namespace WebflixApplication.Controllers
         {
             WebflixContext wfcontext = new WebflixContext();
             var film = wfcontext.FILMs.Find(id);
-            return View(film);
+            var idRealisateur = film.IDREALISATEUR;
+            var realisateur = wfcontext.PERSONNESFILMs.Find(idRealisateur);
+            ShowFilmViewModel sfvm = new ShowFilmViewModel(film, realisateur);
+
+            return View(sfvm);
         }
 
         public ActionResult RentFilm(int id, char type, String message)
@@ -36,12 +40,16 @@ namespace WebflixApplication.Controllers
             if (type == 'S')
             {
                 var location = wfcontext.LOCATIONs.Find(id);
-                rwm = new RentFilmViewModel(location, type, message);
+                var idRealisateur = location.COPIE.FILM.IDREALISATEUR;
+                var realisateur = wfcontext.PERSONNESFILMs.Find(idRealisateur); 
+                rwm = new RentFilmViewModel(location, realisateur, type, message);
             }
             else
             {
                 var film = wfcontext.FILMs.Find(id);
-                rwm = new RentFilmViewModel(film, type, message);
+                var idRealisateur = film.IDREALISATEUR;
+                var realisateur = wfcontext.PERSONNESFILMs.Find(idRealisateur);
+                rwm = new RentFilmViewModel(film, realisateur, type, message);
             }
             
             return View(rwm);

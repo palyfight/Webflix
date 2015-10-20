@@ -13,6 +13,7 @@
 	    <div class="padding-sm">
 		    <div class="row">
 			    <div class="col-md-12">
+                    <a href="/film/showfilm/@Model.film.IDFILM" role="button"><i class="fa fa-arrow-circle-left nav-back"></i></a>
 				    <h1 class="headline dark text-white">
 					    @Model.location.COPIE.FILM.TITRE
 					    <span class="line"></span>
@@ -38,6 +39,11 @@
                                             @acteur.PERSONNESFILM.BIO&#013;">@acteur.PERSONNESFILM.PRENOM @acteur.PERSONNESFILM.NOM
                                         </li> }</ul>
                                     </li>
+                                    <li class="text-white film-details">Réalisateur: <span data-toggle="tooltip" data-placement="right" title="
+                                        @Model.realisateur.DATEDENAISSANCE&#013;
+                                        @Model.realisateur.LIEUDENAISSANCE&#013;
+                                        @Model.realisateur.BIO&#013;">@Model.realisateur.PRENOM @Model.realisateur.NOM</span>
+                                    </li>
                                 </ul>
                             </p>
                         </div>
@@ -55,6 +61,7 @@
 	    <div class="padding-sm">
 		    <div class="row">
 			    <div class="col-md-12">
+                    <a href="/film/showfilm/@Model.film.IDFILM" role="button"><i class="fa fa-arrow-circle-left nav-back"></i></a>
 				    <h1 class="headline dark text-white">
 					    @Model.film.TITRE
 					    <span class="line"></span>
@@ -80,7 +87,11 @@
                                             @acteur.PERSONNESFILM.BIO&#013;">@acteur.PERSONNESFILM.PRENOM @acteur.PERSONNESFILM.NOM</span>
                                         </li> }</ul>
                                     </li>
-                                    <li class="text-white film-details">Réalisateur: </li>
+                                    <li class="text-white film-details">Réalisateur: <span data-toggle="tooltip" data-placement="right" title="
+                                        @Model.realisateur.DATEDENAISSANCE&#013;
+                                        @Model.realisateur.LIEUDENAISSANCE&#013;
+                                        @Model.realisateur.BIO&#013;">@Model.realisateur.PRENOM @Model.realisateur.NOM</span>
+                                    </li>
                                 </ul>
                             </p>
                         </div>

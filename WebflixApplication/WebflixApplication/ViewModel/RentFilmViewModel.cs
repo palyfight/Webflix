@@ -12,19 +12,22 @@ namespace WebflixApplication.ViewModels
         public FILM film { get; set; }
         public char type { get; set; }
         public String message { get; set; }
+        public PERSONNESFILM realisateur { get; set; }
 
-        public RentFilmViewModel(LOCATION location, char type, String message)
+        public RentFilmViewModel(LOCATION location, PERSONNESFILM realisateur, char type, String message)
         {
             this.location = location;
             this.type = type;
             this.message = message;
+            this.realisateur = realisateur;
         }
 
-        public RentFilmViewModel(FILM film, char type, String message)
+        public RentFilmViewModel(FILM film, PERSONNESFILM realisateur, char type, String message)
         {
             this.film = film;
             this.type = type;
             this.message = message;
+            this.realisateur = realisateur;
         }
     }
 }
