@@ -278,6 +278,95 @@ namespace OracleMembershipProvider
         /// <param name="status"></param>
         /// <returns>MembershipUser</returns>
 
+        public override MembershipUser CreateUser(string nom, string prenom, string email, string telephone, DateTime dateDeNaissance, string password, int numCivique, string rue, string ville, string province, string codePostal, out MembershipCreateStatus status) 
+        {
+            ValidatePasswordEventArgs args = new ValidatePasswordEventArgs(email, password, true);
+
+            OnValidatingPassword(args);
+
+            if (args.Cancel)
+            {
+                status = MembershipCreateStatus.InvalidPassword;
+                return null;
+            }
+
+            if ((RequiresUniqueEmail && (GetUserNameByEmail(email) != String.Empty)))
+            {
+                status = MembershipCreateStatus.DuplicateEmail;
+                return null;
+            }
+
+            MembershipUser membershipUser = GetUser(email, false);
+
+            if (membershipUser == null)
+            {
+                System.DateTime createDate = DateTime.Now;
+
+                OracleConnection oracleConnection = new OracleConnection(connectionString);
+
+                OracleCommand oracleCommandAddAdress = new OracleCommand("insertAdress", oracleConnection);
+                oracleCommandAddAdress.CommandType = CommandType.StoredProcedure;
+                oracleCommandAddAdress.Parameters.Add("@returnValue", OracleType.Int32, 38).Direction = ParameterDirection.ReturnValue;
+                oracleCommandAddAdress.Parameters.Add("@numCivique", OracleType.Int32, 38).Value = 1234;//numCivique;
+                oracleCommandAddAdress.Parameters.Add("@rue", OracleType.VarChar, 75).Value = "des papillons";//rue;
+                oracleCommandAddAdress.Parameters.Add("@ville", OracleType.VarChar, 30).Value = "Laval";//ville;
+                oracleCommandAddAdress.Parameters.Add("@province", OracleType.VarChar, 30).Value = "Ontario";//province;
+                oracleCommandAddAdress.Parameters.Add("@codePostal", OracleType.VarChar, 10).Value = "H3N2V9";//codePostal;
+
+                OracleCommand oracleCommandAddUser = new OracleCommand("insertPersonne", oracleConnection);
+                oracleCommandAddUser.CommandType = CommandType.StoredProcedure;
+                oracleCommandAddUser.Parameters.Add("@returnValue", OracleType.Int32, 38).Direction = ParameterDirection.ReturnValue;
+                oracleCommandAddUser.Parameters.Add("@nom", OracleType.VarChar, 30).Value = "Chris";// nom;
+                oracleCommandAddUser.Parameters.Add("@prenom", OracleType.VarChar, 30).Value = "Beezy";//prenom;
+                oracleCommandAddUser.Parameters.Add("@courriel", OracleType.Int32, 50).Value = "C-Beezy@swag.gg";//email;
+                oracleCommandAddUser.Parameters.Add("@telephone", OracleType.VarChar, 15).Value = "514-123-4567";//telephone;
+                oracleCommandAddUser.Parameters.Add("@dateDeNaissance", OracleType.DateTime).Value = new DateTime(1992,11,05);//dateDeNaissance;
+                oracleCommandAddUser.Parameters.Add("@motDePasse", OracleType.VarChar, 255).Value = EncodePassword("y0Mom4");//(password);
+                //oracleCommandAddUser.Parameters.Add("@adresse", OracleType.Int32, 38).Value = 1234;
+
+                int idAdresse = 0;
+
+                try
+                {
+                    oracleConnection.Open();
+
+                    oracleCommandAddAdress.ExecuteNonQuery();
+                    if ((int)oracleCommandAddAdress.Parameters["@returnValue"].Value > 0)
+                    {
+                        idAdresse = (int)oracleCommandAddAdress.Parameters["@returnValue"].Value;
+                        oracleCommandAddUser.Parameters.Add("@adresse", OracleType.Int32, 38).Value = idAdresse;
+                    }
+                    oracleCommandAddUser.ExecuteNonQuery();
+                    if ((int)oracleCommandAddUser.Parameters["@returnValue"].Value == 0)
+                    {
+
+                        status = MembershipCreateStatus.Success;
+                    }
+                    else
+                    {
+                        status = MembershipCreateStatus.UserRejected;
+                    }
+                }
+                catch (OracleException e)
+                {
+                    //Add exception handling here.
+
+                    status = MembershipCreateStatus.ProviderError;
+                }
+                finally
+                {
+                    oracleConnection.Close();
+                }
+
+                return GetUser(email, false);
+            }
+            else
+            {
+                status = MembershipCreateStatus.DuplicateUserName;
+            }
+
+            return null;
+        }
         public override MembershipUser CreateUser(string username, string password, string email, string passwordQuestion, string passwordAnswer, bool isApproved, object providerUserKey, out MembershipCreateStatus status)
         {
 
@@ -297,7 +386,7 @@ namespace OracleMembershipProvider
                 return null;
             }
 
-            MembershipUser membershipUser = GetUser(username, false);
+            MembershipUser membershipUser = GetUser(email, false);
 
             if (membershipUser == null)
             {
@@ -343,7 +432,7 @@ namespace OracleMembershipProvider
                     oracleConnection.Close();
                 }
 
-                return GetUser(username, false);
+                return GetUser(email, false);
             }
             else
             {
