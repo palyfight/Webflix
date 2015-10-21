@@ -13,8 +13,6 @@ using WebflixApplication.Models;
 
 namespace WebflixApplication.Controllers
 {
-    [Authorize]
-    [InitializeSimpleMembership]
     public class AccountController : Controller
     {
         //
@@ -35,9 +33,14 @@ namespace WebflixApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model, string returnUrl)
         {
-            if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
+            var courriel = model.Courriel;
+            var pwd = model.Password;
+            WebflixContext context = new WebflixContext();
+            var user = context.PERSONNEs.Where(p => p.COURRIEL == courriel && p.MOTDEPASSE == pwd);
+
+            if (user.Count() == 1)
             {
-                return RedirectToLocal(returnUrl);
+                return RedirectToAction("Index", "Home");
             }
 
             // If we got this far, something failed, redisplay form
