@@ -817,3 +817,9 @@ footer .block {
     margin: -20px 0 0 0;
     cursor: pointer;
 }
+
+.no-film-results {
+    font-size: 65px;
+    margin-left: 40px;
+    color: #3c8dbc;
+}
