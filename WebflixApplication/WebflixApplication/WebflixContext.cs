@@ -508,6 +508,7 @@ namespace WebflixApplication
 
             if (country.Length > 0)
             {
+                country = country.Replace(",", "|");
                 var contryFilm = this.getFilmByCountry(country).GroupBy(item => item.IDFILM).ToDictionary(item => item.Key, item => item.First());
                 resultStack.Push(contryFilm);
 
