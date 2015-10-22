@@ -10,6 +10,8 @@ using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
 using WebflixApplication.Filters;
 using WebflixApplication.Models;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace WebflixApplication.Controllers
 {
@@ -36,9 +38,10 @@ namespace WebflixApplication.Controllers
             var courriel = model.Courriel;
             var pwd = model.Password;
             WebflixContext context = new WebflixContext();
-            var user = context.PERSONNEs.Where(p => p.COURRIEL == courriel && p.MOTDEPASSE == pwd);
+            var user = context.PERSONNEs.Where(p => p.COURRIEL == courriel);
+            var storedPwd = user.Select(u => u.MOTDEPASSE).First();
 
-            if (user.Count() == 1)
+            if (user.Count() == 1 && ValidateMD5Password(pwd, storedPwd))
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -46,6 +49,28 @@ namespace WebflixApplication.Controllers
             // If we got this far, something failed, redisplay form
             ModelState.AddModelError("", "The user name or password provided is incorrect.");
             return View(model);
+        }
+
+        private string GetMD5HashData(string data)
+        {
+            MD5 md5 = new MD5CryptoServiceProvider();
+
+            byte[] hashData = md5.ComputeHash(Encoding.Default.GetBytes(data));
+
+            StringBuilder returnVal = new StringBuilder();
+
+            for (int i = 0; i < hashData.Length; i++) 
+            {
+                returnVal.Append(hashData[i].ToString("x2"));
+            }
+
+            return returnVal.ToString();
+        }
+
+        private bool ValidateMD5Password(string enteredPwd, string storedPwd) 
+        {
+            string getHashInput = GetMD5HashData(enteredPwd);
+            return (string.Compare(getHashInput, storedPwd) == 0);
         }
 
         //
@@ -56,8 +81,7 @@ namespace WebflixApplication.Controllers
         public ActionResult LogOff()
         {
             WebSecurity.Logout();
-
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Account", "Login");
         }
 
         //
@@ -84,7 +108,7 @@ namespace WebflixApplication.Controllers
                 {
                     WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
                     WebSecurity.Login(model.UserName, model.Password);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Account", "Login");
                 }
                 catch (MembershipCreateUserException e)
                 {

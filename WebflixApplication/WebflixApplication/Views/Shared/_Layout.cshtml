@@ -1,85 +1,119 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <title>Movies</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="">
-        <meta name="author" content="">
-        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-        <meta name="viewport" content="width=device-width" />
+<head>
+    <meta charset="utf-8">
+    <title>Movies</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
 
-        <link rel="stylesheet" type="text/css" href="~/Content/css/bootstrap.css" />
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-        <link rel="stylesheet" type="text/css" href="~/Content/css/endless.css" />
-        <link rel="stylesheet" type="text/css" href="~/Content/css/endless-skin.css" />
-        <link rel="stylesheet" type="text/css" href="~/Content/css/jcarousel.responsive.css" />
-        <link rel="stylesheet" type="text/css" href="~/Content/css/pace.css" />
-        <link rel="stylesheet" type="text/css" href="~/Content/Site.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/css/bootstrap.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/css/endless.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/css/endless-skin.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/css/jcarousel.responsive.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/css/pace.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/Site.css" />
 
-        @Scripts.Render("~/bundles/modernizr")
-    </head>
-    <body>
-        <header>
-            <div id="wrapper" class="preload sidebar-mini">
-                <div id="top-nav" class="skin-6">
-			        <div class="brand">
-				        <span>Webflix</span>
-			        </div><!-- /brand -->
-			        <button type="button" class="navbar-toggle pull-left" id="sidebarToggle">
-				        <span class="icon-bar"></span>
-				        <span class="icon-bar"></span>
-				        <span class="icon-bar"></span>
-			        </button>
-			        <ul class="nav-notification clearfix">
-			        </ul>
-		        </div><!-- /top-nav-->
-		
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <header>
+        <div id="wrapper" class="preload sidebar-mini">
+            <div id="top-nav" class="skin-6">
+                <div class="brand">
+                    <span>Webflix</span>
+                </div>
+                <!-- /brand -->
+                <button type="button" class="navbar-toggle pull-left" id="sidebarToggle">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <ul class="nav-notification clearfix">
+
+                    <!--<li class="profile dropdown">
+					        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+						        <strong>John Doe</strong>
+						        <span><i class="fa fa-chevron-down"></i></span>
+					        </a>
+					        <ul class="dropdown-menu">
+						        <li>
+							        <a class="clearfix" href="#">
+								        <img src="img/user.jpg" alt="User Avatar">
+								        <div class="detail">
+									        <strong>John Doe</strong>
+									        <p class="grey">John_Doe@email.com</p> 
+								        </div>
+							        </a>
+						        </li>
+						        <li><a tabindex="-1" href="profile.html" class="main-link"><i class="fa fa-edit fa-lg"></i> Edit profile</a></li>
+						        <li><a tabindex="-1" href="gallery.html" class="main-link"><i class="fa fa-picture-o fa-lg"></i> Photo Gallery</a></li>
+						        <li><a tabindex="-1" href="#" class="theme-setting"><i class="fa fa-cog fa-lg"></i> Setting</a></li>
+						        <li class="divider"></li>
+						        <li><a tabindex="-1" class="main-link logoutConfirm_open" href="#logoutConfirm"><i class="fa fa-lock fa-lg"></i> Log out</a></li>
+					        </ul>
+				        </li>
+                    <div class="float-right">
+                        <section id="login">
+                            @Html.Partial("_LoginPartial")
+                        </section>
+                    </div>-->
+                </ul>
             </div>
-        </header>
-        <div id="body">
-            @RenderBody()
+            <!-- /top-nav-->
 
-            <footer class="dark">
-	            <div class="row">
-		            <div class="col-sm-3">
-			            <p class="block">About Webflix</p>
-			            <p><small>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum auctor suscipit lobortis.</small></p>
-		            </div><!-- /.col -->
-		            <div class="col-sm-6">
-			            <p class="block">Find Us on</p>
-			            <a href="#" class="social-connect tooltip-test facebook-hover" data-toggle="tooltip" data-original-title="Facebook"><i class="fa fa-facebook"></i></a>
-			            <a href="#" class="social-connect tooltip-test twitter-hover" data-toggle="tooltip" data-original-title="Twitter"><i class="fa fa-twitter"></i></a>
-			            <a href="#" class="social-connect tooltip-test google-plus-hover" data-toggle="tooltip" data-original-title="Google Plus"><i class="fa fa-google-plus"></i></a>
-			            <a href="#" class="social-connect tooltip-test rss-hover" data-toggle="tooltip" data-original-title="Rss feed"><i class="fa fa-rss"></i></a>
-			            <a href="#" class="social-connect tooltip-test tumblr-hover" data-toggle="tooltip" data-original-title="Tumblr"><i class="fa fa-tumblr"></i></a>
-			            <a href="#" class="social-connect tooltip-test dribbble-hover" data-toggle="tooltip" data-original-title="Dribbble"><i class="fa fa-dribbble"></i></a>
-			            <a href="#" class="social-connect tooltip-test linkedin-hover" data-toggle="tooltip" data-original-title="Linkedin"><i class="fa fa-linkedin"></i></a>
-			            <a href="#" class="social-connect tooltip-test pinterest-hover" data-toggle="tooltip" data-original-title="Pinterest"><i class="fa fa-pinterest"></i></a>
-		            </div><!-- /.col -->
-		            <div class="col-sm-3">
-			            <p class="block">Contact Us</p>
-			            Email : endless.themes@gmail.com
-			            <div class="seperator"></div>
-			            <a class="btn btn-sm btn-info"><i class="fa fa-envelope"></i> Contact support</a>
-		            </div><!-- /.col -->
-	            </div><!-- /.row -->
-            </footer>
         </div>
+    </header>
+    <div id="body">
+        @RenderBody()
 
-	    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-        <script src="~/Scripts/bootstrap.js"></script>
-	    <script src='~/Scripts/jquery.jcarousel.min.js'></script>
-	    <script src='~/Scripts/modernizr-2.5.3.js'></script>
-	    <script src='~/Scripts/pace.min.js'></script>
-	    <script src='~/Scripts/jquery.popupoverlay.min.js'></script>
-	    <script src='~/Scripts/jquery.slimscroll.min.js'></script>
-	    <script src='~/Scripts/jquery.resize.min.js'></script>
-	    <script src='~/Scripts/holder.js'></script>
-	    <script src='~/Scripts/jquery.cookie.min.js'></script>
-	    <script src="~/Scripts/endless.js"></script>
-        <script src="~/Scripts/script.js"></script>
+        <footer class="dark">
+            <div class="row">
+                <div class="col-sm-3">
+                    <p class="block">About Webflix</p>
+                    <p><small>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum auctor suscipit lobortis.</small></p>
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-6">
+                    <p class="block">Find Us on</p>
+                    <a href="#" class="social-connect tooltip-test facebook-hover" data-toggle="tooltip" data-original-title="Facebook"><i class="fa fa-facebook"></i></a>
+                    <a href="#" class="social-connect tooltip-test twitter-hover" data-toggle="tooltip" data-original-title="Twitter"><i class="fa fa-twitter"></i></a>
+                    <a href="#" class="social-connect tooltip-test google-plus-hover" data-toggle="tooltip" data-original-title="Google Plus"><i class="fa fa-google-plus"></i></a>
+                    <a href="#" class="social-connect tooltip-test rss-hover" data-toggle="tooltip" data-original-title="Rss feed"><i class="fa fa-rss"></i></a>
+                    <a href="#" class="social-connect tooltip-test tumblr-hover" data-toggle="tooltip" data-original-title="Tumblr"><i class="fa fa-tumblr"></i></a>
+                    <a href="#" class="social-connect tooltip-test dribbble-hover" data-toggle="tooltip" data-original-title="Dribbble"><i class="fa fa-dribbble"></i></a>
+                    <a href="#" class="social-connect tooltip-test linkedin-hover" data-toggle="tooltip" data-original-title="Linkedin"><i class="fa fa-linkedin"></i></a>
+                    <a href="#" class="social-connect tooltip-test pinterest-hover" data-toggle="tooltip" data-original-title="Pinterest"><i class="fa fa-pinterest"></i></a>
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-3">
+                    <p class="block">Contact Us</p>
+                    Email : endless.themes@gmail.com
+			            <div class="seperator"></div>
+                    <a class="btn btn-sm btn-info"><i class="fa fa-envelope"></i>Contact support</a>
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </footer>
+    </div>
 
-        @RenderSection("scripts", required: false)
-    </body>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src='~/Scripts/jquery.jcarousel.min.js'></script>
+    <script src='~/Scripts/modernizr-2.5.3.js'></script>
+    <script src='~/Scripts/pace.min.js'></script>
+    <script src='~/Scripts/jquery.popupoverlay.min.js'></script>
+    <script src='~/Scripts/jquery.slimscroll.min.js'></script>
+    <script src='~/Scripts/jquery.resize.min.js'></script>
+    <script src='~/Scripts/holder.js'></script>
+    <script src='~/Scripts/jquery.cookie.min.js'></script>
+    <script src="~/Scripts/endless.js"></script>
+    <script src="~/Scripts/script.js"></script>
+
+    @RenderSection("scripts", required: false)
+</body>
 </html>
