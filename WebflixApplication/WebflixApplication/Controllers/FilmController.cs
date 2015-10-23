@@ -40,7 +40,7 @@ namespace WebflixApplication.Controllers
             }
         }
 
-        public ActionResult RentFilm(int id, char type, String message)
+        public ActionResult ShowRentMovie(int id, char type, String message)
         {
             if (Session["IDPERSONNE"] != null)
             {
@@ -113,18 +113,18 @@ namespace WebflixApplication.Controllers
                         try
                         {
                             webflixContext.SaveChanges();
-                            return RedirectToAction("RentFilm", "Film", new { id = location.IDLOCATION, type = 'S', message = "Votre location a été effectué avec success le" + location.DATEDELOCATION });
+                            return RedirectToAction("ShowRentMovie", "Film", new { id = location.IDLOCATION, type = 'S', message = "Votre location a été effectué avec success le" + location.DATEDELOCATION });
                         }
                         catch (Exception e)
                         {
                             message = e.Message;
-                            return RedirectToAction("RentFilm", "Film", new { id = film.IDFILM, type = 'E', message = message });
+                            return RedirectToAction("ShowRentMovie", "Film", new { id = film.IDFILM, type = 'E', message = message });
                         }
 
                         copie.DISPONIBLE = false;
                         webflixContext.SaveChanges();
                     }
-                    return RedirectToAction("RentFilm", "Film", new { id = film.IDFILM, type = 'E', message = "Vous avez atteint le nombre de copie permis par votre forfait." });
+                    return RedirectToAction("ShowRentMovie", "Film", new { id = film.IDFILM, type = 'E', message = "Vous avez atteint le nombre de copie permis par votre forfait." });
                 }
             }
             else
