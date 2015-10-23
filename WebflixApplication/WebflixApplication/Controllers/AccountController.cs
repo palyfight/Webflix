@@ -38,11 +38,14 @@ namespace WebflixApplication.Controllers
             var courriel = model.Courriel;
             var pwd = model.Password;
             WebflixContext context = new WebflixContext();
-            var user = context.PERSONNEs.Where(p => p.COURRIEL == courriel);
+            var user = (Session["IDPERSONNE"] == null) ? context.PERSONNEs.Where(p => p.COURRIEL == courriel) : context.PERSONNEs.Where(p => p.IDPERSONNE == (int)Session["IDPERSONNE"]);
             var storedPwd = user.Select(u => u.MOTDEPASSE).First();
 
             if (user.Count() == 1 && ValidateMD5Password(pwd, storedPwd))
             {
+                Session["IDPERSONNE"] = user.Select(u => u.IDPERSONNE).First();
+                Session["NOM"] = user.Select(u => u.NOM).First();
+                Session["PRENOM"] = user.Select(u => u.PRENOM).First();
                 return RedirectToAction("Index", "Home");
             }
 
@@ -80,8 +83,11 @@ namespace WebflixApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
-            WebSecurity.Logout();
-            return RedirectToAction("Account", "Login");
+            //WebSecurity.Logout();
+            Session["IDPERSONNE"] = null;
+            Session["NOM"] = null;
+            Session["PRENOM"] = null;
+            return RedirectToAction("Login", "Account");
         }
 
         //
@@ -108,7 +114,7 @@ namespace WebflixApplication.Controllers
                 {
                     WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
                     WebSecurity.Login(model.UserName, model.Password);
-                    return RedirectToAction("Account", "Login");
+                    return RedirectToAction("Login", "Account");
                 }
                 catch (MembershipCreateUserException e)
                 {

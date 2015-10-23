@@ -11,12 +11,20 @@ namespace WebflixApplication.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
+            if (Session["IDPERSONNE"] != null)
+            {
+                ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
 
-            using(var webflixContext = new WebflixContext()){
-                var films = webflixContext.FILMs.Take(20).ToList();
-                return View(films);
-            }            
+                using (var webflixContext = new WebflixContext())
+                {
+                    var films = webflixContext.FILMs.Take(20).ToList();
+                    return View(films);
+                }
+            }
+            else 
+            {
+                return RedirectToAction("Login", "Account");
+            }
         }
 
         public ActionResult About()
