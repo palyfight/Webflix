@@ -45,19 +45,24 @@
         films = $.parseJSON(result);
         container = $('#movie-list');
         container.html('');
-        $.each(films, function (i, value) {
-            var film = '';
-            film += "<li class='col-sm-2'>";
-            film += "<a href='/film/showfilm/" + value.IDFILM + "'>";
-            film += "<h2 class='film_title'>" + value.TITRE + "</h2>";
-            film += "<img class='posters' src='" + value.POSTER + "'>";
-            film += "<div class='quick-detail text-white'>";
-            film += "<p>" + value.SCENARIO + "</p>";
-            film += "</div>";
-            film += "</a>";
-            film += "</li>";
-            container.append(film);
-        });
+        if (result.length > 2) {
+            $.each(films, function (i, value) {
+                var film = '';
+                film += "<li class='col-sm-2'>";
+                film += "<a href='/film/showfilm/" + value.IDFILM + "'>";
+                film += "<h2 class='film_title'>" + value.TITRE + "</h2>";
+                film += "<img class='posters' src='" + value.POSTER + "'>";
+                film += "<div class='quick-detail text-white'>";
+                film += "<p>" + value.SCENARIO + "</p>";
+                film += "</div>";
+                film += "</a>";
+                film += "</li>";
+                container.append(film);
+            });
+        }
+        else {
+            container.append("<h1 class='no-film-results'>Aucun film n'a été trouvé!!</h1>");
+        }
     }
 
 });

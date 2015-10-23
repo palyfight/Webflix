@@ -17,11 +17,11 @@ namespace WebflixApplication.Controllers
 
                 using (var webflixContext = new WebflixContext())
                 {
-                    var films = webflixContext.FILMs.Take(20).ToList();
+                    var films = webflixContext.FILMs.Take(50).ToList();
                     return View(films);
                 }
             }
-            else 
+            else
             {
                 return RedirectToAction("Login", "Account");
             }
