@@ -24,35 +24,49 @@ namespace WebflixApplication.Controllers
 
         public ActionResult ShowFilm(int id)
         {
-            WebflixContext wfcontext = new WebflixContext();
-            var film = wfcontext.FILMs.Find(id);
-            var idRealisateur = film.IDREALISATEUR;
-            var realisateur = wfcontext.PERSONNESFILMs.Find(idRealisateur);
-            ShowFilmViewModel sfvm = new ShowFilmViewModel(film, realisateur);
+            if (Session["IDPERSONNE"] != null)
+            {
+                WebflixContext wfcontext = new WebflixContext();
+                var film = wfcontext.FILMs.Find(id);
+                var idRealisateur = film.IDREALISATEUR;
+                var realisateur = wfcontext.PERSONNESFILMs.Find(idRealisateur);
+                ShowFilmViewModel sfvm = new ShowFilmViewModel(film, realisateur);
 
-            return View(sfvm);
+                return View(sfvm);
+            }
+            else
+            {
+                return RedirectToAction("Login", "Account");
+            }
         }
 
         public ActionResult RentFilm(int id, char type, String message)
         {
-            WebflixContext wfcontext = new WebflixContext();
-            RentFilmViewModel rwm;
-            if (type == 'S')
+            if (Session["IDPERSONNE"] != null)
             {
-                var location = wfcontext.LOCATIONs.Find(id);
-                var idRealisateur = location.COPIE.FILM.IDREALISATEUR;
-                var realisateur = wfcontext.PERSONNESFILMs.Find(idRealisateur); 
-                rwm = new RentFilmViewModel(location, realisateur, type, message);
+                WebflixContext wfcontext = new WebflixContext();
+                RentFilmViewModel rwm;
+                if (type == 'S')
+                {
+                    var location = wfcontext.LOCATIONs.Find(id);
+                    var idRealisateur = location.COPIE.FILM.IDREALISATEUR;
+                    var realisateur = wfcontext.PERSONNESFILMs.Find(idRealisateur);
+                    rwm = new RentFilmViewModel(location, realisateur, type, message);
+                }
+                else
+                {
+                    var film = wfcontext.FILMs.Find(id);
+                    var idRealisateur = film.IDREALISATEUR;
+                    var realisateur = wfcontext.PERSONNESFILMs.Find(idRealisateur);
+                    rwm = new RentFilmViewModel(film, realisateur, type, message);
+                }
+
+                return View(rwm);
             }
             else
             {
-                var film = wfcontext.FILMs.Find(id);
-                var idRealisateur = film.IDREALISATEUR;
-                var realisateur = wfcontext.PERSONNESFILMs.Find(idRealisateur);
-                rwm = new RentFilmViewModel(film, realisateur, type, message);
+                return RedirectToAction("Login", "Account");
             }
-            
-            return View(rwm);
         }
 
         //ajax needs to be change to start searching from 3 characters min.
@@ -75,40 +89,47 @@ namespace WebflixApplication.Controllers
 
         public ActionResult RentMovie(int idFilm, int idClient)
         {
-            CLIENT client;
-            COPIE copie;
-            FILM film;
-            String message;
-
-            using (var webflixContext = new WebflixContext())
+            if (Session["IDPERSONNE"] != null)
             {
-                client = webflixContext.CLIENTs.Find(idClient);
-                film = webflixContext.FILMs.Find(idFilm);
-                copie = film.COPIEs.Where(c => c.DISPONIBLE == true).FirstOrDefault();
-                int clientMaxLoaction = (int)client.FORFAIT.LOCATIONSMAX;
-                int nombreLocationCourante = client.LOCATIONs.Count(l => l.DATERETOUR == null);
-                LOCATION location = new LOCATION();
-                if (copie != null && nombreLocationCourante < clientMaxLoaction)
-                {
-                    location.CLIENT = client;
-                    location.COPIE = copie;
-                    location.DATEDELOCATION = DateTime.Now;
-                    webflixContext.LOCATIONs.Add(location);
-                    try
-                    {
-                        webflixContext.SaveChanges();
-                        return RedirectToAction("RentFilm", "Film", new { id = location.IDLOCATION, type = 'S', message = "Votre location a été effectué avec success le" + location.DATEDELOCATION });
-                    }
-                    catch (Exception e)
-                    {
-                        message = e.Message;
-                        return RedirectToAction("RentFilm", "Film", new { id = film.IDFILM, type = 'E', message = message });
-                    }
+                CLIENT client;
+                COPIE copie;
+                FILM film;
+                String message;
 
-                    copie.DISPONIBLE = false;
-                    webflixContext.SaveChanges();
+                using (var webflixContext = new WebflixContext())
+                {
+                    client = webflixContext.CLIENTs.Find(idClient);
+                    film = webflixContext.FILMs.Find(idFilm);
+                    copie = film.COPIEs.Where(c => c.DISPONIBLE == true).FirstOrDefault();
+                    int clientMaxLoaction = (int)client.FORFAIT.LOCATIONSMAX;
+                    int nombreLocationCourante = client.LOCATIONs.Count(l => l.DATERETOUR == null);
+                    LOCATION location = new LOCATION();
+                    if (copie != null && nombreLocationCourante < clientMaxLoaction)
+                    {
+                        location.CLIENT = client;
+                        location.COPIE = copie;
+                        location.DATEDELOCATION = DateTime.Now;
+                        webflixContext.LOCATIONs.Add(location);
+                        try
+                        {
+                            webflixContext.SaveChanges();
+                            return RedirectToAction("RentFilm", "Film", new { id = location.IDLOCATION, type = 'S', message = "Votre location a été effectué avec success le" + location.DATEDELOCATION });
+                        }
+                        catch (Exception e)
+                        {
+                            message = e.Message;
+                            return RedirectToAction("RentFilm", "Film", new { id = film.IDFILM, type = 'E', message = message });
+                        }
+
+                        copie.DISPONIBLE = false;
+                        webflixContext.SaveChanges();
+                    }
+                    return RedirectToAction("RentFilm", "Film", new { id = film.IDFILM, type = 'E', message = "Vous avez atteint le nombre de copie permis par votre forfait." });
                 }
-                return RedirectToAction("RentFilm", "Film", new { id = film.IDFILM, type = 'E', message = "Vous avez atteint le nombre de copie permis par votre forfait." });
+            }
+            else
+            {
+                return RedirectToAction("Login", "Account");
             }
         }
     }

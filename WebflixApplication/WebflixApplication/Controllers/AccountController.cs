@@ -10,11 +10,11 @@ using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
 using WebflixApplication.Filters;
 using WebflixApplication.Models;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace WebflixApplication.Controllers
 {
-    [Authorize]
-    [InitializeSimpleMembership]
     public class AccountController : Controller
     {
         //
@@ -35,14 +35,45 @@ namespace WebflixApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model, string returnUrl)
         {
-            if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
+            var courriel = model.Courriel;
+            var pwd = model.Password;
+            WebflixContext context = new WebflixContext();
+            var user = (Session["IDPERSONNE"] == null) ? context.PERSONNEs.Where(p => p.COURRIEL == courriel) : context.PERSONNEs.Where(p => p.IDPERSONNE == (int)Session["IDPERSONNE"]);
+            var storedPwd = user.Select(u => u.MOTDEPASSE).First();
+
+            if (user.Count() == 1 && ValidateMD5Password(pwd, storedPwd))
             {
-                return RedirectToLocal(returnUrl);
+                Session["IDPERSONNE"] = user.Select(u => u.IDPERSONNE).First();
+                Session["NOM"] = user.Select(u => u.NOM).First();
+                Session["PRENOM"] = user.Select(u => u.PRENOM).First();
+                return RedirectToAction("Index", "Home");
             }
 
             // If we got this far, something failed, redisplay form
             ModelState.AddModelError("", "The user name or password provided is incorrect.");
             return View(model);
+        }
+
+        private string GetMD5HashData(string data)
+        {
+            MD5 md5 = new MD5CryptoServiceProvider();
+
+            byte[] hashData = md5.ComputeHash(Encoding.Default.GetBytes(data));
+
+            StringBuilder returnVal = new StringBuilder();
+
+            for (int i = 0; i < hashData.Length; i++) 
+            {
+                returnVal.Append(hashData[i].ToString("x2"));
+            }
+
+            return returnVal.ToString();
+        }
+
+        private bool ValidateMD5Password(string enteredPwd, string storedPwd) 
+        {
+            string getHashInput = GetMD5HashData(enteredPwd);
+            return (string.Compare(getHashInput, storedPwd) == 0);
         }
 
         //
@@ -52,9 +83,11 @@ namespace WebflixApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
-            WebSecurity.Logout();
-
-            return RedirectToAction("Index", "Home");
+            //WebSecurity.Logout();
+            Session["IDPERSONNE"] = null;
+            Session["NOM"] = null;
+            Session["PRENOM"] = null;
+            return RedirectToAction("Login", "Account");
         }
 
         //
@@ -81,7 +114,7 @@ namespace WebflixApplication.Controllers
                 {
                     WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
                     WebSecurity.Login(model.UserName, model.Password);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Login", "Account");
                 }
                 catch (MembershipCreateUserException e)
                 {

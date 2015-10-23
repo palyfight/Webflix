@@ -8,28 +8,72 @@
     <h2>Create a new account.</h2>
 </hgroup>
 
-@using (Html.BeginForm()) {
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary()
 
-    <fieldset>
-        <legend>Registration Form</legend>
-        <ol>
-            <li>
-                @Html.LabelFor(m => m.UserName)
-                @Html.TextBoxFor(m => m.UserName)
-            </li>
-            <li>
-                @Html.LabelFor(m => m.Password)
-                @Html.PasswordFor(m => m.Password)
-            </li>
-            <li>
-                @Html.LabelFor(m => m.ConfirmPassword)
-                @Html.PasswordFor(m => m.ConfirmPassword)
-            </li>
-        </ol>
-        <input type="submit" value="Register" />
-    </fieldset>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <ul>
+        <li>
+            <label for="nom">Nom:</label>
+            <br />
+            @Html.TextBox("nom")
+        </li>
+        <li>
+            <label for="prenom">Prenom:</label>
+            <br />
+            @Html.TextBox("prenom")
+        </li>
+        <li>
+            <label for="courriel">Courriel:</label>
+            <br />
+            @Html.TextBox("courriel")
+        </li>
+        <li>
+            <label for="telephone">Telephone:</label>
+            <br />
+            @Html.TextBox("telephone")
+        </li>
+        <li>
+            <label for="dateDeNaissance">Date de naissance:</label>
+            <br />
+            @Html.TextBox("dateDeNaissance")
+        </li>
+        <li>
+            @Html.LabelFor(m => m.Password)
+            @Html.PasswordFor(m => m.Password)
+        </li>
+        <li>
+            @Html.LabelFor(m => m.ConfirmPassword)
+            @Html.PasswordFor(m => m.ConfirmPassword)
+        </li>
+        Adresse:
+                <li>
+                    <label for="numeroCivique">Numero civique:</label>
+                    <br />
+                    @Html.TextBox("numeroCivique")
+                </li>
+        <li>
+            <label for="rue">Rue:</label>
+            <br />
+            @Html.TextBox("rue")
+        </li>
+        <li>
+            <label for="ville">Ville:</label>
+            <br />
+            @Html.TextBox("ville")
+        </li>
+        <li>
+            <label for="province">Province:</label>
+            <br />
+            @Html.TextBox("province")
+        </li>
+        <li>
+            <label for="codePostal">Code postal:</label>
+            <br />
+            @Html.TextBox("codePostal")
+        </li>
+    </ul>
+    <input type="submit" value="Register" />
 }
 
 @section Scripts {

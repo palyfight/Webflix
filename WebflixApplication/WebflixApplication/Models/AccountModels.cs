@@ -58,8 +58,8 @@ namespace WebflixApplication.Models
     public class LoginModel
     {
         [Required]
-        [Display(Name = "User name")]
-        public string UserName { get; set; }
+        [Display(Name = "Courriel")]
+        public string Courriel { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
