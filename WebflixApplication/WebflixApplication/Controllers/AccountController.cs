@@ -39,7 +39,7 @@ namespace WebflixApplication.Controllers
             var pwd = model.Password;
             WebflixContext context = new WebflixContext();
             var user = (Session["IDPERSONNE"] == null) ? context.PERSONNEs.Where(p => p.COURRIEL == courriel) : context.PERSONNEs.Where(p => p.IDPERSONNE == (int)Session["IDPERSONNE"]);
-            var storedPwd = user.Select(u => u.MOTDEPASSE).First();
+            var storedPwd = user.Select(u => u.MOTDEPASSE).FirstOrDefault();
 
             if (user.Count() == 1 && ValidateMD5Password(pwd, storedPwd))
             {
