@@ -1,11 +1,11 @@
 ﻿@if (Session["IDPERSONNE"] != null) {
-    <text>
-        Hello, @Session["PRENOM"], @Session["NOM"]!
+    <div>
+        <span>Hello, @Session["PRENOM"], @Session["NOM"]!</span>
         @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" })) {
             @Html.AntiForgeryToken()
             <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
         }
-    </text>
+    </div>
 } else {
     <ul>
         <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
