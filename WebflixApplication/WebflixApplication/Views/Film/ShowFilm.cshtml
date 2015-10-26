@@ -22,7 +22,7 @@
                         </p>
                         <p>
                             <ul>
-                                <li class="text-white film-details">Nombre de copie disponible: @Model.film.COPIEs.Count(c => c.DISPONIBLE = true)</li>
+                                <li class="text-white film-details">Nombre de copie disponible: @Model.film.COPIEs.Count(c => c.DISPONIBLE == true)</li>
                                 <li class="text-white film-details">Pays de production: @foreach (var pays in @Model.film.FILMPAYS)
                                                                                         {<span> @pays.PAY.NOM, </span> }</li>
                                 <li class="text-white film-details">Langue originale: @Model.film.LANGUEORIGINALE </li>

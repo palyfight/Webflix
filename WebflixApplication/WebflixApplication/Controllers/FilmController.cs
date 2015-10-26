@@ -113,6 +113,8 @@ namespace WebflixApplication.Controllers
                         try
                         {
                             webflixContext.SaveChanges();
+                            copie.DISPONIBLE = false; // Apres la location
+                            webflixContext.SaveChanges();
                             return RedirectToAction("ShowRentMovie", "Film", new { id = location.IDLOCATION, type = 'S', message = "Votre location a été effectué avec success le" + location.DATEDELOCATION });
                         }
                         catch (Exception e)
@@ -120,11 +122,15 @@ namespace WebflixApplication.Controllers
                             message = e.Message;
                             return RedirectToAction("ShowRentMovie", "Film", new { id = film.IDFILM, type = 'E', message = message });
                         }
-
-                        copie.DISPONIBLE = false;
-                        webflixContext.SaveChanges();
                     }
-                    return RedirectToAction("ShowRentMovie", "Film", new { id = film.IDFILM, type = 'E', message = "Vous avez atteint le nombre de copie permis par votre forfait." });
+                    else if (nombreLocationCourante >= clientMaxLoaction)
+                    {
+                        return RedirectToAction("ShowRentMovie", "Film", new { id = film.IDFILM, type = 'E', message = "Vous avez atteint le nombre de copie permis par votre forfait." });
+                    }
+                    else 
+                    {
+                        return RedirectToAction("ShowRentMovie", "Film", new { id = film.IDFILM, type = 'E', message = "Il n'y a plus de copie disponible pour le film que vous souhaitez louer." });
+                    }
                 }
             }
             else
