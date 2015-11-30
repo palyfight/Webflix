@@ -176,6 +176,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\AnalysisController.cs" />
     <Compile Include="Controllers\FilmController.cs" />
     <Compile Include="Models\ADRESSE.cs" />
     <Compile Include="Models\ANNONCE.cs" />
@@ -343,6 +344,7 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Film\ShowFilm.cshtml" />
     <Content Include="Views\Film\ShowRentMovie.cshtml" />
+    <Content Include="Views\Analysis\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

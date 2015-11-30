@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<WebflixApplication.Models.FILM>
 @{
-ViewBag.Title = "Home Page";
+ViewBag.Title = "Analysis Page";
 }
 
 <div id="main-container" class="bg-dark">
@@ -34,40 +34,5 @@ ViewBag.Title = "Home Page";
                 </div>
 			</div><!-- /.navbar-collapse -->
 		</nav>
-		<div class="row">
-			<div class="col-md-12">
-				<h2 class="headline dark text-white">
-					Latest Movies
-					<span class="line"></span>
-				</h2>
-				<div class="movies-wrapper">
-					<div class="movie-jcarousel row" id="popularMovie">
-						<ul id="movie-list">
-                            @foreach(var film in Model){
-							    <li class="col-sm-2">
-								    <a href="/film/showfilm/@film.IDFILM">
-                                        <h2 class="film_title">@film.TITRE</h2>
-									    <img class="posters" src="@film.POSTER" alt="Image 1">
-									    <div class="quick-detail text-white">
-                                            @if (film.SCENARIO.Length > 200)
-                                            {
-                                                <p>@film.SCENARIO.Substring(0, 200)...</p> 
-                                            }
-                                            else{
-                                                <p>@film.SCENARIO</p>
-                                            }
-									    </div>
-								    </a>
-							    </li>
-                            }
-						</ul>
-					</div>
-				</div><!-- /jcarousel-wrapper -->
-						
-				<div class="padding-sm text-right">
-					<a href="#" class="primary-font">See All</a>
-				</div>
-			</div><!-- /.col -->
-		</div><!-- ./row -->
 	</div><!-- /.padding-sm -->
 </div><!-- /main-container -->
