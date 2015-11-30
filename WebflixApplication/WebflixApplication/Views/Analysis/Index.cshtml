@@ -20,9 +20,9 @@ ViewBag.Title = "Analysis Page";
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse" id="galleryNavigation">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="#">Home</a></li>
+					<li><a href="@Url.Action("Index", "Home")">Home</a></li>
 					<li><a href="@Url.Action("ShowAdvanceSearchMovie", "Home")">Advanced Search</a></li>
-                    <li><a href="@Url.Action("Index", "Analysis")">Analysis</a></li>
+                    <li class="active"><a href="#">Analysis</a></li>
 				</ul>
                 <div>
                     <div class="form-group col-md-3 pull-right" style="margin-top: 9px; margin-bottom: 6px;">
@@ -34,5 +34,57 @@ ViewBag.Title = "Analysis Page";
                 </div>
 			</div><!-- /.navbar-collapse -->
 		</nav>
+		<div class="row">
+			<div class="col-md-12">
+				<h2 class="headline dark text-white">
+					Data Analysis
+					<span class="line"></span>
+				</h2>
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        <form class="form-horizontal advance-search-inputs">
+                            <div class="form-group col-md-6">
+                                <input type="text" class="form-control" id="ageGroupe" placeholder="Age Group">
+                            </div>
+                             <div class="form-group col-md-6">
+                                <input type="text" class="form-control" id="province" placeholder="Province">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <select class="form-control" id="dayOfWeek">
+                                    <option value="" selected disabled>--Please select a day--</option>
+                                    <option>Monday</option>
+                                    <option>Tuesday</option>
+                                    <option>Wednesday</option>
+                                    <option>Thursday</option>
+                                    <option>Friday</option>
+                                    <option>Saturday</option>
+                                    <option>Sunday</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <select class="form-control" id="month">
+                                    <option value="" selected disabled>--Please select a month--</option>
+                                    <option>January</option>
+                                    <option>February</option>
+                                    <option>March</option>
+                                    <option>April</option>
+                                    <option>May</option>
+                                    <option>June</option>
+                                    <option>July</option>
+                                    <option>August</option>
+                                    <option>September</option>
+                                    <option>October</option>
+                                    <option>November</option>
+                                    <option>December</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <button type="button" id="search-btn" class="btn btn-default pull-right">Analyze</button> 
+                            </div>
+                         </form>
+                     </div>
+                </div>
+			</div><!-- /.col -->
+		</div><!-- ./row -->
 	</div><!-- /.padding-sm -->
 </div><!-- /main-container -->
