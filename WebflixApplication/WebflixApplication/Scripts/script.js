@@ -41,6 +41,23 @@
         
     });
 
+    $("#analyze-btn").on("click", function () {
+        $.ajax({
+            type: 'post',
+            url: '/film/AnalyzeData',
+            dataType: 'json',
+            data: {
+                AgeGroup: $('#ageGroupe').val(),
+                Province: $('#province').val(),
+                DayOfWeek: $('#dayOfWeek').val(),
+                Month: $('#month').val()
+            },
+            success: function (r) {
+            }
+        });
+
+    });
+
     function showSearchResult(result) {
         films = $.parseJSON(result);
         container = $('#movie-list');

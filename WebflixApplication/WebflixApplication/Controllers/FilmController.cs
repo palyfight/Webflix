@@ -73,6 +73,15 @@ namespace WebflixApplication.Controllers
             }
         }
 
+        public ActionResult AnalyzeData(String AgeGroup, String Province, String DayOfWeek, String Month)
+        {
+            /*using (var webflixContext = new WebflixContext())
+            {
+                return Json(webflixContext.AdvanceSearchMovie(title, actor, realisator, genre, country, language, year));
+            }*/
+            return null;
+        }
+
         public ActionResult RentMovie(int idFilm, int idClient)
         {
             CLIENT client;

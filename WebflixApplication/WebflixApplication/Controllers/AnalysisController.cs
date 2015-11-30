@@ -16,5 +16,13 @@ namespace WebflixApplication.Controllers
             return View();
         }
 
+        public ActionResult AdvanceSearchMovie(String title, String actor, String realisator, String genre, String country, String language, String year)
+        {
+            using (var webflixContext = new WebflixContext())
+            {
+                return Json(webflixContext.AdvanceSearchMovie(title, actor, realisator, genre, country, language, year));
+            }
+        }
+
     }
 }

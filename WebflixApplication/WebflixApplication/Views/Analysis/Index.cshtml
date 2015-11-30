@@ -44,42 +44,86 @@ ViewBag.Title = "Analysis Page";
                     <div class="col-md-10 col-md-offset-1">
                         <form class="form-horizontal advance-search-inputs">
                             <div class="form-group col-md-6">
-                                <input type="text" class="form-control" id="ageGroupe" placeholder="Age Group">
+                                <!--<input type="text" class="form-control" id="ageGroupe" placeholder="Age Group">-->
+                                <select class="form-control" id="ageGroupe">
+                                    <option value="" selected disabled>--Please select an age group--</option>
+                                    <option value="0">0-5</option>
+                                    <option value="1">6-10</option>
+                                    <option value="2">11-15</option>
+                                    <option value="3">16-20</option>
+                                    <option value="4">21-25</option>
+                                    <option value="5">26-30</option>
+                                    <option value="6">31-35</option>
+                                    <option value="7">36-40</option>
+                                    <option value="8">41-45</option>
+                                    <option value="9">46-50</option>
+                                    <option value="10">51-55</option>
+                                    <option value="11">56-60</option>
+                                    <option value="12">61-65</option>
+                                    <option value="13">66-70</option>
+                                    <option value="14">71-75</option>
+                                    <option value="15">76-80</option>
+                                    <option value="16">81-85</option>
+                                    <option value="17">86-90</option>
+                                    <option value="18">91-95</option>
+                                    <option value="19">96-100</option>
+                                    <option value="20">101-105</option>
+                                    <option value="ALL">ALL</option>
+                                </select>
                             </div>
                              <div class="form-group col-md-6">
-                                <input type="text" class="form-control" id="province" placeholder="Province">
+                                <!--<input type="text" class="form-control" id="province" placeholder="Province">-->
+                                <select class="form-control" id="province">
+                                    <option value="" selected disabled>--Please select a province--</option>
+                                    <option value="AB">Alberta</option>
+                                    <option value="BC">British Columbia</option>
+                                    <option value="MB">Manitoba</option>
+                                    <option value="NB">New Brunswick</option>
+                                    <option value="NL">Newfoundland and Labrador</option>
+                                    <option value="NT">Northwest Territories</option>
+                                    <option value="NS">Nova Scotia</option>
+                                    <option value="NU">Nunavut</option>
+                                    <option value="ON">Ontario</option>
+                                    <option value="PE">Prince Edward Island</option>
+                                    <option value="QC">Quebec</option>
+                                    <option value="SK">Saskatchewan</option>
+                                    <option value="YU">Yukon</option>
+                                    <option value="ALL">ALL</option>
+                                </select>
                             </div>
                             <div class="form-group col-md-6">
                                 <select class="form-control" id="dayOfWeek">
                                     <option value="" selected disabled>--Please select a day--</option>
-                                    <option>Monday</option>
-                                    <option>Tuesday</option>
-                                    <option>Wednesday</option>
-                                    <option>Thursday</option>
-                                    <option>Friday</option>
-                                    <option>Saturday</option>
-                                    <option>Sunday</option>
+                                    <option value="0">Monday</option>
+                                    <option value="1">Tuesday</option>
+                                    <option value="2">Wednesday</option>
+                                    <option value="3">Thursday</option>
+                                    <option value="4">Friday</option>
+                                    <option value="5">Saturday</option>
+                                    <option value="6">Sunday</option>
+                                    <option value="ALL">ALL</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-6">
                                 <select class="form-control" id="month">
                                     <option value="" selected disabled>--Please select a month--</option>
-                                    <option>January</option>
-                                    <option>February</option>
-                                    <option>March</option>
-                                    <option>April</option>
-                                    <option>May</option>
-                                    <option>June</option>
-                                    <option>July</option>
-                                    <option>August</option>
-                                    <option>September</option>
-                                    <option>October</option>
-                                    <option>November</option>
-                                    <option>December</option>
+                                    <option value="0">January</option>
+                                    <option value="1">February</option>
+                                    <option value="2">March</option>
+                                    <option value="3">April</option>
+                                    <option value="4">May</option>
+                                    <option value="5">June</option>
+                                    <option value="6">July</option>
+                                    <option value="7">August</option>
+                                    <option value="8">September</option>
+                                    <option value="9">October</option>
+                                    <option value="10">November</option>
+                                    <option value="11">December</option>
+                                    <option value="ALL">ALL</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-6">
-                                <button type="button" id="search-btn" class="btn btn-default pull-right">Analyze</button> 
+                                <button type="button" id="analyze-btn" class="btn btn-default pull-right">Analyze</button> 
                             </div>
                          </form>
                      </div>
