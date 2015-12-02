@@ -10,11 +10,13 @@ namespace WebflixApplication.ViewModels
     {
         public FILM film { get; set; }
         public PERSONNESFILM realisateur { get; set; }
+        public Cote cote { get; set; }
 
-        public ShowFilmViewModel(FILM film, PERSONNESFILM realisateur)
+        public ShowFilmViewModel(FILM film, PERSONNESFILM realisateur, Cote cote)
         {
             this.film = film;
             this.realisateur = realisateur;
+            this.cote = cote;
         }
     }
 }

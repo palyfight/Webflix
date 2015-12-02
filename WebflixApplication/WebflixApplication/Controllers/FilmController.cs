@@ -28,8 +28,9 @@ namespace WebflixApplication.Controllers
             var film = wfcontext.FILMs.Find(id);
             var idRealisateur = film.IDREALISATEUR;
             var realisateur = wfcontext.PERSONNESFILMs.Find(idRealisateur);
-            ShowFilmViewModel sfvm = new ShowFilmViewModel(film, realisateur);
+            var cote = new WebflixContext().Database.SqlQuery<Cote>("Select moyenne, idfilm from ma_vue_moyenne where idfilm = " + film.CODE).FirstOrDefault();
 
+            ShowFilmViewModel sfvm = new ShowFilmViewModel(film, realisateur, cote);
             return View(sfvm);
         }
 

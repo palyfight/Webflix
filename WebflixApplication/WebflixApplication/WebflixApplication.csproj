@@ -182,6 +182,7 @@
     <Compile Include="Models\DATE_W.cs" />
     <Compile Include="Models\FILM_W.cs" />
     <Compile Include="Models\LOCATION_W.cs" />
+    <Compile Include="Models\Cote.cs" />
     <Compile Include="WebflixWarehouseContext.cs" />
     <Compile Include="Models\ADRESSE.cs" />
     <Compile Include="Models\ANNONCE.cs" />
