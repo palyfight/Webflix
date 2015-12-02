@@ -41,23 +41,6 @@
         
     });
 
-    $("#analyze-btn").on("click", function () {
-        $.ajax({
-            type: 'post',
-            url: '/film/AnalyzeData',
-            dataType: 'json',
-            data: {
-                AgeGroup: $('#ageGroupe').val(),
-                Province: $('#province').val(),
-                DayOfWeek: $('#dayOfWeek').val(),
-                Month: $('#month').val()
-            },
-            success: function (r) {
-            }
-        });
-
-    });
-
     function showSearchResult(result) {
         films = $.parseJSON(result);
         container = $('#movie-list');
@@ -81,5 +64,22 @@
             container.append("<h1 class='no-film-results'>Aucun film n'a été trouvé!!</h1>");
         }
     }
+
+    $("#analyze-btn").on("click", function () {
+        $.ajax({
+            type: 'post',
+            url: '/film/AnalyzeData',
+            dataType: 'json',
+            data: {
+                AgeGroup: $('#ageGroupe').val(),
+                Province: $('#province').val(),
+                DayOfWeek: $('#dayOfWeek').val(),
+                Month: $('#month').val()
+            },
+            success: function (r) {
+            }
+        });
+
+    });
 
 });

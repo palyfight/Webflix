@@ -78,10 +78,11 @@ namespace WebflixApplication.Controllers
             int groupeAge = (AgeGroup.Equals("ALL") || AgeGroup.Equals("")) ? -1 : Int32.Parse(AgeGroup);
             int dayOfWeek = (DayOfWeek.Equals("ALL") || DayOfWeek.Equals("")) ? -1 : Int32.Parse(DayOfWeek);
             int month = (Month.Equals("ALL") || Month.Equals("")) ? -1 : Int32.Parse(Month);
-            
+            String prov = (String.IsNullOrEmpty(Province)) ? "ALL" : Province;
+
             using (var webflixWarehouseContext = new WebflixWarehouseContext())
             {
-                return Json(webflixWarehouseContext.analyzeData(groupeAge, Province, dayOfWeek, month));
+                return Json(webflixWarehouseContext.analyzeData(groupeAge, prov, dayOfWeek, month));
             }
         }
 

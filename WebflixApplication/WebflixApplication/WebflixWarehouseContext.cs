@@ -21,6 +21,35 @@ namespace WebflixApplication
         {
         }
 
+        public virtual List<LOCATION_W> getClientsByAge(int groupeAge)
+        {
+            var ageParameter = new OracleParameter("groupeages", OracleDbType.Int32, groupeAge, ParameterDirection.Input);
+            return this.Database.SqlQuery<LOCATION_W>("SELECT * FROM LOCATION_W WHERE groupeage = :groupeages", ageParameter).ToList();
+        }
+
+        public virtual List<LOCATION_W> getClientsByProvince(String prov)
+        {
+            var provParameter = new OracleParameter("provinces", OracleDbType.Varchar2, prov, ParameterDirection.Input);
+            return this.Database.SqlQuery<LOCATION_W>("SELECT * FROM LOCATION_W WHERE province = :provinces", provParameter).ToList();
+        }
+
+        public virtual List<LOCATION_W> getDayOfTheWeek(int dayOfWeek)
+        {
+            var dayParameter = new OracleParameter("jours", OracleDbType.Int32, dayOfWeek, ParameterDirection.Input);
+            return this.Database.SqlQuery<LOCATION_W>("SELECT * FROM LOCATION_W WHERE jour = :jours", dayParameter).ToList();
+        }
+
+        public virtual List<LOCATION_W> getMonth(int month)
+        {
+            var monthParameter = new OracleParameter("mois", OracleDbType.Int32, month, ParameterDirection.Input);
+            return this.Database.SqlQuery<LOCATION_W>("SELECT * FROM LOCATION_W WHERE mois = :mois", monthParameter).ToList();
+        }
+
+        public virtual List<LOCATION_W> getAllLocations()
+        {
+            return this.Database.SqlQuery<LOCATION_W>("SELECT * FROM LOCATION_W").ToList();
+        }
+
         public virtual DbSet<CLIENT_W> CLIENT_W { get; set; }
         public virtual DbSet<DATE_W> DATE_W { get; set; }
         public virtual DbSet<FILM_W> FILM_W { get; set; }
@@ -30,88 +59,49 @@ namespace WebflixApplication
         //RECHERCHE
         public virtual String analyzeData(int groupeAge, String prov, int day, int week)
         {
-            /*Stack resultStack = new Stack();
-            query = query.Replace(",", "|");
+            Stack resultStack = new Stack();
+            string json = "";
 
-            string json = null;
-
-
-            //Always search by titles
-
-            foreach (String q in query.Split(new String[] { "|" }, StringSplitOptions.RemoveEmptyEntries))
+            if (groupeAge != -1)
             {
-                if (q.Length > 3)
-                {
-                    var queryTrimed = q.Trim();
-                    Match isNumber = Regex.Match(queryTrimed, @"^[0-9-|]*$");
+                var groupesAgeClient = this.getClientsByAge(groupeAge).GroupBy(item => item.IDLOCATION).ToDictionary(item => item.Key, item => item.First());
+                resultStack.Push(groupesAgeClient);
+            }
 
-                    var titlesFilm = this.getFilmByTitle(queryTrimed).GroupBy(item => item.IDFILM).ToDictionary(item => item.Key, item => item.First());
-                    resultStack.Push(titlesFilm);
+            if (!prov.Equals("ALL"))
+            {
+                var provClient = this.getClientsByProvince(prov).GroupBy(item => item.IDLOCATION).ToDictionary(item => item.Key, item => item.First());
+                resultStack.Push(provClient);
+            }
 
-                    if (!isNumber.Success)
-                    {
-                        //search by actor
-                        var actorFilm = this.getFilmByActor(queryTrimed).GroupBy(item => item.IDFILM).ToDictionary(item => item.Key, item => item.First());
-                        resultStack.Push(actorFilm);
+            if (day != -1)
+            {
+                var dayOfWeek = this.getDayOfTheWeek(day).GroupBy(item => item.IDLOCATION).ToDictionary(item => item.Key, item => item.First());
+                resultStack.Push(dayOfWeek);
+            }
 
-                        //search by realisator
-                        var realisatorFilm = this.getFilmByRealisator(queryTrimed).GroupBy(item => item.IDFILM).ToDictionary(item => item.Key, item => item.First());
-                        resultStack.Push(realisatorFilm);
+            if (week != -1)
+            {
+                var genreFilm = this.getMonth(week).GroupBy(item => item.IDLOCATION).ToDictionary(item => item.Key, item => item.First());
+                resultStack.Push(genreFilm);
+            }
 
-                        //search by genre
-                        var genreFilm = this.getFilmByGenre(queryTrimed).GroupBy(item => item.IDFILM).ToDictionary(item => item.Key, item => item.First());
-                        resultStack.Push(genreFilm);
-
-                        //search by country
-                        var contryFilm = this.getFilmByCountry(queryTrimed).GroupBy(item => item.IDFILM).ToDictionary(item => item.Key, item => item.First());
-                        resultStack.Push(contryFilm);
-
-                        //search by language
-                        var languageFilm = this.getFilmByLanguage(queryTrimed).GroupBy(item => item.IDFILM).ToDictionary(item => item.Key, item => item.First());
-                        resultStack.Push(languageFilm);
-
-                    }
-                    else
-                    {
-                        //if plusieur date need to loop
-                        //Search by years
-
-                        string[] stringSeparators = new string[] { "-" };
-                        String[] years = queryTrimed.Split(stringSeparators, StringSplitOptions.RemoveEmptyEntries);
-
-                        if (years[0].Length == 4)
-                        {
-                            String min = years[0];
-                            String max = years[0];
-                            if (years.Length > 1 && years[1].Length == 4)
-                            {
-                                max = years[1];
-                            }
-
-                            DateTime starts = DateTime.ParseExact(min + "-01-01", "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None);
-                            DateTime ends = DateTime.ParseExact(max + "-12-31", "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None);
-
-                            var dateFilm = this.getFilmByDate(starts, ends).GroupBy(item => item.IDFILM).ToDictionary(item => item.Key, item => item.First());
-                            resultStack.Push(dateFilm);
-                        }
-
-                    }
-                }
-
+            if(groupeAge == -1 && prov.Equals("ALL") && day == -1 && week == -1)
+            {
+                var allFilms = this.getAllLocations().GroupBy(item => item.IDLOCATION).ToDictionary(item => item.Key, item => item.First());
+                resultStack.Push(allFilms);
             }
 
             if (resultStack.Count > 0)
             {
-                var result = ((Dictionary<Decimal, FILM>)resultStack.Pop());
+                var result = ((Dictionary<Decimal, LOCATION_W>)resultStack.Pop());
                 while (resultStack.Count > 0)
                 {
-                    result = result.Concat((Dictionary<Decimal, FILM>)resultStack.Pop()).GroupBy(d => d.Key).ToDictionary(d => d.Key, d => d.First().Value); ;
+                    result = result.Concat((Dictionary<Decimal, LOCATION_W>)resultStack.Pop()).GroupBy(d => d.Key).ToDictionary(d => d.Key, d => d.First().Value); ;
                 }
                 json = JsonConvert.SerializeObject(result);
             }
-
-            return json;*/
-            return null;
+            return json;
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
