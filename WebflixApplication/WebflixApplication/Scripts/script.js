@@ -77,9 +77,10 @@
                 Month: $('#month').val()
             },
             success: function (r) {
+                container = $('#analysis-results');
+                container.html('');
+                container.append('Nombres de locations trouvées: ' + r);
             }
         });
-
     });
-
 });

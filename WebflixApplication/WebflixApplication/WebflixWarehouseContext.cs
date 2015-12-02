@@ -21,35 +21,6 @@ namespace WebflixApplication
         {
         }
 
-        public virtual List<LOCATION_W> getClientsByAge(int groupeAge)
-        {
-            var ageParameter = new OracleParameter("groupeages", OracleDbType.Int32, groupeAge, ParameterDirection.Input);
-            return this.Database.SqlQuery<LOCATION_W>("SELECT * FROM LOCATION_W WHERE groupeage = :groupeages", ageParameter).ToList();
-        }
-
-        public virtual List<LOCATION_W> getClientsByProvince(String prov)
-        {
-            var provParameter = new OracleParameter("provinces", OracleDbType.Varchar2, prov, ParameterDirection.Input);
-            return this.Database.SqlQuery<LOCATION_W>("SELECT * FROM LOCATION_W WHERE province = :provinces", provParameter).ToList();
-        }
-
-        public virtual List<LOCATION_W> getDayOfTheWeek(int dayOfWeek)
-        {
-            var dayParameter = new OracleParameter("jours", OracleDbType.Int32, dayOfWeek, ParameterDirection.Input);
-            return this.Database.SqlQuery<LOCATION_W>("SELECT * FROM LOCATION_W WHERE jour = :jours", dayParameter).ToList();
-        }
-
-        public virtual List<LOCATION_W> getMonth(int month)
-        {
-            var monthParameter = new OracleParameter("mois", OracleDbType.Int32, month, ParameterDirection.Input);
-            return this.Database.SqlQuery<LOCATION_W>("SELECT * FROM LOCATION_W WHERE mois = :mois", monthParameter).ToList();
-        }
-
-        public virtual List<LOCATION_W> getAllLocations()
-        {
-            return this.Database.SqlQuery<LOCATION_W>("SELECT * FROM LOCATION_W").ToList();
-        }
-
         public virtual DbSet<CLIENT_W> CLIENT_W { get; set; }
         public virtual DbSet<DATE_W> DATE_W { get; set; }
         public virtual DbSet<FILM_W> FILM_W { get; set; }
@@ -57,51 +28,32 @@ namespace WebflixApplication
 
 
         //RECHERCHE
-        public virtual String analyzeData(int groupeAge, String prov, int day, int week)
+        public virtual int analyzeData(int groupeAge, String prov, int day, int week)
         {
-            Stack resultStack = new Stack();
-            string json = "";
+            String query = "SELECT * FROM LOCATION_W WHERE 1=1";
 
             if (groupeAge != -1)
             {
-                var groupesAgeClient = this.getClientsByAge(groupeAge).GroupBy(item => item.IDLOCATION).ToDictionary(item => item.Key, item => item.First());
-                resultStack.Push(groupesAgeClient);
+                query += " AND groupeage = "+groupeAge;
             }
 
             if (!prov.Equals("ALL"))
             {
-                var provClient = this.getClientsByProvince(prov).GroupBy(item => item.IDLOCATION).ToDictionary(item => item.Key, item => item.First());
-                resultStack.Push(provClient);
+                query += " AND province = '" + prov + "'";
             }
 
             if (day != -1)
             {
-                var dayOfWeek = this.getDayOfTheWeek(day).GroupBy(item => item.IDLOCATION).ToDictionary(item => item.Key, item => item.First());
-                resultStack.Push(dayOfWeek);
+                query += " AND jour = " + day;
             }
 
             if (week != -1)
             {
-                var genreFilm = this.getMonth(week).GroupBy(item => item.IDLOCATION).ToDictionary(item => item.Key, item => item.First());
-                resultStack.Push(genreFilm);
+                query += " AND mois = " + week;
             }
 
-            if(groupeAge == -1 && prov.Equals("ALL") && day == -1 && week == -1)
-            {
-                var allFilms = this.getAllLocations().GroupBy(item => item.IDLOCATION).ToDictionary(item => item.Key, item => item.First());
-                resultStack.Push(allFilms);
-            }
-
-            if (resultStack.Count > 0)
-            {
-                var result = ((Dictionary<Decimal, LOCATION_W>)resultStack.Pop());
-                while (resultStack.Count > 0)
-                {
-                    result = result.Concat((Dictionary<Decimal, LOCATION_W>)resultStack.Pop()).GroupBy(d => d.Key).ToDictionary(d => d.Key, d => d.First().Value); ;
-                }
-                json = JsonConvert.SerializeObject(result);
-            }
-            return json;
+            int results = this.Database.SqlQuery<LOCATION_W>(query).Count();
+            return results;
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

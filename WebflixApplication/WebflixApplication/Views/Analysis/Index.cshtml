@@ -1,29 +1,29 @@
 ﻿@model IEnumerable<WebflixApplication.Models.FILM>
 @{
-ViewBag.Title = "Analysis Page";
+    ViewBag.Title = "Analysis Page";
 }
 
 <div id="main-container" class="bg-dark">
-	<div class="padding-sm">
-		<nav class="navbar navbar-inverse">
-			<!-- Brand and toggle get grouped for better mobile display -->
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#galleryNavigation">
-				<span class="sr-only">Toggle navigation</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="#">Gallery</a>
-			</div>
+    <div class="padding-sm">
+        <nav class="navbar navbar-inverse">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#galleryNavigation">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Gallery</a>
+            </div>
 
-			<!-- Collect the nav links, forms, and other content for toggling -->
-			<div class="collapse navbar-collapse" id="galleryNavigation">
-				<ul class="nav navbar-nav">
-					<li><a href="@Url.Action("Index", "Home")">Home</a></li>
-					<li><a href="@Url.Action("ShowAdvanceSearchMovie", "Home")">Advanced Search</a></li>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="galleryNavigation">
+                <ul class="nav navbar-nav">
+                    <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+                    <li><a href="@Url.Action("ShowAdvanceSearchMovie", "Home")">Advanced Search</a></li>
                     <li class="active"><a href="#">Analysis</a></li>
-				</ul>
+                </ul>
                 <div>
                     <div class="form-group col-md-3 pull-right" style="margin-top: 9px; margin-bottom: 6px;">
                         <div class="input-group">
@@ -32,14 +32,14 @@ ViewBag.Title = "Analysis Page";
                         </div>
                     </div>
                 </div>
-			</div><!-- /.navbar-collapse -->
-		</nav>
-		<div class="row">
-			<div class="col-md-12">
-				<h2 class="headline dark text-white">
-					Data Analysis
+            </div>
+            <!-- /.navbar-collapse -->
+        </nav>
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="headline dark text-white">Data Analysis
 					<span class="line"></span>
-				</h2>
+                </h2>
                 <div class="row">
                     <div class="col-md-10 col-md-offset-1">
                         <form class="form-horizontal advance-search-inputs">
@@ -71,7 +71,7 @@ ViewBag.Title = "Analysis Page";
                                     <option value="ALL">ALL</option>
                                 </select>
                             </div>
-                             <div class="form-group col-md-6">
+                            <div class="form-group col-md-6">
                                 <!--<input type="text" class="form-control" id="province" placeholder="Province">-->
                                 <select class="form-control" id="province">
                                     <option value="" selected disabled>--Please select a province--</option>
@@ -94,41 +94,54 @@ ViewBag.Title = "Analysis Page";
                             <div class="form-group col-md-6">
                                 <select class="form-control" id="dayOfWeek">
                                     <option value="" selected disabled>--Please select a day--</option>
-                                    <option value="0">Sunday</option>
-                                    <option value="1">Monday</option>
-                                    <option value="2">Tuesday</option>
-                                    <option value="3">Wednesday</option>
-                                    <option value="4">Thursday</option>
-                                    <option value="5">Friday</option>
-                                    <option value="6">Saturday</option>
+                                    <option value="1">Sunday</option>
+                                    <option value="2">Monday</option>
+                                    <option value="3">Tuesday</option>
+                                    <option value="4">Wednesday</option>
+                                    <option value="5">Thursday</option>
+                                    <option value="6">Friday</option>
+                                    <option value="7">Saturday</option>
                                     <option value="ALL">ALL</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-6">
                                 <select class="form-control" id="month">
                                     <option value="" selected disabled>--Please select a month--</option>
-                                    <option value="0">January</option>
-                                    <option value="1">February</option>
-                                    <option value="2">March</option>
-                                    <option value="3">April</option>
-                                    <option value="4">May</option>
-                                    <option value="5">June</option>
-                                    <option value="6">July</option>
-                                    <option value="7">August</option>
-                                    <option value="8">September</option>
-                                    <option value="9">October</option>
-                                    <option value="10">November</option>
-                                    <option value="11">December</option>
+                                    <option value="1">January</option>
+                                    <option value="2">February</option>
+                                    <option value="3">March</option>
+                                    <option value="4">April</option>
+                                    <option value="5">May</option>
+                                    <option value="6">June</option>
+                                    <option value="7">July</option>
+                                    <option value="8">August</option>
+                                    <option value="9">September</option>
+                                    <option value="10">October</option>
+                                    <option value="11">November</option>
+                                    <option value="12">December</option>
                                     <option value="ALL">ALL</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-6">
-                                <button type="button" id="analyze-btn" class="btn btn-default pull-right">Analyze</button> 
+                                <button type="button" id="analyze-btn" class="btn btn-default pull-right">Analyze</button>
                             </div>
-                         </form>
-                     </div>
+                        </form>
+                    </div>
                 </div>
-			</div><!-- /.col -->
-		</div><!-- ./row -->
-	</div><!-- /.padding-sm -->
-</div><!-- /main-container -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- ./row -->
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="headline dark text-white">
+                    <ul id="analysis-results">
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.padding-sm -->
+</div>
+<!-- /main-container -->

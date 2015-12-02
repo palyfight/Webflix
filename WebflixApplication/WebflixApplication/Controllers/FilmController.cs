@@ -73,7 +73,7 @@ namespace WebflixApplication.Controllers
             }
         }
 
-        public ActionResult AnalyzeData(String AgeGroup, String Province, String DayOfWeek, String Month)
+        public int AnalyzeData(String AgeGroup, String Province, String DayOfWeek, String Month)
         {
             int groupeAge = (AgeGroup.Equals("ALL") || AgeGroup.Equals("")) ? -1 : Int32.Parse(AgeGroup);
             int dayOfWeek = (DayOfWeek.Equals("ALL") || DayOfWeek.Equals("")) ? -1 : Int32.Parse(DayOfWeek);
@@ -82,7 +82,7 @@ namespace WebflixApplication.Controllers
 
             using (var webflixWarehouseContext = new WebflixWarehouseContext())
             {
-                return Json(webflixWarehouseContext.analyzeData(groupeAge, prov, dayOfWeek, month));
+                return webflixWarehouseContext.analyzeData(groupeAge, prov, dayOfWeek, month);
             }
         }
 
