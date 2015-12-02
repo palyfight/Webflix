@@ -46,7 +46,7 @@
                         </p>
                     </div>
                     <div class="col-md-2">
-                        <a class="btn btn-default btn-rent-movie" href="@Url.Action("RentMovie", "Film", new { idFilm = Model.film.IDFILM, idClient = Session["IDPERSONNE"] })" role="button">Louer le film</a>
+                        <a class="btn btn-default btn-rent-movie" href="@Url.Action("RentMovie", "Film", new { idFilm = Model.film.IDFILM, idClient = 13/*Session["IDPERSONNE"]*/ })" role="button">Louer le film</a>
                     </div>
                 </div>
 			</div><!-- /.col -->

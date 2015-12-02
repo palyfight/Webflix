@@ -176,7 +176,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\AnalysisController.cs" />
+    <Compile Include="Models\CLIENT_W.cs" />
     <Compile Include="Controllers\FilmController.cs" />
+    <Compile Include="Models\DATE_W.cs" />
+    <Compile Include="Models\FILM_W.cs" />
+    <Compile Include="Models\LOCATION_W.cs" />
+    <Compile Include="WebflixWarehouseContext.cs" />
     <Compile Include="Models\ADRESSE.cs" />
     <Compile Include="Models\ANNONCE.cs" />
     <Compile Include="App_Start\AuthConfig.cs" />
@@ -274,7 +280,6 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="ClassDiagram1.cd" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\endless.js" />

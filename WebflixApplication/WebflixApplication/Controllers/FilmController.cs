@@ -75,11 +75,14 @@ namespace WebflixApplication.Controllers
 
         public ActionResult AnalyzeData(String AgeGroup, String Province, String DayOfWeek, String Month)
         {
-            /*using (var webflixContext = new WebflixContext())
+            int groupeAge = (AgeGroup.Equals("ALL") || AgeGroup.Equals("")) ? -1 : Int32.Parse(AgeGroup);
+            int dayOfWeek = (DayOfWeek.Equals("ALL") || DayOfWeek.Equals("")) ? -1 : Int32.Parse(DayOfWeek);
+            int month = (Month.Equals("ALL") || Month.Equals("")) ? -1 : Int32.Parse(Month);
+            
+            using (var webflixWarehouseContext = new WebflixWarehouseContext())
             {
-                return Json(webflixContext.AdvanceSearchMovie(title, actor, realisator, genre, country, language, year));
-            }*/
-            return null;
+                return Json(webflixWarehouseContext.analyzeData(groupeAge, Province, dayOfWeek, month));
+            }
         }
 
         public ActionResult RentMovie(int idFilm, int idClient)
