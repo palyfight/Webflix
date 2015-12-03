@@ -50,9 +50,26 @@
                     </div>
                     <div class="col-md-2">
                         <h2 class="text-white">Cote</h2>
-                        <h1 class="text-white">@Model.cote.MOYENNE.ToString("#.#")</h1>
+                        <h1 class="text-white" style="font-size: 70px;">@Model.cote.MOYENNE.ToString("#.#")/5</h1>
                     </div>
                 </div>
+                <h1 class="headline dark text-white">
+					Films recommendeés
+					<span class="line"></span>
+                    <div class="movie-jcarousel row" id="popularMovie">
+						<ul id="movie-list">
+                            @foreach(var recommendation in Model.recommendations){
+							    <li class="col-sm-2">
+                                    <h1>@recommendation.IDFILM</h1>
+								    <a href="/film/showfilm/@recommendation.IDFILM">
+                                        <h3 class="film_title text-white" style="text-align:center;">@recommendation.TITRE</h3>
+									    <img class="posters" src="@recommendation.POSTER" alt="Image 1">
+								    </a>
+							    </li>
+                            }
+						</ul>
+					</div>
+				</h1>
 			</div><!-- /.col -->
 		</div><!-- ./row -->
 	</div><!-- /.padding-sm -->

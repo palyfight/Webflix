@@ -180,6 +180,7 @@
     <Compile Include="Models\CLIENT_W.cs" />
     <Compile Include="Controllers\FilmController.cs" />
     <Compile Include="Models\DATE_W.cs" />
+    <Compile Include="Models\FilmRecommendation.cs" />
     <Compile Include="Models\FILM_W.cs" />
     <Compile Include="Models\LOCATION_W.cs" />
     <Compile Include="Models\Cote.cs" />
