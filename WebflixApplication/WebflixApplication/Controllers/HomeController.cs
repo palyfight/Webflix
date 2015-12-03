@@ -15,7 +15,7 @@ namespace WebflixApplication.Controllers
 
             using (var webflixContext = new WebflixContext())
             {
-                var films = webflixContext.FILMs.ToList().Take(10);
+                var films = webflixContext.FILMs.ToList().Take(30);
                 return View(films);
             }
         }
