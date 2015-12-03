@@ -28,8 +28,17 @@ namespace WebflixApplication.Controllers
             var film = wfcontext.FILMs.Find(id);
             var idRealisateur = film.IDREALISATEUR;
             var realisateur = wfcontext.PERSONNESFILMs.Find(idRealisateur);
-            ShowFilmViewModel sfvm = new ShowFilmViewModel(film, realisateur);
+            var cote = new WebflixContext().Database.SqlQuery<Cote>("Select moyenne, idfilm from ma_vue_moyenne where idfilm = " + film.CODE).FirstOrDefault();
+            // film_j = id film recommander
+            var recommendations = new WebflixContext().Database.SqlQuery<FilmRecommendation>("Select vu.correlation, vu.id_film_J from ma_vue_correlations vu where vu.id_film_k = " + film.CODE + " AND VU.ID_FILM_J NOT IN((SELECT code FROM FILM INNER JOIN COPIE ON COPIE.IDFILM = FILM.IDFILM INNER JOIN LOCATION ON LOCATION.IDCOPIE = COPIE.IDCOPIE WHERE LOCATION.IDCLIENT = 13 )) Order By correlation desc OFFSET 0 ROWS FETCH NEXT 3 ROWS ONLY").ToList();
+            List<FILM> all_recommendation = new List<FILM>();
+            
+            foreach(var recommendation in recommendations){
+                var recommendationss = recommendation.id_film_J.ToString();
+                all_recommendation.Add(wfcontext.FILMs.Where(f => f.CODE == recommendationss).FirstOrDefault());
+            }
 
+            ShowFilmViewModel sfvm = new ShowFilmViewModel(film, realisateur, cote, all_recommendation);
             return View(sfvm);
         }
 
