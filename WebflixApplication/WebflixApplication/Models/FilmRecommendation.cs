@@ -7,7 +7,7 @@ namespace WebflixApplication.Models
 {
     public class FilmRecommendation
     {
-        public int id_film_J { get; set; }
+        public int film { get; set; }
         public double correlation { get; set; }
     }
 }
